@@ -1,6 +1,8 @@
 
 package marketsimulator;
 
+import marketsimulator.View.mainView;
+import marketsimulator.Model.User;
 import java.util.ArrayList;
 
 
@@ -16,20 +18,12 @@ public class MarketSimulator
    
    public static void main(String[] args) 
    {
-       DatabaseController cr = new DatabaseController();
-       ArrayList<User> users = new ArrayList<User>();
-       
-       users = cr.getUsers();
-       
-              
-       System.out.println(users);
-       
        
        Runnable r = new Runnable() {
 
            @Override
            public void run() {
-               new mainForm().setVisible(true);
+               new mainView().setVisible(true);
            }
        };
        Thread t = new Thread(r);

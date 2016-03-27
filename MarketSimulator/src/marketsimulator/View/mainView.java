@@ -3,18 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package marketsimulator;
+package marketsimulator.View;
+
+import javax.swing.JOptionPane;
+import marketsimulator.Controller.UserController;
 
 /**
  *
  * @author SoRa
  */
-public class mainForm extends javax.swing.JFrame {
+public class mainView extends javax.swing.JFrame {
 
     /**
      * Creates new form main
      */
-    public mainForm() {
+    public mainView() {
         initComponents();
     }
 
@@ -42,6 +45,11 @@ public class mainForm extends javax.swing.JFrame {
         jLabel2.setText("Password:");
 
         btnLogin.setText("Login");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
 
         btnRegister.setText("Register");
         btnRegister.addActionListener(new java.awt.event.ActionListener() {
@@ -68,13 +76,14 @@ public class mainForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(83, 83, 83)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(8, 8, 8)
-                            .addComponent(jLabel2)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(74, 74, 74)
                         .addComponent(btnLogin))
@@ -112,13 +121,23 @@ public class mainForm extends javax.swing.JFrame {
 
             @Override
             public void run() {
-               new registerForm().setVisible(true);
+               new registerView().setVisible(true);
             }
         };
         Thread t = new Thread(r);
         t.start();
         this.setVisible(false);
     }//GEN-LAST:event_btnRegisterActionPerformed
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        String username = txtUsername.getText();
+	String password = txtPassword.getText();
+        
+        UserController controller = new UserController();
+        if(controller.userLogin(username,password)) JOptionPane.showMessageDialog(this, "Logged in");
+        else                                        JOptionPane.showMessageDialog(this, "Wrong username and/or password");
+       
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     
 
@@ -131,4 +150,5 @@ public class mainForm extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
+
 }
