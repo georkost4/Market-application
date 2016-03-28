@@ -4,6 +4,7 @@ package marketsimulator;
 import marketsimulator.View.mainView;
 import marketsimulator.Model.User;
 import java.util.ArrayList;
+import marketsimulator.View.propertyView;
 
 
 /**
@@ -23,7 +24,7 @@ public class MarketSimulator
 
            @Override
            public void run() {
-               new mainView().setVisible(true);
+               new propertyView().setVisible(true);
            }
        };
        Thread t = new Thread(r);

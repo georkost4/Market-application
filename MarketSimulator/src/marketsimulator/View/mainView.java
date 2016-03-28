@@ -134,7 +134,13 @@ public class mainView extends javax.swing.JFrame {
 	String password = txtPassword.getText();
         
         UserController controller = new UserController();
-        if(controller.userLogin(username,password)) JOptionPane.showMessageDialog(this, "Logged in");
+        if(controller.userLogin(username,password))
+        {
+            JOptionPane.showMessageDialog(this, "Logged in");
+            new propertyView().setVisible(true);
+            this.setVisible(false);
+        }
+        
         else                                        JOptionPane.showMessageDialog(this, "Wrong username and/or password");
        
     }//GEN-LAST:event_btnLoginActionPerformed

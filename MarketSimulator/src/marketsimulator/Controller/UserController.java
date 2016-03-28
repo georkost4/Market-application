@@ -5,6 +5,7 @@
  */
 package marketsimulator.Controller;
 
+import DAO.Database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -19,12 +20,8 @@ import marketsimulator.Model.User;
  *
  * @author SoRa
  */
-public class UserController implements UserInterface
+public class UserController extends Database implements UserInterface
 {
-   private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-   private static final String DB_URL = "jdbc:mysql://localhost:3306/MarketDB?zeroDateTimeBehavior=convertToNull";
-   private static final String USER = "root";
-   private static final String PASS = "";
    
     @Override
     public User getUser(String given_username) 
@@ -34,8 +31,8 @@ public class UserController implements UserInterface
         Statement stmt = null;
        try 
        {
-           Class.forName(JDBC_DRIVER);
-           conn = DriverManager.getConnection(DB_URL,USER,PASS);
+           super.setClass();
+           conn = super.getConnection();
            stmt = conn.createStatement();
            String sql;
           
@@ -72,8 +69,8 @@ public class UserController implements UserInterface
        Statement stmt = null;
        try 
        {
-           Class.forName(JDBC_DRIVER);
-           conn = DriverManager.getConnection(DB_URL,USER,PASS);
+           super.setClass();
+           conn = super.getConnection();
            stmt = conn.createStatement();
            String sql;
           

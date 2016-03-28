@@ -5,6 +5,7 @@
  */
 package marketsimulator.Controller;
 
+import java.util.ArrayList;
 import marketsimulator.Model.Property;
 
 /**
@@ -15,5 +16,6 @@ public interface PropertyInterface
 {
     public boolean addProperty(Property property);
     public boolean removeProperty(Property property);
+    public ArrayList<Property> getProperties();
     
 }

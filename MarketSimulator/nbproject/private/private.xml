@@ -3,15 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/SoRa/Desktop/MarketSimulator/src/marketsimulator/Model/User.java</file>
-            <file>file:/C:/Users/SoRa/Desktop/MarketSimulator/src/marketsimulator/View/mainView.java</file>
-            <file>file:/C:/Users/SoRa/Desktop/MarketSimulator/src/marketsimulator/Controller/UserController.java</file>
-            <file>file:/C:/Users/SoRa/Desktop/MarketSimulator/src/marketsimulator/MarketSimulator.java</file>
-            <file>file:/C:/Users/SoRa/Desktop/MarketSimulator/src/marketsimulator/Model/Buyer.java</file>
-            <file>file:/C:/Users/SoRa/Desktop/MarketSimulator/src/marketsimulator/Model/Seller.java</file>
-            <file>file:/C:/Users/SoRa/Desktop/MarketSimulator/src/marketsimulator/View/registerView.java</file>
-            <file>file:/C:/Users/SoRa/Desktop/MarketSimulator/src/marketsimulator/Model/Property.java</file>
-            <file>file:/C:/Users/SoRa/Desktop/MarketSimulator/src/marketsimulator/Controller/UserInterface.java</file>
+            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/View/mainView.java</file>
+            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/View/AddNewPropertyView.java</file>
+            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/Controller/PropertyInterface.java</file>
+            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/Controller/PropertyController.java</file>
+            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/Model/Property.java</file>
+            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/View/propertyView.java</file>
+            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/MarketSimulator.java</file>
+            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/DAO/Database.java</file>
         </group>
     </open-files>
 </project-private>
