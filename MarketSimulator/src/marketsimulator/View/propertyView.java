@@ -7,8 +7,10 @@ package marketsimulator.View;
 
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 import marketsimulator.Controller.PropertyController;
+import marketsimulator.Model.JListRenderer;
 import marketsimulator.Model.Property;
 
 /**
@@ -40,6 +42,16 @@ public class propertyView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        propertyList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                propertyListMouseClicked(evt);
+            }
+        });
+        propertyList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                propertyListValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(propertyList);
 
         btnAddNewProperty.setText("Add New Property");
@@ -53,23 +65,23 @@ public class propertyView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnAddNewProperty)))
-                .addGap(34, 34, 34))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addComponent(btnAddNewProperty)
+                .addGap(14, 14, 14))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
-                .addComponent(btnAddNewProperty)
-                .addGap(38, 38, 38))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addComponent(btnAddNewProperty)))
+                .addContainerGap(351, Short.MAX_VALUE))
         );
 
         pack();
@@ -80,6 +92,17 @@ public class propertyView extends javax.swing.JFrame {
         this.setVisible(false);
         new AddNewPropertyView().setVisible(true);
     }//GEN-LAST:event_btnAddNewPropertyActionPerformed
+
+    private void propertyListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_propertyListValueChanged
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_propertyListValueChanged
+
+    private void propertyListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_propertyListMouseClicked
+        // TODO add your handling code here:
+        int prop =  evt.getModifiers();
+         JOptionPane.showMessageDialog(this,((Property)propertyList.getSelectedValue()).getName());
+    }//GEN-LAST:event_propertyListMouseClicked
 
     /**
      * @param args the command line arguments
@@ -92,9 +115,10 @@ public class propertyView extends javax.swing.JFrame {
        properties = controller.getProperties();
        for(Property prop : properties)
        {
-           model.addElement(prop.getValue());
+           model.addElement(prop);
    
        }
+       propertyList.setCellRenderer(new JListRenderer());
        propertyList.setModel(model);
    }
 

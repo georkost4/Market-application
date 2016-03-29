@@ -5,6 +5,7 @@
  */
 package marketsimulator.Model;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -14,7 +15,7 @@ import java.sql.Statement;
  *
  * @author SoRa
  */
-public  class User 
+public  class User implements Serializable
 {
     private int id;
     private String firstname,lastname,username , password , city , number ;

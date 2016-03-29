@@ -6,6 +6,10 @@
 package marketsimulator.Controller;
 
 import DAO.Database;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -100,6 +104,42 @@ public class UserController extends Database implements UserInterface
        if(tmpUser == null) return false;
        if(tmpUser.getPassword().equals(password)) return true;
        else return false;
+    }
+
+    @Override
+    public User getLoggedUser() {
+        User tmp = null;
+        try
+        {
+		   
+		FileInputStream fin = new FileInputStream(System.getProperty("user.home")+"\\Documents\\user.ser");
+		ObjectInputStream oos = new ObjectInputStream(fin);   
+		tmp = (User) oos.readObject();
+		oos.close();
+		System.out.println(tmp);
+		   
+	}
+        catch(Exception ex){  ex.printStackTrace();return null;}
+        
+        return tmp;
+    }
+
+    @Override
+    public boolean setLoggedUser(User user) 
+    {
+        try
+        {
+		   
+		FileOutputStream fout = new FileOutputStream(System.getProperty("user.home")+"\\Documents\\user.ser");
+		ObjectOutputStream oos = new ObjectOutputStream(fout);   
+		oos.writeObject(user);
+		oos.close();
+		System.out.println("Done");
+		   
+	}
+        catch(Exception ex){  ex.printStackTrace();return false;}
+        
+        return true;
     }
     
     

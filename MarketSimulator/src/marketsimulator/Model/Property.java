@@ -18,7 +18,7 @@ public class Property
     String image_location;
     String datePosted;
 
-    public Property(String property_id,String seller_id, String name, String value, String image_location, String datePosted) 
+    public Property(String property_id,String seller_id, String name, String value,String datePosted,String image_location) 
     {
         this.property_id = property_id;
         this.seller_id = seller_id;

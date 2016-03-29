@@ -5,12 +5,13 @@
         <group>
             <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/View/mainView.java</file>
             <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/View/AddNewPropertyView.java</file>
-            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/Controller/PropertyInterface.java</file>
             <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/Controller/PropertyController.java</file>
-            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/Model/Property.java</file>
             <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/View/propertyView.java</file>
+            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/Model/Property.java</file>
             <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/MarketSimulator.java</file>
-            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/DAO/Database.java</file>
+            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/Controller/UserInterface.java</file>
+            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/Model/User.java</file>
+            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/Controller/UserController.java</file>
         </group>
     </open-files>
 </project-private>

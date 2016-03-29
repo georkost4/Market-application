@@ -16,4 +16,6 @@ public interface UserInterface
     public boolean userRegister(User user);
     public boolean userLogin(String username,String password);
     public User getUser(String given_username);
+    public User getLoggedUser();
+    public boolean setLoggedUser(User user);
 }

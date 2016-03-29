@@ -34,7 +34,7 @@ public class PropertyController extends Database implements PropertyInterface  {
             String sql;
             stm = con.createStatement();
             sql = "INSERT INTO " + super.getTALBE_PROPERTY()+ "(property_id,seller_id,name,value,date_posted,image) VALUES "
-                    + "(" +property.getSeller_id()+  ",' " 
+                    + "(0," +property.getSeller_id()+  ",' " 
                     + property.getName()+"'," 
                     + "'"+property.getValue()+"'," 
                     + "'"+property.getDatePosted()+"'," 

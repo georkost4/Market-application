@@ -5,6 +5,7 @@
  */
 package marketsimulator.View;
 
+import com.sun.glass.events.KeyEvent;
 import javax.swing.JOptionPane;
 import marketsimulator.Controller.UserController;
 
@@ -43,6 +44,12 @@ public class mainView extends javax.swing.JFrame {
         jLabel1.setText("Username:");
 
         jLabel2.setText("Password:");
+
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyPressed(evt);
+            }
+        });
 
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -137,13 +144,21 @@ public class mainView extends javax.swing.JFrame {
         if(controller.userLogin(username,password))
         {
             JOptionPane.showMessageDialog(this, "Logged in");
+            controller.setLoggedUser(controller.getUser(username));
             new propertyView().setVisible(true);
             this.setVisible(false);
         }
         
-        else                                        JOptionPane.showMessageDialog(this, "Wrong username and/or password");
+        else JOptionPane.showMessageDialog(this, "Wrong username and/or password");
        
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode()== KeyEvent.VK_ENTER){
+            btnLoginActionPerformed(null);
+        }
+    }//GEN-LAST:event_txtPasswordKeyPressed
 
     
 
