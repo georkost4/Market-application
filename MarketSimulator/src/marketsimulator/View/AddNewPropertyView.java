@@ -136,10 +136,6 @@ public class AddNewPropertyView extends javax.swing.JFrame {
         if(returnVal == 0)
         {
             File file = fc.getSelectedFile();
-            String txt =  txtImageSelected.getText();
-            txt.replaceAll("\\", "\\\\");
-            System.out.print(txt);
-            System.out.println(file.getAbsolutePath());
             txtImageSelected.setText(file.getAbsolutePath());
         
         }
@@ -152,10 +148,9 @@ public class AddNewPropertyView extends javax.swing.JFrame {
         String seller_id = String.valueOf( user_controller.getLoggedUser().getId() );
         String name  = txtName.getText();
         String value = txtValue.getText();
-        String image = txtImageSelected.getText();
+        String image = txtImageSelected.getText().replace("\\", "/");
         
-        
-        
+        //Times needs fix
         Property temp = new Property("0",seller_id,name,value,System.getProperty("user.timezone"),image);
         
         controller.addProperty(temp);

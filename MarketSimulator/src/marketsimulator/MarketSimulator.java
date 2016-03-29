@@ -30,6 +30,5 @@ public class MarketSimulator
        };
        Thread t = new Thread(r);
        t.start();
-   
    }
 }
