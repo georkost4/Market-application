@@ -23,13 +23,16 @@ public class JListRenderer extends DefaultListCellRenderer implements ListCellRe
     public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
         Property prop = (Property) value;
         setText(prop.getName());
+        setText(prop.getValue()+"$");
         Icon icon = new ImageIcon(prop.getImage_location());
+        
         setIcon(icon);
+        
         
         if(isSelected)
         {
             setBackground(list.getSelectionBackground());
-            this.setForeground(list.getSelectionForeground());
+            setForeground(list.getSelectionForeground());
         }
         else
         {
@@ -41,9 +44,5 @@ public class JListRenderer extends DefaultListCellRenderer implements ListCellRe
         setFont(list.getFont());
         return this;
     }
-    
-    
-    
-    
-    
+        
 }

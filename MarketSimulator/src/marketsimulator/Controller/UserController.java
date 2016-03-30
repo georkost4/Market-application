@@ -6,18 +6,15 @@
 package marketsimulator.Controller;
 
 import DAO.Database;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import marketsimulator.Model.User;
 
 /**
@@ -54,8 +51,6 @@ public class UserController extends Database implements UserInterface
            String number     = rs.getString("number");
 
            tempUser = new User(id,firstname,lastname,username,password,city,number);
-
-           System.out.println(tempUser);
            
            rs.close();
            stmt.close();
@@ -87,7 +82,6 @@ public class UserController extends Database implements UserInterface
                    + "'" + user.getNumber() + "')";
            int result = stmt.executeUpdate(sql);
            
-           System.out.println(String.valueOf(result));
            stmt.close();
            conn.close();
            if(result == 1) return true;
@@ -129,19 +123,16 @@ public class UserController extends Database implements UserInterface
     {
         try
         {
-		   
+		File file = new File(System.getProperty("user.home")+"\\Documents\\user.ser");
+                file.deleteOnExit();
 		FileOutputStream fout = new FileOutputStream(System.getProperty("user.home")+"\\Documents\\user.ser");
 		ObjectOutputStream oos = new ObjectOutputStream(fout);   
 		oos.writeObject(user);
 		oos.close();
-		System.out.println("Done");
-		   
 	}
         catch(Exception ex){  ex.printStackTrace();return false;}
         
         return true;
     }
     
-    
-   
 }

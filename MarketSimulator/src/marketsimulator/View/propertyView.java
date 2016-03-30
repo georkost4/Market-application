@@ -47,11 +47,6 @@ public class propertyView extends javax.swing.JFrame {
                 propertyListMouseClicked(evt);
             }
         });
-        propertyList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                propertyListValueChanged(evt);
-            }
-        });
         jScrollPane1.setViewportView(propertyList);
 
         btnAddNewProperty.setText("Add New Property");
@@ -89,14 +84,8 @@ public class propertyView extends javax.swing.JFrame {
         new AddNewPropertyView().setVisible(true);
     }//GEN-LAST:event_btnAddNewPropertyActionPerformed
 
-    private void propertyListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_propertyListValueChanged
-        // TODO add your handling code here:
-       
-    }//GEN-LAST:event_propertyListValueChanged
-
     private void propertyListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_propertyListMouseClicked
         // TODO add your handling code here:
-        int prop =  evt.getModifiers();
          JOptionPane.showMessageDialog(this,((Property)propertyList.getSelectedValue()).getName());
     }//GEN-LAST:event_propertyListMouseClicked
 

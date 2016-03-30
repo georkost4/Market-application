@@ -89,7 +89,6 @@ public class PropertyController extends Database implements PropertyInterface  {
             
             ResultSet rs =  stm.executeQuery(sql);
              
-            int i = 0;
             while(rs.next())
             {
                 String property_id = String.valueOf( rs.getInt("property_id"));
@@ -101,15 +100,12 @@ public class PropertyController extends Database implements PropertyInterface  {
                 
                 list.add(new Property(property_id,seller_id,name,value,date_posted,image));
                 
-                System.out.println("iteration:"+i);
-                i++;
             }
             
         } 
         catch (SQLException ex) {ex.printStackTrace(); return null;} 
         catch (ClassNotFoundException ex) {ex.printStackTrace(); return null; }
         
-        if(list.isEmpty()) list.add(new Property("9","8","*m","8","7","6")); System.out.println("Tue List is empty");
         return list;
     }
 

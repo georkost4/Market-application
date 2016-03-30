@@ -16,19 +16,8 @@ import marketsimulator.View.propertyView;
 
 public class MarketSimulator 
 {
-  
-   
    public static void main(String[] args) 
    {
-       
-       Runnable r = new Runnable() {
-
-           @Override
-           public void run() {
-               new mainView().setVisible(true);
-           }
-       };
-       Thread t = new Thread(r);
-       t.start();
+       new mainView().setVisible(true);
    }
 }

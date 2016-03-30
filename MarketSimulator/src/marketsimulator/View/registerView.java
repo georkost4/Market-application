@@ -166,7 +166,11 @@ public class registerView extends javax.swing.JFrame {
         // Validate Data
         if(validate(user))
         {
-            if(controller.userRegister(user)) JOptionPane.showMessageDialog(this, "You successfully Registered");
+            if(controller.userRegister(user))
+            {
+                JOptionPane.showMessageDialog(this, "You successfully Registered");
+                btnCancelActionPerformed(evt);
+            }
             else JOptionPane.showMessageDialog(this, "Something went wrong try again later");
         }
         else JOptionPane.showMessageDialog(this,"Wrong input");
@@ -186,7 +190,7 @@ public class registerView extends javax.swing.JFrame {
         //Check city
         
         //Check number;
-        return false;
+        return true;
     }
     /**
      * @param args the command line arguments

@@ -123,17 +123,8 @@ public class mainView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-        // TODO add your handling code here:
-        Runnable r = new Runnable() {
-
-            @Override
-            public void run() {
-               new registerView().setVisible(true);
-            }
-        };
-        Thread t = new Thread(r);
-        t.start();
         this.setVisible(false);
+        new registerView().setVisible(true);
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed

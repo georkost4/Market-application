@@ -6,6 +6,7 @@
 package marketsimulator.View;
 
 import java.io.File;
+import java.util.Date;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
@@ -45,6 +46,7 @@ public class AddNewPropertyView extends javax.swing.JFrame {
         btnSelectImage = new javax.swing.JButton();
         txtImageSelected = new javax.swing.JLabel();
         btnDone = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,6 +72,13 @@ public class AddNewPropertyView extends javax.swing.JFrame {
             }
         });
 
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -88,22 +97,26 @@ public class AddNewPropertyView extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtImageSelected)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-                                        .addComponent(txtValue))))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                                            .addComponent(txtValue))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+                                        .addComponent(btnBack))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(152, 152, 152)
                         .addComponent(btnDone)))
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addGap(37, 37, 37))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19)
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBack))
+                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -129,15 +142,14 @@ public class AddNewPropertyView extends javax.swing.JFrame {
         "Image files", ImageIO.getReaderFileSuffixes());
         fc.addChoosableFileFilter(imageFilter);
         fc.setAcceptAllFileFilterUsed(false);
-       
-        //In response to a button click:
+        
+   
         int returnVal = fc.showDialog(this,"Select");
         System.out.println(String.valueOf(returnVal));
         if(returnVal == 0)
         {
             File file = fc.getSelectedFile();
             txtImageSelected.setText(file.getAbsolutePath());
-        
         }
     }//GEN-LAST:event_btnSelectImageActionPerformed
 
@@ -145,19 +157,28 @@ public class AddNewPropertyView extends javax.swing.JFrame {
         // TODO add your handling code here:
         PropertyController controller = new PropertyController();
         UserController user_controller = new UserController();
+       
         String seller_id = String.valueOf( user_controller.getLoggedUser().getId() );
         String name  = txtName.getText();
         String value = txtValue.getText();
         String image = txtImageSelected.getText().replace("\\", "/");
         
-        //Times needs fix
-        Property temp = new Property("0",seller_id,name,value,System.getProperty("user.timezone"),image);
+        Date date = new Date();
+       
+        Property temp = new Property("0",seller_id,name,value,date.toString(),image);
         
         controller.addProperty(temp);
     }//GEN-LAST:event_btnDoneActionPerformed
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        new propertyView().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnBackActionPerformed
+
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDone;
     private javax.swing.JButton btnSelectImage;
     private javax.swing.JLabel jLabel4;
