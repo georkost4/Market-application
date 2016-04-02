@@ -2,6 +2,15 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/View/AddNewPropertyView.java</file>
+            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/View/registerView.java</file>
+            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/Controller/PropertyController.java</file>
+            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/Controller/ValidationInterface.java</file>
+            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/Controller/ValidationController.java</file>
+            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/Model/Property.java</file>
+            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/test/marketsimulator/Controller/ValidationControllerTest.java</file>
+            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/Controller/UserController.java</file>
+        </group>
     </open-files>
 </project-private>

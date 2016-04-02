@@ -13,7 +13,7 @@ import java.sql.SQLException;
  *
  * @author SoRa
  */
-public class Database 
+public class DatabaseController implements DAO
 {
    private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
    private static final String DB_URL = "jdbc:mysql://localhost:3306/MarketDB?zeroDateTimeBehavior=convertToNull";
@@ -24,21 +24,23 @@ public class Database
    private static String TABLE_PROPERTY = "onsale";
    private static String TABLE_BIDS = "bids";
    
-   protected Connection getConnection() throws SQLException 
+   @Override
+   public Connection getConnection() throws SQLException 
    {
        return DriverManager.getConnection(DB_URL,USER,PASS);
    }
    
-   protected void setClass() throws ClassNotFoundException 
+   @Override
+   public void setClass() throws ClassNotFoundException 
    {
        Class.forName(JDBC_DRIVER);
    }
 
-    protected  String getTABLE_USERS() { return TABLE_USERS;}
+    public  String getTABLE_USERS() { return TABLE_USERS;}
 
-    protected  String getTALBE_PROPERTY() {return TABLE_PROPERTY;}
+    public  String getTALBE_PROPERTY() {return TABLE_PROPERTY;}
 
-    protected  String getTABLE_BIDS() {return TABLE_BIDS; }
+    public  String getTABLE_BIDS() {return TABLE_BIDS; }
    
    
     

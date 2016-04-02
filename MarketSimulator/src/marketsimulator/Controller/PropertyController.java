@@ -5,7 +5,7 @@
  */
 package marketsimulator.Controller;
 
-import DAO.Database;
+import DAO.DatabaseController;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,8 +19,8 @@ import marketsimulator.Model.Property;
  *
  * @author SoRa
  */
-public class PropertyController extends Database implements PropertyInterface  {
-    
+public class PropertyController  implements PropertyInterface  {
+    DatabaseController db_controller = new DatabaseController();
     
     @Override
     public boolean addProperty(Property property) 
@@ -29,14 +29,16 @@ public class PropertyController extends Database implements PropertyInterface  {
         Statement stm = null;
         try
         {
-            super.setClass();
-            con = super.getConnection();
+            db_controller.setClass();
+            con = db_controller.getConnection();
             String sql;
             stm = con.createStatement();
-            sql = "INSERT INTO " + super.getTALBE_PROPERTY()+ "(property_id,seller_id,name,value,date_posted,image) VALUES "
-                    + "(0," +property.getSeller_id()+  ",' " 
-                    + property.getName()+"'," 
-                    + "'"+property.getValue()+"'," 
+            sql = "INSERT INTO " + db_controller.getTALBE_PROPERTY()+ "(property_id,seller_id,name,value,city,address,date_posted,image) VALUES "
+                    + "(0," +property.getSeller_id() +  ",' " 
+                    + property.getName() + "'," 
+                    + "'"+property.getValue() + "',"
+                    + "'"+property.getCity() + "'," 
+                    + "'"+property.getAddress() + "',"
                     + "'"+property.getDatePosted()+"'," 
                     + "'"+property.getImage_location() 
                     + "')";
@@ -57,11 +59,11 @@ public class PropertyController extends Database implements PropertyInterface  {
         Statement stm = null;
         try
         {
-            super.setClass();
-            con = super.getConnection();
+            db_controller.setClass();
+            con = db_controller.getConnection();
             String sql;
             stm = con.createStatement();
-            sql = "DELETE FROM " + super.getTALBE_PROPERTY() + "WHERE selled_id = '" + property.getSeller_id() + "' and name = '" + property.getName() + "'";
+            sql = "DELETE FROM " + db_controller.getTALBE_PROPERTY() + "WHERE selled_id = '" + property.getSeller_id() + "' and name = '" + property.getName() + "'";
             
             int response =  stm.executeUpdate(sql);
              
@@ -81,11 +83,11 @@ public class PropertyController extends Database implements PropertyInterface  {
         Statement stm = null;
         try
         {
-            super.setClass();
-            con = super.getConnection();
+            db_controller.setClass();
+            con = db_controller.getConnection();
             String sql;
             stm = con.createStatement();
-            sql = "SELECT * FROM " + super.getTALBE_PROPERTY() + " ORDER BY date_posted DESC";
+            sql = "SELECT * FROM " + db_controller.getTALBE_PROPERTY() + " ORDER BY date_posted DESC";
             
             ResultSet rs =  stm.executeQuery(sql);
              
@@ -95,10 +97,12 @@ public class PropertyController extends Database implements PropertyInterface  {
                 String seller_id   = String.valueOf(rs.getString("seller_id"));
                 String name        = rs.getString("name");
                 String value       = rs.getString("value");
+                String city        = rs.getString("city");
+                String address     = rs.getString("address");
                 String date_posted = rs.getString("date_posted");
                 String image       = rs.getString("image");
                 
-                list.add(new Property(property_id,seller_id,name,value,date_posted,image));
+                list.add(new Property(property_id,seller_id,name,value,city,address,date_posted,image));
                 
             }
             

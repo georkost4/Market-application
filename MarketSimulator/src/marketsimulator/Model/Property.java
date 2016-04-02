@@ -15,18 +15,29 @@ public class Property
     String seller_id;
     String name;
     String value;
+    String city;
+    String address;
     String image_location;
     String datePosted;
 
-    public Property(String property_id,String seller_id, String name, String value,String datePosted,String image_location) 
-    {
+    public Property(String property_id, String seller_id, String name, String value, String city, String address,String datePosted , String image_location) {
         this.property_id = property_id;
         this.seller_id = seller_id;
         this.name = name;
         this.value = value;
+        this.city = city;
+        this.address = address;
         this.image_location = image_location;
         this.datePosted = datePosted;
     }
+
+    public String getCity() {return city;}
+
+    public void setCity(String city) {this.city = city;}
+
+    public String getAddress() {return address; }
+
+    public void setAddress(String address) {this.address = address;}
 
     public String getProperty_id() { return property_id;  }
 

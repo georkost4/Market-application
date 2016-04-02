@@ -5,7 +5,7 @@
  */
 package marketsimulator.Controller;
 
-import DAO.Database;
+import DAO.DatabaseController;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -21,8 +21,9 @@ import marketsimulator.Model.User;
  *
  * @author SoRa
  */
-public class UserController extends Database implements UserInterface
+public class UserController  implements UserInterface
 {
+    DatabaseController db_controller = new DatabaseController();
    
     @Override
     public User getUser(String given_username) 
@@ -32,8 +33,8 @@ public class UserController extends Database implements UserInterface
         Statement stmt = null;
        try 
        {
-           super.setClass();
-           conn = super.getConnection();
+           db_controller.setClass();
+           conn = db_controller.getConnection();
            stmt = conn.createStatement();
            String sql;
           
@@ -68,8 +69,8 @@ public class UserController extends Database implements UserInterface
        Statement stmt = null;
        try 
        {
-           super.setClass();
-           conn = super.getConnection();
+           db_controller.setClass();
+           conn = db_controller.getConnection();
            stmt = conn.createStatement();
            String sql;
           

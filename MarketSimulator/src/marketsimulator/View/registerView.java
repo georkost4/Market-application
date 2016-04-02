@@ -7,6 +7,7 @@ package marketsimulator.View;
 
 import javax.swing.JOptionPane;
 import marketsimulator.Controller.UserController;
+import marketsimulator.Controller.ValidationController;
 import marketsimulator.Model.User;
 
 /**
@@ -155,16 +156,17 @@ public class registerView extends javax.swing.JFrame {
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         // TODO add your handling code here:
         UserController controller = new UserController();
+        ValidationController vd_controller = new ValidationController();
         String firstName = txtFirstName.getText();
         String lastName  = txtLastName.getText();
         String username  = txtUsername.getText();
 	String password  = txtPassword.getText();
-        String city      = txtPassword.getText();
-        String number    = txtPassword.getText();
+        String city      = txtCity.getText();
+        String number    = txtPhone.getText();
         User user = new User(firstName,lastName,username,password,city,number);
         
         // Validate Data
-        if(validate(user))
+        if(vd_controller.validateRegisterInput(this,user.getFirstname(),user.getLastname(),user.getNumber(),user.getPassword(),user.getUsername(),user.getCity()))
         {
             if(controller.userRegister(user))
             {
@@ -173,25 +175,9 @@ public class registerView extends javax.swing.JFrame {
             }
             else JOptionPane.showMessageDialog(this, "Something went wrong try again later");
         }
-        else JOptionPane.showMessageDialog(this,"Wrong input");
         
     }//GEN-LAST:event_btnOKActionPerformed
     
-    private boolean validate(User user)
-    {
-        //Check firstname
-        
-        //Check lastName
-        
-        //Check username
-        
-        //Check password
-        
-        //Check city
-        
-        //Check number;
-        return true;
-    }
     /**
      * @param args the command line arguments
      */
