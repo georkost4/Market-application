@@ -5,6 +5,7 @@
  */
 package marketsimulator.Controller;
 
+import java.util.ArrayList;
 import marketsimulator.Model.Property;
 
 /**
@@ -14,7 +15,9 @@ import marketsimulator.Model.Property;
 public interface InterestInterface 
 {
     public boolean makeInterest(String property_id,String user_id);
-    public boolean acceptInterest();
-    public boolean declineInterest();
+    public boolean acceptInterest(String property_id,String user_id);
+    public boolean declineInterest(String property_id,String user_id);
+    public ArrayList<Property> getMyInterests(String user_id);
+    public ArrayList<Property> getMyListings(String user_id);
     
 }

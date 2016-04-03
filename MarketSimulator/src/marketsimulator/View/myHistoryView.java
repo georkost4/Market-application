@@ -5,7 +5,11 @@
  */
 package marketsimulator.View;
 
+import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import marketsimulator.Controller.InterestController;
+import marketsimulator.Controller.UserController;
+import marketsimulator.Model.Property;
 
 /**
  *
@@ -34,6 +38,8 @@ public class myHistoryView extends javax.swing.JFrame {
         btnBack = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,24 +52,34 @@ public class myHistoryView extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(jList1);
 
+        jButton1.setText("My Listings");
+
+        jButton2.setText("Interests");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnBack)
-                .addGap(20, 20, 20))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnBack)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(btnBack)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                .addGap(45, 45, 45)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addContainerGap(104, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
@@ -71,7 +87,17 @@ public class myHistoryView extends javax.swing.JFrame {
 
      private void init() 
      {
+       InterestController controller = new InterestController();
+       ArrayList<Property> property = new ArrayList<Property>();
+       property = controller.getMyInterests(String.valueOf(new UserController().getLoggedUser().getId()));
        DefaultListModel model = new DefaultListModel();
+       for(Property tmp : property)
+       {
+           model.addElement(tmp.getName());
+       }
+       
+       jList1.setModel(model);
+       
        
      }
      
@@ -84,6 +110,8 @@ public class myHistoryView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

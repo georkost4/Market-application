@@ -7,6 +7,8 @@ package marketsimulator.View;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import marketsimulator.Controller.InterestController;
+import marketsimulator.Controller.UserController;
 import marketsimulator.Model.Property;
 
 /**
@@ -137,7 +139,10 @@ public class propertyDetailsView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnInterestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInterestActionPerformed
-        JOptionPane.showMessageDialog(this,"Needs implementation");
+        InterestController controller = new InterestController();
+        UserController user_controller = new UserController();
+        if(controller.makeInterest(property.getProperty_id(),String.valueOf(user_controller.getLoggedUser().getId()))) JOptionPane.showMessageDialog(this, "Done");
+        else JOptionPane.showMessageDialog(this, "Error");
     }//GEN-LAST:event_btnInterestActionPerformed
 
    private void init() 
