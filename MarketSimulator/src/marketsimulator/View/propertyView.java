@@ -39,9 +39,12 @@ public class propertyView extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         propertyList = new javax.swing.JList();
         btnAddNewProperty = new javax.swing.JButton();
+        btnHistory = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
+        propertyList.setFont(new java.awt.Font("Georgia", 0, 16)); // NOI18N
         propertyList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 propertyListMouseClicked(evt);
@@ -56,14 +59,23 @@ public class propertyView extends javax.swing.JFrame {
             }
         });
 
+        btnHistory.setText("My History");
+        btnHistory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHistoryActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAddNewProperty)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnAddNewProperty, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnHistory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(14, 14, 14))
         );
         layout.setVerticalGroup(
@@ -71,7 +83,9 @@ public class propertyView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(75, 75, 75)
                 .addComponent(btnAddNewProperty)
-                .addContainerGap(255, Short.MAX_VALUE))
+                .addGap(57, 57, 57)
+                .addComponent(btnHistory)
+                .addContainerGap(292, Short.MAX_VALUE))
             .addComponent(jScrollPane1)
         );
 
@@ -86,8 +100,15 @@ public class propertyView extends javax.swing.JFrame {
 
     private void propertyListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_propertyListMouseClicked
         // TODO add your handling code here:
-         JOptionPane.showMessageDialog(this,((Property)propertyList.getSelectedValue()).getName());
+         Property prop = (Property) propertyList.getSelectedValue() ;
+         new propertyDetailsView(prop).setVisible(true);
+         this.setVisible(false);
     }//GEN-LAST:event_propertyListMouseClicked
+
+    private void btnHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoryActionPerformed
+        this.setVisible(false);
+        new myHistoryView().setVisible(true);
+    }//GEN-LAST:event_btnHistoryActionPerformed
 
     /**
      * @param args the command line arguments
@@ -109,6 +130,7 @@ public class propertyView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddNewProperty;
+    private javax.swing.JButton btnHistory;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList propertyList;
     // End of variables declaration//GEN-END:variables

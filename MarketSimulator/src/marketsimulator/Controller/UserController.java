@@ -15,6 +15,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import marketsimulator.Model.User;
 
 /**
@@ -26,19 +28,19 @@ public class UserController  implements UserInterface
     DatabaseController db_controller = new DatabaseController();
    
     @Override
-    public User getUser(String given_username) 
+    public User getUser(String given_username,JFrame frame) 
     {
         User tempUser = null;
         Connection conn = null;
         Statement stmt = null;
-       try 
-       {
+        try 
+        {
            db_controller.setClass();
            conn = db_controller.getConnection();
            stmt = conn.createStatement();
            String sql;
           
-           sql = "SELECT * FROM users where username = '"+given_username+"'";
+           sql = "SELECT * FROM users where username = '" + given_username + "'";
            ResultSet rs = stmt.executeQuery(sql);
            
            rs.next();
@@ -57,7 +59,7 @@ public class UserController  implements UserInterface
            stmt.close();
            conn.close();
        } 
-       catch (SQLException ex) {ex.printStackTrace(); return null;} 
+       catch (SQLException ex) {ex.printStackTrace(); JOptionPane.showMessageDialog(frame,"Could not establish connection to the database.");  return null;} 
        catch (ClassNotFoundException ex) {ex.printStackTrace(); return null; }
        return tempUser;
     } 
@@ -95,10 +97,10 @@ public class UserController  implements UserInterface
     @Override
     public boolean userLogin(String username, String password) 
     {
-       User tmpUser = getUser(username);
+       User tmpUser = getUser(username,null);
        if(tmpUser == null) return false;
        if(tmpUser.getPassword().equals(password)) return true;
-       else return false;
+       return false;
     }
 
     @Override
@@ -106,13 +108,11 @@ public class UserController  implements UserInterface
         User tmp = null;
         try
         {
-		   
 		FileInputStream fin = new FileInputStream(System.getProperty("user.home")+"\\Documents\\user.ser");
 		ObjectInputStream oos = new ObjectInputStream(fin);   
 		tmp = (User) oos.readObject();
 		oos.close();
-		System.out.println(tmp);
-		   
+		System.out.println(tmp);	   
 	}
         catch(Exception ex){  ex.printStackTrace();return null;}
         

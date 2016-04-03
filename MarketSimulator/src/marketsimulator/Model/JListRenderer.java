@@ -6,6 +6,13 @@
 package marketsimulator.Model;
 
 import java.awt.Component;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -22,9 +29,12 @@ public class JListRenderer extends DefaultListCellRenderer implements ListCellRe
     @Override
     public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
         Property prop = (Property) value;
-        setText(prop.getName());
-        setText(prop.getValue()+"$");
-        Icon icon = new ImageIcon(prop.getImage_location());
+        setText(prop.getCity() + "  " + prop.getAddress() + "  " + prop.getValue()+"$");
+        
+        Image img = null;
+        try {  img= ImageIO.read(new File(prop.getImage_location().replace("/","\\"))).getScaledInstance(176, 146, BufferedImage.SCALE_SMOOTH);} 
+        catch (IOException ex) { ex.printStackTrace();}
+        Icon icon = new ImageIcon(img);
         
         setIcon(icon);
         
@@ -44,5 +54,5 @@ public class JListRenderer extends DefaultListCellRenderer implements ListCellRe
         setFont(list.getFont());
         return this;
     }
-        
+
 }

@@ -72,7 +72,7 @@ public class ValidationController implements ValidationInterface
     @Override
     public boolean validateAddress(String address) {
        // Characters followed by a number
-        String regex = "([a-zA-Z]+ [0-9])+";
+        String regex = "([a-zA-Z]+ [0-9]{1,})+";
         
         if(address.matches(regex)) return true;
         return false;
@@ -82,7 +82,7 @@ public class ValidationController implements ValidationInterface
     public boolean validateRegisterInput(JFrame frame,String name, String name2, String phone, String password, String username,String city) {
         if(!this.validateName(name, name2))
         {
-            JOptionPane.showMessageDialog(frame, "a-z and A-Z only", "First and/or Last name Error", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(frame, "a-z and A-Z only \u2022 \n sadasd", "First and/or Last name Error", JOptionPane.INFORMATION_MESSAGE);
             return false;        
         }
         if(!this.validatePassword(password)){
