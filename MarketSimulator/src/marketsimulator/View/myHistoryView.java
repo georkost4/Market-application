@@ -6,9 +6,12 @@
 package marketsimulator.View;
 
 import java.util.ArrayList;
+import java.util.Vector;
 import javax.swing.DefaultListModel;
+import javax.swing.table.DefaultTableModel;
 import marketsimulator.Controller.InterestController;
 import marketsimulator.Controller.UserController;
+import marketsimulator.Model.CustomTableModel;
 import marketsimulator.Model.Property;
 
 /**
@@ -40,6 +43,12 @@ public class myHistoryView extends javax.swing.JFrame {
         jList1 = new javax.swing.JList();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tableMyInterests = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tableMyListings = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,12 +65,51 @@ public class myHistoryView extends javax.swing.JFrame {
 
         jButton2.setText("Interests");
 
+        jLabel1.setText("My Listings");
+
+        tableMyInterests.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tableMyInterests);
+
+        jLabel2.setText("Properties that im interested in");
+
+        tableMyListings.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(tableMyListings);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 811, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3))
+                .addGap(50, 50, 50)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnBack)
@@ -71,15 +119,26 @@ public class myHistoryView extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(btnBack)
-                .addGap(45, 45, 45)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2)
-                .addContainerGap(104, Short.MAX_VALUE))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(btnBack)
+                        .addGap(45, 45, 45)
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -88,16 +147,19 @@ public class myHistoryView extends javax.swing.JFrame {
      private void init() 
      {
        InterestController controller = new InterestController();
-       ArrayList<Property> property = new ArrayList<Property>();
-       property = controller.getMyInterests(String.valueOf(new UserController().getLoggedUser().getId()));
-       DefaultListModel model = new DefaultListModel();
-       for(Property tmp : property)
-       {
-           model.addElement(tmp.getName());
-       }
        
-       jList1.setModel(model);
+       ArrayList<Property> propertiesImInterestedIn = new ArrayList<Property>();
+       ArrayList<Property> myListingsArray =  new ArrayList<Property>();
        
+       propertiesImInterestedIn = controller.getMyInterests(String.valueOf(new UserController().getLoggedUser().getId()));
+       myListingsArray = controller.getMyListings(String.valueOf(new UserController().getLoggedUser().getId()));
+       
+       CustomTableModel myListingsModel = new CustomTableModel(myListingsArray);
+       CustomTableModel propertiesImInterestedInModel = new CustomTableModel(propertiesImInterestedIn);
+       
+       tableMyInterests.setModel(myListingsModel);
+       
+       tableMyListings.setModel(propertiesImInterestedInModel);
        
      }
      
@@ -112,8 +174,14 @@ public class myHistoryView extends javax.swing.JFrame {
     private javax.swing.JButton btnBack;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable tableMyInterests;
+    private javax.swing.JTable tableMyListings;
     // End of variables declaration//GEN-END:variables
 
    

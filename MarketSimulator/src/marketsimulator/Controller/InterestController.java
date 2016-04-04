@@ -116,7 +116,7 @@ public class InterestController implements InterestInterface {
                 String seller_id = rs.getString("seller_id");
                 String name = rs.getString("name");
                 String value = rs.getString("value");
-                String city = rs.getString("image");
+                String city = rs.getString("city");
                 String date = rs.getString("date_posted");
                 String image = rs.getString("image");
                 String address = rs.getString("address");
@@ -146,7 +146,7 @@ public class InterestController implements InterestInterface {
             con = database_controller.getConnection();
             String sql;
             stm = con.createStatement();
-            sql = "SELECT * FROM " + database_controller.getTALBE_PROPERTY() + "WHERE user_id = " + user_id + " ORDER BY date_posted DESC";
+            sql = "SELECT * FROM " + database_controller.getTALBE_PROPERTY() + " WHERE seller_id = " + user_id + " ORDER BY date_posted DESC";
             
             ResultSet rs =  stm.executeQuery(sql);
              

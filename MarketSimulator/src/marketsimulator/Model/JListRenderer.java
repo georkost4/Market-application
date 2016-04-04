@@ -29,8 +29,7 @@ public class JListRenderer extends DefaultListCellRenderer implements ListCellRe
     @Override
     public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
         Property prop = (Property) value;
-        setText(prop.getCity() + "  " + prop.getAddress() + "  " + prop.getValue()+"$");
-        
+        setText(prop.getCity() + " " + prop.getAddress() + "  " + prop.getValue()+"$");
         Image img = null;
         try {  img= ImageIO.read(new File(prop.getImage_location().replace("/","\\"))).getScaledInstance(176, 146, BufferedImage.SCALE_SMOOTH);} 
         catch (IOException ex) { ex.printStackTrace();}
