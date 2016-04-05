@@ -8,6 +8,7 @@ package marketsimulator.Model;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
+import marketsimulator.Controller.InterestController;
 
 /**
  *
@@ -16,8 +17,9 @@ import javax.swing.table.AbstractTableModel;
 public class CustomTableModel extends AbstractTableModel {
     JButton button;
     ArrayList<Property> property;
+    InterestController controller;
     
-    public CustomTableModel(ArrayList<Property> property) {this.property = property;   }
+    public CustomTableModel(ArrayList<Property> property) {this.property = property;  controller = new InterestController(); }
 
     @Override
     public String getColumnName(int column) 
@@ -26,7 +28,7 @@ public class CustomTableModel extends AbstractTableModel {
         switch(column)
         {
             case 0:
-                name = "Name";
+                name = "Id";
                 break;
             case 1:
                 name = "City";
@@ -41,11 +43,17 @@ public class CustomTableModel extends AbstractTableModel {
                 name = "Seller";
                 break;
             case 5:
-                name = "Seller";
-                break;
-            case 6:
                 name = "Data Posted";
                 break;
+            case 6:
+                name = "Image";
+                break;  
+            case 7:
+                name = "State";
+                break;
+            case 8:
+                name = "property_id";
+                break;  
         }
         return name;
     }    
@@ -71,7 +79,7 @@ public class CustomTableModel extends AbstractTableModel {
         switch(columnIndex)
         {
             case 0:
-                tmp = property.get(rowIndex).getName();
+                tmp = property.get(rowIndex).getProperty_id();
                 break;
             case 1:
                 tmp = property.get(rowIndex).getCity();
@@ -83,7 +91,7 @@ public class CustomTableModel extends AbstractTableModel {
                 tmp = property.get(rowIndex).getValue();
                 break;
             case 4:
-                tmp = property.get(rowIndex).getSeller_id();
+                tmp = controller.getSellerName(property.get(rowIndex).getSeller_id());
                 break;
             case 5:
                 tmp = property.get(rowIndex).getDatePosted();
@@ -91,13 +99,18 @@ public class CustomTableModel extends AbstractTableModel {
             case 6:
                 tmp = property.get(rowIndex).getImage_location();
                 break;
-            case 7:
-                button = new JButton(); 
-                button.setText("Sd");
-                button.setEnabled(true);
-                button.requestFocus();
+            case 8:
+                tmp = property.get(rowIndex).getProperty_id();
+                break;    
         }
         return tmp;
     }
+
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        if(columnIndex == 7) return true;
+        return false;
+    }
+    
 }
     

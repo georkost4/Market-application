@@ -7,12 +7,17 @@ package marketsimulator.View;
 
 import java.util.ArrayList;
 import java.util.Vector;
+import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultListModel;
+import javax.swing.JCheckBox;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import marketsimulator.Controller.InterestController;
 import marketsimulator.Controller.UserController;
 import marketsimulator.Model.CustomTableModel;
 import marketsimulator.Model.Property;
+import marketsimulator.Model.ButtonEditor;
+import marketsimulator.Model.ButtonRenderer;
 
 /**
  *
@@ -160,6 +165,14 @@ public class myHistoryView extends javax.swing.JFrame {
        tableMyInterests.setModel(myListingsModel);
        
        tableMyListings.setModel(propertiesImInterestedInModel);
+       
+       TableColumn tableColumn = tableMyInterests.getColumnModel().getColumn(7);
+      
+       
+       
+       tableColumn.setCellRenderer(new ButtonRenderer());
+       tableColumn.setCellEditor(new ButtonEditor(new JCheckBox()));
+      
        
      }
      

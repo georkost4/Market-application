@@ -38,7 +38,7 @@ public class DatabaseController implements DAO
 
     public  String getTABLE_USERS() { return TABLE_USERS;}
 
-    public  String getTALBE_PROPERTY() {return TABLE_PROPERTY;}
+    public  String getTABLE_PROPERTY() {return TABLE_PROPERTY;}
 
     public  String getTABLE_BIDS() {return TABLE_BIDS; }
    

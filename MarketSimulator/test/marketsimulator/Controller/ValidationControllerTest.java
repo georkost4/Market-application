@@ -83,13 +83,17 @@ public class ValidationControllerTest {
         System.out.println("validateAddress");
         String address = "asdsd 34";
         String address2 = "asdsd34";
+        String address3 = "asdsd s 34";
         ValidationController instance = new ValidationController();
         boolean expResult = true;
         boolean expResult2 = false;
+        boolean expResult3 = true;
         boolean result = instance.validateAddress(address);
         boolean result2 = instance.validateAddress(address2);
+        boolean result3 = instance.validateAddress(address3);
         assertEquals(expResult, result);
         assertEquals(expResult2,result2);
+        assertEquals(expResult3,result3);
        
     }
     

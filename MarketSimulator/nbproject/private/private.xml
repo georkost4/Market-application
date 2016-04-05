@@ -5,12 +5,7 @@
         <group>
             <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/View/myHistoryView.java</file>
             <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/Controller/InterestController.java</file>
-            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/Controller/PropertyInterface.java</file>
-            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/Controller/InterestInterface.java</file>
-            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/Model/Property.java</file>
-            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/View/propertyView.java</file>
-            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/View/propertyDetailsView.java</file>
-            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/Controller/UserController.java</file>
+            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/Model/CustomTableModel.java</file>
         </group>
     </open-files>
 </project-private>

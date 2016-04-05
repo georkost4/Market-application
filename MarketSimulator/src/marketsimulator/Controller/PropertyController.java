@@ -33,7 +33,7 @@ public class PropertyController  implements PropertyInterface  {
             con = db_controller.getConnection();
             String sql;
             stm = con.createStatement();
-            sql = "INSERT INTO " + db_controller.getTALBE_PROPERTY()+ "(property_id,seller_id,name,value,city,address,date_posted,image) VALUES "
+            sql = "INSERT INTO " + db_controller.getTABLE_PROPERTY()+ "(property_id,seller_id,name,value,city,address,date_posted,image) VALUES "
                     + "(0," +property.getSeller_id() +  ",' " 
                     + property.getName() + "'," 
                     + "'"+property.getValue() + "',"
@@ -63,7 +63,7 @@ public class PropertyController  implements PropertyInterface  {
             con = db_controller.getConnection();
             String sql;
             stm = con.createStatement();
-            sql = "DELETE FROM " + db_controller.getTALBE_PROPERTY() + "WHERE selled_id = '" + property.getSeller_id() + "' and name = '" + property.getName() + "'";
+            sql = "DELETE FROM " + db_controller.getTABLE_PROPERTY() + "WHERE selled_id = '" + property.getSeller_id() + "' and name = '" + property.getName() + "'";
             
             int response =  stm.executeUpdate(sql);
              
@@ -87,7 +87,7 @@ public class PropertyController  implements PropertyInterface  {
             con = db_controller.getConnection();
             String sql;
             stm = con.createStatement();
-            sql = "SELECT * FROM " + db_controller.getTALBE_PROPERTY() + " ORDER BY date_posted DESC";
+            sql = "SELECT * FROM " + db_controller.getTABLE_PROPERTY() + " ORDER BY date_posted DESC";
             
             ResultSet rs =  stm.executeQuery(sql);
              

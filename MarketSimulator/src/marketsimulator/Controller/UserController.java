@@ -111,8 +111,7 @@ public class UserController  implements UserInterface
 		FileInputStream fin = new FileInputStream(System.getProperty("user.home")+"\\Documents\\user.ser");
 		ObjectInputStream oos = new ObjectInputStream(fin);   
 		tmp = (User) oos.readObject();
-		oos.close();
-		System.out.println(tmp);	   
+		oos.close();	   
 	}
         catch(Exception ex){  ex.printStackTrace();return null;}
         

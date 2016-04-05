@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import marketsimulator.Model.Property;
+import marketsimulator.Model.User;
 
 /**
  *
@@ -136,7 +137,6 @@ public class InterestController implements InterestInterface {
     @Override
     public ArrayList<Property> getMyListings(String user_id) 
     {
-        // NOT TESTED 
         ArrayList<Property> list = new ArrayList<Property>();
         Connection con = null;
         Statement stm = null;
@@ -146,7 +146,7 @@ public class InterestController implements InterestInterface {
             con = database_controller.getConnection();
             String sql;
             stm = con.createStatement();
-            sql = "SELECT * FROM " + database_controller.getTALBE_PROPERTY() + " WHERE seller_id = " + user_id + " ORDER BY date_posted DESC";
+            sql = "SELECT * FROM " + database_controller.getTABLE_PROPERTY() + " WHERE seller_id = " + user_id + " ORDER BY date_posted DESC";
             
             ResultSet rs =  stm.executeQuery(sql);
              
@@ -170,6 +170,74 @@ public class InterestController implements InterestInterface {
         catch (ClassNotFoundException ex) {ex.printStackTrace(); return null; }
         
         return list;
+    }
+
+    @Override
+    public String getSellerName(String seller_id) {
+        String tmp = null;
+        Connection con = null;
+        Statement stm = null;
+        try
+        {
+            database_controller.setClass();
+            con = database_controller.getConnection();
+            String sql;
+            stm = con.createStatement();
+            sql = "SELECT * FROM " + database_controller.getTABLE_PROPERTY() + ", " + database_controller.getTABLE_USERS() + " WHERE seller_id =  user_id and seller_id = " + seller_id;
+            
+            ResultSet rs =  stm.executeQuery(sql);
+             
+            while(rs.next())
+            {
+                String first_name = rs.getString("firstname");
+                String last_name = rs.getString("lastname");
+                
+                tmp = first_name + "  " + last_name;
+                
+            }
+            
+        } 
+        catch (SQLException ex) {ex.printStackTrace(); return null;} 
+        catch (ClassNotFoundException ex) {ex.printStackTrace(); return null; }
+        
+        return tmp;
+    }
+
+    @Override
+    public ArrayList<User> getUsersThatAreInterestedInMyListings(String property_id) {
+        ArrayList<User> users = new ArrayList<User>();
+        Connection con = null;
+        Statement stm = null;
+        try
+        {
+            database_controller.setClass();
+            con = database_controller.getConnection();
+            String sql;
+            stm = con.createStatement();
+            sql = "select * from users where user_id in ( SELECT user_id from bids where property_id = " + property_id + " and user_id != " + new UserController().getLoggedUser().getId() + " )";
+            
+            ResultSet rs =  stm.executeQuery(sql);
+            
+            System.out.println("BeforeResultSet");
+            int i = 0;
+            while(rs.next())
+            {
+                String first_name = rs.getString("firstname");
+                String last_name = rs.getString("lastname");
+                String city = rs.getString("city");
+                String number = rs.getString("number");
+                System.out.println("InsideResultSet");
+                users.add(new User(-1,first_name,last_name,null,null,city,number));
+                System.out.println(users.get(i).toString());
+                i++;
+                
+            }
+            
+        } 
+        catch (SQLException ex) {ex.printStackTrace(); return null;} 
+        catch (ClassNotFoundException ex) {ex.printStackTrace(); return null; }
+        
+        return users;
     }
     
 }
