@@ -6,6 +6,15 @@
 package marketsimulator.View;
 
 import com.sun.glass.events.KeyEvent;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import marketsimulator.Controller.UserController;
 
@@ -20,6 +29,8 @@ public class mainView extends javax.swing.JFrame {
      */
     public mainView() {
         initComponents();
+        setIcon();
+        
     }
 
     /**
@@ -40,6 +51,7 @@ public class mainView extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Login Form");
 
         jLabel1.setText("Username:");
 
@@ -160,5 +172,15 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
+
+    private void setIcon() 
+    {
+        Image icon = null;
+        try {icon = ImageIO.read(getClass().getClassLoader().getResource("Images/logo.jpg"));} 
+        catch (IOException ex) {ex.printStackTrace();  }
+        this.setIconImage( icon);
+    }     
+
+        
 
 }

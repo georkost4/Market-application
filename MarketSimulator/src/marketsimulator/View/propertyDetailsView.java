@@ -47,6 +47,7 @@ public class propertyDetailsView extends javax.swing.JFrame {
         btnInterest = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Details of the property");
 
         city.setText("jLabel1");
 

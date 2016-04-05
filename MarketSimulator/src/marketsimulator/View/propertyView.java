@@ -42,6 +42,7 @@ public class propertyView extends javax.swing.JFrame {
         btnHistory = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Properties  on sale");
         setResizable(false);
 
         propertyList.setFont(new java.awt.Font("Georgia", 0, 16)); // NOI18N

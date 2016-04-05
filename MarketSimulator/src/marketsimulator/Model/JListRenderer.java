@@ -30,10 +30,8 @@ public class JListRenderer extends DefaultListCellRenderer implements ListCellRe
     public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
         Property prop = (Property) value;
         setText(prop.getCity() + " " + prop.getAddress() + "  " + prop.getValue()+"$");
-        Image img = null;
-        try {  img= ImageIO.read(new File(prop.getImage_location().replace("/","\\"))).getScaledInstance(176, 146, BufferedImage.SCALE_SMOOTH);} 
-        catch (IOException ex) { ex.printStackTrace();}
-        Icon icon = new ImageIcon(img);
+        
+        Icon icon = new ImageIcon(prop.getImage_location());
         
         setIcon(icon);
         

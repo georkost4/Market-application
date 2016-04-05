@@ -56,6 +56,7 @@ public class myHistoryView extends javax.swing.JFrame {
         tableMyListings = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Check my history");
 
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {

@@ -5,8 +5,13 @@
  */
 package marketsimulator.View;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -55,6 +60,7 @@ public class AddNewPropertyView extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Add new property for sale");
 
         jLabel4.setText("Value");
 
@@ -118,7 +124,7 @@ public class AddNewPropertyView extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 170, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 266, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -126,8 +132,8 @@ public class AddNewPropertyView extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(txtImageSelected))
                                     .addComponent(btnSelectImage))
-                                .addGap(97, 97, 97)
-                                .addComponent(btnDone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnDone, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(27, 27, 27))
         );
         layout.setVerticalGroup(
@@ -181,8 +187,17 @@ public class AddNewPropertyView extends javax.swing.JFrame {
         System.out.println(String.valueOf(returnVal));
         if(returnVal == 0)
         {
-            File file = fc.getSelectedFile();
-            txtImageSelected.setText(file.getAbsolutePath());
+           
+                File file = fc.getSelectedFile();
+                txtImageSelected.setText(file.getAbsolutePath());
+                try 
+                {
+                    BufferedImage img = new BufferedImage(176, 146, BufferedImage.TYPE_INT_RGB);
+                    img.createGraphics().drawImage(ImageIO.read(new File(txtImageSelected.getText())).getScaledInstance(176, 146, Image.SCALE_SMOOTH),0,0,null);
+                    ImageIO.write(img, "jpg", new File(txtImageSelected.getText()));
+                }
+                catch (IOException ex) {ex.printStackTrace();  }
+            
         }
     }//GEN-LAST:event_btnSelectImageActionPerformed
 

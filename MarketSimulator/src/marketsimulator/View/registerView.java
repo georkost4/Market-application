@@ -48,6 +48,7 @@ public class registerView extends javax.swing.JFrame {
         txtCity = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Register form");
 
         jLabel1.setText("First Name:");
 
