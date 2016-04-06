@@ -20,6 +20,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import marketsimulator.Controller.PropertyController;
 import marketsimulator.Controller.UserController;
 import marketsimulator.Controller.ValidationController;
+import marketsimulator.Controller.setIconController;
 import marketsimulator.Model.Property;
 import marketsimulator.Model.User;
 
@@ -34,6 +35,7 @@ public class AddNewPropertyView extends javax.swing.JFrame {
      */
     public AddNewPropertyView() {
         initComponents();
+        new setIconController().setIcon(this);
     }
 
     /**

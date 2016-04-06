@@ -3,23 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package marketsimulator.Model;
+package Utilities;
 
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 import marketsimulator.Controller.InterestController;
+import marketsimulator.Model.Property;
 
 /**
  *
  * @author SoRa
  */
-public class CustomTableModel extends AbstractTableModel {
+public class MyListingsTableModel extends AbstractTableModel {
     JButton button;
     ArrayList<Property> property;
     InterestController controller;
     
-    public CustomTableModel(ArrayList<Property> property) {this.property = property;  controller = new InterestController(); }
+    public MyListingsTableModel(ArrayList<Property> property) {this.property = property;  controller = new InterestController(); }
 
     @Override
     public String getColumnName(int column) 

@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import marketsimulator.Controller.InterestController;
 import marketsimulator.Controller.UserController;
+import marketsimulator.Controller.setIconController;
 import marketsimulator.Model.Property;
 
 /**
@@ -24,6 +25,7 @@ public class propertyDetailsView extends javax.swing.JFrame {
     public propertyDetailsView(Property property) {
         initComponents();
         this.property = property;
+        new setIconController().setIcon(this);
         init();
     }
 
@@ -39,12 +41,14 @@ public class propertyDetailsView extends javax.swing.JFrame {
         city = new javax.swing.JLabel();
         icon = new javax.swing.JLabel();
         name = new javax.swing.JLabel();
-        value = new javax.swing.JLabel();
+        address = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
         city1 = new javax.swing.JLabel();
         name1 = new javax.swing.JLabel();
         value1 = new javax.swing.JLabel();
         btnInterest = new javax.swing.JButton();
+        value = new javax.swing.JLabel();
+        value3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Details of the property");
@@ -55,7 +59,7 @@ public class propertyDetailsView extends javax.swing.JFrame {
 
         name.setText("jLabel1");
 
-        value.setText("jLabel1");
+        address.setText("jLabel1");
 
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -68,15 +72,19 @@ public class propertyDetailsView extends javax.swing.JFrame {
 
         name1.setText("Name:");
 
-        value1.setText("Value");
+        value1.setText("Address:");
 
-        btnInterest.setIcon(new javax.swing.ImageIcon(getClass().getResource("/marketsimulator/View/accept-icon.png"))); // NOI18N
+        btnInterest.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/accept-icon.png"))); // NOI18N
         btnInterest.setText("Im interested in this property");
         btnInterest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInterestActionPerformed(evt);
             }
         });
+
+        value.setText("jLabel1");
+
+        value3.setText("Value");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -85,9 +93,11 @@ public class propertyDetailsView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(icon, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBack))
+                .addGap(42, 42, 42)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(icon, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(city1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(name1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -96,13 +106,13 @@ public class propertyDetailsView extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(city, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(value, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(65, Short.MAX_VALUE))
+                            .addComponent(address, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnBack)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnInterest, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(87, 87, 87))))
+                        .addComponent(value3, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(value, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnInterest, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,12 +133,16 @@ public class propertyDetailsView extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(value1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(value, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                            .addComponent(address, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(value3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(value, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnInterest)
                     .addComponent(btnBack))
-                .addGap(48, 48, 48))
+                .addGap(36, 36, 36))
         );
 
         pack();
@@ -151,12 +165,14 @@ public class propertyDetailsView extends javax.swing.JFrame {
         icon.setIcon( new ImageIcon(property.getImage_location()));
         city.setText( property.getCity());
         name.setText(property.getName());
-        value.setText( property.getValue() );
+        address.setText( property.getAddress());
+        value.setText(property.getValue()+"$");
         
     }
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel address;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnInterest;
     private javax.swing.JLabel city;
@@ -166,6 +182,7 @@ public class propertyDetailsView extends javax.swing.JFrame {
     private javax.swing.JLabel name1;
     private javax.swing.JLabel value;
     private javax.swing.JLabel value1;
+    private javax.swing.JLabel value3;
     // End of variables declaration//GEN-END:variables
 
     

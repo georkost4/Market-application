@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package marketsimulator.Model;
+package Utilities;
 
 import java.awt.Component;
 import javax.swing.JButton;
@@ -36,6 +36,7 @@ public class ButtonRenderer extends JButton implements TableCellRenderer {
         setText("See users");
         return this;
   }
+  
 
     
 }

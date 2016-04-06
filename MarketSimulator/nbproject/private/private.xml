@@ -4,8 +4,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/View/myHistoryView.java</file>
-            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/Controller/InterestController.java</file>
-            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/Model/CustomTableModel.java</file>
+            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/View/mainView.java</file>
+            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/View/AddNewPropertyView.java</file>
+            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/View/accept-icon.png</file>
+            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/View/registerView.java</file>
+            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/View/usersThatAreInterestedInMyListingsView.java</file>
+            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/View/propertyView.java</file>
+            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/Model/JListRenderer.java</file>
+            <file>file:/C:/Users/SoRa/Desktop/Methodologia/Market-application/MarketSimulator/src/marketsimulator/View/propertyDetailsView.java</file>
         </group>
     </open-files>
 </project-private>

@@ -5,7 +5,7 @@
  */
 package marketsimulator.Controller;
 
-import DAO.DatabaseController;
+import marketsimulator.Model.DatabaseController;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

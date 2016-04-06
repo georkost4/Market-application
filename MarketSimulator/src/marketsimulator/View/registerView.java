@@ -8,6 +8,7 @@ package marketsimulator.View;
 import javax.swing.JOptionPane;
 import marketsimulator.Controller.UserController;
 import marketsimulator.Controller.ValidationController;
+import marketsimulator.Controller.setIconController;
 import marketsimulator.Model.User;
 
 /**
@@ -21,6 +22,7 @@ public class registerView extends javax.swing.JFrame {
      */
     public registerView() {
         initComponents();
+        new setIconController().setIcon(this);
     }
 
     /**

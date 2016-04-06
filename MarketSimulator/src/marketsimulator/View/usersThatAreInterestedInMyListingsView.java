@@ -5,8 +5,12 @@
  */
 package marketsimulator.View;
 
+import Utilities.usersThatAreInterestedInMyListingsJLIST_RENDERER;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import marketsimulator.Controller.InterestController;
+import marketsimulator.Controller.setIconController;
 import marketsimulator.Model.User;
 
 /**
@@ -17,11 +21,13 @@ public class usersThatAreInterestedInMyListingsView extends javax.swing.JFrame {
 
     
     ArrayList<User> users;
-    public usersThatAreInterestedInMyListingsView(ArrayList<User> users) {
+    String prop_id;
+    public usersThatAreInterestedInMyListingsView(ArrayList<User> users,String prop_id) {
         initComponents();
         this.users = users;
-        
+        this.prop_id = prop_id;
         init();
+        new setIconController().setIcon(this);
     }
 
     /**
@@ -47,10 +53,21 @@ public class usersThatAreInterestedInMyListingsView extends javax.swing.JFrame {
             }
         });
 
+        jList1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jList1.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
+        });
+        jList1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jList1MouseClicked(evt);
+            }
+        });
+        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jList1ValueChanged(evt);
+            }
         });
         jScrollPane1.setViewportView(jList1);
 
@@ -86,15 +103,27 @@ public class usersThatAreInterestedInMyListingsView extends javax.swing.JFrame {
         
         for(User user : users)
         {
-            model.addElement(user.getFirstname()+" "+user.getLastname());
+            model.addElement(user);
         }
         jList1.setModel(model);
+        jList1.setCellRenderer(new usersThatAreInterestedInMyListingsJLIST_RENDERER());
     }
     
     
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jList1ValueChanged
+
+    private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
+       User user = (User) jList1.getSelectedValue();
+       int result = JOptionPane.showConfirmDialog(this, "Do you want to sell this property to this user?", "Warning", JOptionPane.YES_NO_CANCEL_OPTION);
+       if(result == JOptionPane.YES_OPTION) new InterestController().acceptInterest(prop_id, String.valueOf(user.getId()));
+       else if(result == JOptionPane.NO_OPTION) new InterestController().declineInterest(prop_id, String.valueOf(user.getId()));
+    }//GEN-LAST:event_jList1MouseClicked
 
    
 

@@ -10,7 +10,9 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 import marketsimulator.Controller.PropertyController;
-import marketsimulator.Model.JListRenderer;
+import Utilities.PropertyOnSale_JListRenderer;
+import marketsimulator.Controller.UserController;
+import marketsimulator.Controller.setIconController;
 import marketsimulator.Model.Property;
 
 /**
@@ -25,6 +27,7 @@ public class propertyView extends javax.swing.JFrame {
     public propertyView() {
         initComponents();
         init();
+        new setIconController().setIcon(this);
     }
 
     /**
@@ -40,6 +43,8 @@ public class propertyView extends javax.swing.JFrame {
         propertyList = new javax.swing.JList();
         btnAddNewProperty = new javax.swing.JButton();
         btnHistory = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        labelUser = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Properties  on sale");
@@ -67,6 +72,11 @@ public class propertyView extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Logged in as");
+
+        labelUser.setForeground(new java.awt.Color(153, 153, 255));
+        labelUser.setText("jLabel2");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -74,10 +84,17 @@ public class propertyView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnAddNewProperty, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnHistory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(14, 14, 14))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnAddNewProperty, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnHistory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(14, 14, 14))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                            .addComponent(labelUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(36, 36, 36))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -86,7 +103,11 @@ public class propertyView extends javax.swing.JFrame {
                 .addComponent(btnAddNewProperty)
                 .addGap(57, 57, 57)
                 .addComponent(btnHistory)
-                .addContainerGap(292, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelUser)
+                .addContainerGap(190, Short.MAX_VALUE))
             .addComponent(jScrollPane1)
         );
 
@@ -116,6 +137,8 @@ public class propertyView extends javax.swing.JFrame {
      */
    public void init()
    {
+       UserController user_controller = new UserController();
+       labelUser.setText(user_controller.getLoggedUser().getFirstname() + " \n " + user_controller.getLoggedUser().getLastname());
        PropertyController controller = new PropertyController();
        DefaultListModel model = new DefaultListModel();
        ArrayList<Property> properties = new ArrayList<Property>();
@@ -125,14 +148,16 @@ public class propertyView extends javax.swing.JFrame {
            model.addElement(prop);
    
        }
-       propertyList.setCellRenderer(new JListRenderer());
+       propertyList.setCellRenderer(new PropertyOnSale_JListRenderer());
        propertyList.setModel(model);
    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddNewProperty;
     private javax.swing.JButton btnHistory;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelUser;
     private javax.swing.JList propertyList;
     // End of variables declaration//GEN-END:variables
 }

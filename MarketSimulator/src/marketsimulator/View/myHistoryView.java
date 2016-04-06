@@ -14,10 +14,12 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import marketsimulator.Controller.InterestController;
 import marketsimulator.Controller.UserController;
-import marketsimulator.Model.CustomTableModel;
+import Utilities.MyListingsTableModel;
 import marketsimulator.Model.Property;
-import marketsimulator.Model.ButtonEditor;
-import marketsimulator.Model.ButtonRenderer;
+import Utilities.JTableButtonEditor;
+import Utilities.ButtonRenderer;
+import Utilities.PropertiesThatImInterestedTableModel;
+import marketsimulator.Controller.setIconController;
 
 /**
  *
@@ -30,7 +32,7 @@ public class myHistoryView extends javax.swing.JFrame {
      */
     public myHistoryView() {
         initComponents();
-        
+        new setIconController().setIcon(this);
         init();
     }
 
@@ -46,8 +48,6 @@ public class myHistoryView extends javax.swing.JFrame {
         btnBack = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableMyInterests = new javax.swing.JTable();
@@ -66,10 +66,6 @@ public class myHistoryView extends javax.swing.JFrame {
         });
 
         jScrollPane1.setViewportView(jList1);
-
-        jButton1.setText("My Listings");
-
-        jButton2.setText("Interests");
 
         jLabel1.setText("My Listings");
 
@@ -117,11 +113,8 @@ public class myHistoryView extends javax.swing.JFrame {
                 .addGap(50, 50, 50)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnBack)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addComponent(btnBack)
+                .addGap(41, 41, 41))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,11 +123,7 @@ public class myHistoryView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(37, 37, 37)
-                        .addComponent(btnBack)
-                        .addGap(45, 45, 45)
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2))
+                        .addComponent(btnBack))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addComponent(jLabel1)
@@ -160,8 +149,9 @@ public class myHistoryView extends javax.swing.JFrame {
        propertiesImInterestedIn = controller.getMyInterests(String.valueOf(new UserController().getLoggedUser().getId()));
        myListingsArray = controller.getMyListings(String.valueOf(new UserController().getLoggedUser().getId()));
        
-       CustomTableModel myListingsModel = new CustomTableModel(myListingsArray);
-       CustomTableModel propertiesImInterestedInModel = new CustomTableModel(propertiesImInterestedIn);
+       MyListingsTableModel myListingsModel = new MyListingsTableModel(myListingsArray);
+       PropertiesThatImInterestedTableModel propertiesImInterestedInModel = new PropertiesThatImInterestedTableModel(propertiesImInterestedIn);
+       
        
        tableMyInterests.setModel(myListingsModel);
        
@@ -172,7 +162,7 @@ public class myHistoryView extends javax.swing.JFrame {
        
        
        tableColumn.setCellRenderer(new ButtonRenderer());
-       tableColumn.setCellEditor(new ButtonEditor(new JCheckBox()));
+       tableColumn.setCellEditor(new JTableButtonEditor(new JCheckBox()));
       
        
      }
@@ -186,8 +176,6 @@ public class myHistoryView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JList jList1;

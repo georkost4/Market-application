@@ -1,4 +1,4 @@
-package marketsimulator.Model;
+package Utilities;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -13,9 +13,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import marketsimulator.Controller.InterestController;
+import marketsimulator.Model.User;
 import marketsimulator.View.usersThatAreInterestedInMyListingsView;
 
-public class ButtonEditor extends DefaultCellEditor
+public class JTableButtonEditor extends DefaultCellEditor
 {
     
   protected JButton button;
@@ -24,7 +25,7 @@ public class ButtonEditor extends DefaultCellEditor
   private boolean isPushed;
   private String prop_id;
 
-  public ButtonEditor(JCheckBox checkBox) 
+  public JTableButtonEditor(JCheckBox checkBox) 
   {
     super(checkBox);
     button = new JButton();
@@ -62,13 +63,9 @@ public class ButtonEditor extends DefaultCellEditor
   {
     if (isPushed) 
     {
-      JOptionPane.showMessageDialog(button,"Clicked");
       ArrayList<User> users = new ArrayList<User>();
       users = (new InterestController().getUsersThatAreInterestedInMyListings(prop_id));
-      new usersThatAreInterestedInMyListingsView(users).setVisible(true);
-      
-      
-      
+      new usersThatAreInterestedInMyListingsView(users,prop_id).setVisible(true);
     }
     isPushed = false;
     return null;

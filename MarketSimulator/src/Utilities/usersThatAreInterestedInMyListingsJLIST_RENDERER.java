@@ -3,38 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package marketsimulator.Model;
+package Utilities;
 
 import java.awt.Component;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
+import marketsimulator.Model.Property;
+import marketsimulator.Model.User;
 
 /**
  *
  * @author SoRa
  */
-public class JListRenderer extends DefaultListCellRenderer implements ListCellRenderer<Object>
+public class usersThatAreInterestedInMyListingsJLIST_RENDERER extends DefaultListCellRenderer implements ListCellRenderer<Object>
 {
-
     @Override
     public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-        Property prop = (Property) value;
-        setText(prop.getCity() + " " + prop.getAddress() + "  " + prop.getValue()+"$");
-        
-        Icon icon = new ImageIcon(prop.getImage_location());
-        
-        setIcon(icon);
-        
+        User user = (User) value;
+        setText(user.getFirstname()+ " " + user.getLastname());
         
         if(isSelected)
         {
@@ -51,5 +40,5 @@ public class JListRenderer extends DefaultListCellRenderer implements ListCellRe
         setFont(list.getFont());
         return this;
     }
-
+    
 }

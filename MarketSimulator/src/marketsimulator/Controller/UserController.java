@@ -5,7 +5,7 @@
  */
 package marketsimulator.Controller;
 
-import DAO.DatabaseController;
+import marketsimulator.Model.DatabaseController;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

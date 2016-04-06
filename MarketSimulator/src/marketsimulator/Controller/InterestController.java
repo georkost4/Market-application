@@ -5,7 +5,7 @@
  */
 package marketsimulator.Controller;
 
-import DAO.DatabaseController;
+import marketsimulator.Model.DatabaseController;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,7 +33,7 @@ public class InterestController implements InterestInterface {
            conn = database_controller.getConnection();
            stm = conn.createStatement();
            database_controller.setClass();
-           String sql = "UPDATE  " + database_controller.getTABLE_BIDS() + "SET approved = 1 where user_id = " + user_id + " and property_id = " + property_id;
+           String sql = "UPDATE  " + database_controller.getTABLE_BIDS() + " SET approved = 1 where user_id = '" + user_id + "' and property_id = '" + property_id + "'";
                   
            
            int rs = stm.executeUpdate(sql);
@@ -55,7 +55,7 @@ public class InterestController implements InterestInterface {
            conn = database_controller.getConnection();
            stm = conn.createStatement();
            database_controller.setClass();
-           String sql = "UPDATE  " + database_controller.getTABLE_BIDS() + "SET approved = 0 where user_id = " + user_id + " and property_id = " + property_id;
+           String sql = "UPDATE  " + database_controller.getTABLE_BIDS() + " SET approved = 0 where user_id = " + user_id + " and property_id = " + property_id;
                   
            
            int rs = stm.executeUpdate(sql);
@@ -222,12 +222,13 @@ public class InterestController implements InterestInterface {
             int i = 0;
             while(rs.next())
             {
+                String user_id = rs.getString("user_id");
                 String first_name = rs.getString("firstname");
                 String last_name = rs.getString("lastname");
                 String city = rs.getString("city");
                 String number = rs.getString("number");
                 System.out.println("InsideResultSet");
-                users.add(new User(-1,first_name,last_name,null,null,city,number));
+                users.add(new User(Integer.parseInt(user_id),first_name,last_name,null,null,city,number));
                 System.out.println(users.get(i).toString());
                 i++;
                 
