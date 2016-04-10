@@ -33,9 +33,9 @@ public class PropertyController  implements PropertyInterface  {
             con = db_controller.getConnection();
             String sql;
             stm = con.createStatement();
-            sql = "INSERT INTO " + db_controller.getTABLE_PROPERTY()+ "(property_id,seller_id,name,value,city,address,date_posted,image) VALUES "
+            sql = "INSERT INTO " + db_controller.getTABLE_PROPERTY()+ "(property_id,seller_id,on_sale,value,city,address,date_posted,image) VALUES "
                     + "(0," +property.getSeller_id() +  ",' " 
-                    + property.getName() + "'," 
+                    + property.getOn_sale() + "'," 
                     + "'"+property.getValue() + "',"
                     + "'"+property.getCity() + "'," 
                     + "'"+property.getAddress() + "',"
@@ -63,7 +63,7 @@ public class PropertyController  implements PropertyInterface  {
             con = db_controller.getConnection();
             String sql;
             stm = con.createStatement();
-            sql = "DELETE FROM " + db_controller.getTABLE_PROPERTY() + "WHERE selled_id = '" + property.getSeller_id() + "' and name = '" + property.getName() + "'";
+            sql = "DELETE FROM " + db_controller.getTABLE_PROPERTY() + "WHERE property_id = " + property.getProperty_id();
             
             int response =  stm.executeUpdate(sql);
              
@@ -87,7 +87,7 @@ public class PropertyController  implements PropertyInterface  {
             con = db_controller.getConnection();
             String sql;
             stm = con.createStatement();
-            sql = "SELECT * FROM " + db_controller.getTABLE_PROPERTY() + " ORDER BY date_posted DESC";
+            sql = "SELECT * FROM " + db_controller.getTABLE_PROPERTY() + " where seller_id != " + new UserController().getLoggedUser().getId() + " ORDER BY date_posted DESC";
             
             ResultSet rs =  stm.executeQuery(sql);
              
@@ -95,14 +95,14 @@ public class PropertyController  implements PropertyInterface  {
             {
                 String property_id = String.valueOf( rs.getInt("property_id"));
                 String seller_id   = String.valueOf(rs.getString("seller_id"));
-                String name        = rs.getString("name");
+                String on_sale        = rs.getString("on_sale");
                 String value       = rs.getString("value");
                 String city        = rs.getString("city");
                 String address     = rs.getString("address");
                 String date_posted = rs.getString("date_posted");
                 String image       = rs.getString("image");
                 
-                list.add(new Property(property_id,seller_id,name,value,city,address,date_posted,image));
+                list.add(new Property(property_id,seller_id,on_sale,value,city,address,date_posted,image));
                 
             }
             
@@ -111,6 +111,34 @@ public class PropertyController  implements PropertyInterface  {
         catch (ClassNotFoundException ex) {ex.printStackTrace(); return null; }
         
         return list;
+    }
+    
+    @Override
+    public int getOnSaleState(String property_id)
+    {
+        int returnVal = -10;
+        Connection con = null;
+        Statement stm = null;
+        try
+        {
+            db_controller.setClass();
+            con = db_controller.getConnection();
+            String sql;
+            stm = con.createStatement();
+            sql = "SELECT on_sale FROM " + db_controller.getTABLE_PROPERTY() + " where property_id = " + property_id;
+            
+            ResultSet rs =  stm.executeQuery(sql);
+             
+            while(rs.next())
+            {
+               returnVal = Integer.parseInt(rs.getString("on_sale"));           
+            }
+            
+        } 
+        catch (SQLException ex) {ex.printStackTrace(); return -1;} 
+        catch (ClassNotFoundException ex) {ex.printStackTrace(); return -1; }
+        
+        return returnVal;
     }
 
 }

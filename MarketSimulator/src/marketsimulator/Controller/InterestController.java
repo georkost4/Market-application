@@ -107,7 +107,7 @@ public class InterestController implements InterestInterface {
             conn = database_controller.getConnection();
             stm = conn.createStatement();
             database_controller.setClass();
-            String sql ="SELECT onsale.property_id,seller_id,name,value,city,image,date_posted,address FROM onsale,bids where bids.property_id = onsale.property_id and bids.user_id = " + user_id;
+            String sql ="SELECT onsale.property_id,seller_id,on_sale,value,city,image,date_posted,address FROM onsale,bids where bids.property_id = onsale.property_id and bids.user_id = " + user_id;
             
             ResultSet rs = stm.executeQuery(sql);
             
@@ -116,14 +116,14 @@ public class InterestController implements InterestInterface {
             {
                 String id = rs.getString("property_id");
                 String seller_id = rs.getString("seller_id");
-                String name = rs.getString("name");
+                String on_sale = rs.getString("on_sale");
                 String value = rs.getString("value");
                 String city = rs.getString("city");
                 String date = rs.getString("date_posted");
                 String image = rs.getString("image");
                 String address = rs.getString("address");
                 
-                list.add(new Property(id,seller_id,name,value,city,address,date,image));
+                list.add(new Property(id,seller_id,on_sale,value,city,address,date,image));
                 
                 System.out.println(list.get(i));
                 i++;
@@ -155,14 +155,14 @@ public class InterestController implements InterestInterface {
             {
                 String property_id = String.valueOf( rs.getInt("property_id"));
                 String seller_id   = String.valueOf(rs.getString("seller_id"));
-                String name        = rs.getString("name");
+                String on_sale        = rs.getString("on_sale");
                 String value       = rs.getString("value");
                 String city        = rs.getString("city");
                 String address     = rs.getString("address");
                 String date_posted = rs.getString("date_posted");
                 String image       = rs.getString("image");
                 
-                list.add(new Property(property_id,seller_id,name,value,city,address,date_posted,image));
+                list.add(new Property(property_id,seller_id,on_sale,value,city,address,date_posted,image));
                 
             }
             
@@ -241,7 +241,8 @@ public class InterestController implements InterestInterface {
         
         return users;
     }
-
+    
+    @Override
     public int getPropertyState(String property_id) 
     {
        Connection conn = null;

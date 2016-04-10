@@ -13,17 +13,17 @@ public class Property
 {
     String property_id;
     String seller_id;
-    String name;
+    String on_sale;
     String value;
     String city;
     String address;
     String image_location;
     String datePosted;
 
-    public Property(String property_id, String seller_id, String name, String value, String city, String address,String datePosted , String image_location) {
+    public Property(String property_id, String seller_id, String on_sale, String value, String city, String address,String datePosted , String image_location) {
         this.property_id = property_id;
         this.seller_id = seller_id;
-        this.name = name;
+        this.on_sale = on_sale;
         this.value = value;
         this.city = city;
         this.address = address;
@@ -47,10 +47,10 @@ public class Property
 
     public void setSeller_id(String seller_id) {this.seller_id = seller_id;}
 
-    public String getName() {return name;}
+    public String getOn_sale() { return on_sale; }
 
-    public void setName(String name) {this.name = name;}
-
+    public void setOn_sale(String on_sale) { this.on_sale = on_sale;  }
+  
     public String getValue() { return value; }
 
     public void setValue(String value) {this.value = value; }

@@ -22,5 +22,6 @@ public interface InterestInterface
     public ArrayList<Property> getMyListings(String user_id);
     public String getSellerName(String seller_id);
     public ArrayList<User> getUsersThatAreInterestedInMyListings(String property_id);
+    public int getPropertyState(String property_id);
     
 }

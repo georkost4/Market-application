@@ -108,13 +108,9 @@ public class ValidationController implements ValidationInterface
     }
 
     @Override
-    public boolean validateAddNewPropertyInput(JFrame frame, String name, String value, String city, String address) 
+    public boolean validateAddNewPropertyInput(JFrame frame, String value, String city, String address) 
     {
-        if(!this.validateName(name, name))
-        {
-            JOptionPane.showMessageDialog(frame, "a-z and A-Z only", "Property name Error", JOptionPane.INFORMATION_MESSAGE);
-            return false;        
-        }
+     
         if(!this.validateValue(value)){
             JOptionPane.showMessageDialog(frame, " 0-9 only", "Value Error", JOptionPane.INFORMATION_MESSAGE);
             return false;

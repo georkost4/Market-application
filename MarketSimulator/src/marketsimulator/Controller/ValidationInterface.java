@@ -21,7 +21,7 @@ public interface ValidationInterface
     public boolean validateCity(String city);
     
     public boolean validateRegisterInput(JFrame frame,String name,String name2,String phone,String password,String username,String city);
-    public boolean validateAddNewPropertyInput(JFrame frame, String name,String value,String city,String address);
+    public boolean validateAddNewPropertyInput(JFrame frame,String value,String city,String address);
     
     public boolean validateValue(String value);
     public boolean validateAddress(String address);

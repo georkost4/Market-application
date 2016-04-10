@@ -17,5 +17,6 @@ public interface PropertyInterface
     public boolean addProperty(Property property);
     public boolean removeProperty(Property property);
     public ArrayList<Property> getProperties();
+    public int getOnSaleState(String property_id);
     
 }
