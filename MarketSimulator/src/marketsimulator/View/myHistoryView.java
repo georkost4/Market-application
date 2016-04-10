@@ -19,6 +19,9 @@ import marketsimulator.Model.Property;
 import Utilities.JTableButtonEditor;
 import Utilities.ButtonRenderer;
 import Utilities.PropertiesThatImInterestedTableModel;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import marketsimulator.Controller.setIconController;
 
 /**
@@ -30,10 +33,13 @@ public class myHistoryView extends javax.swing.JFrame {
     /**
      * Creates new form myHistoryView
      */
-    public myHistoryView() {
+    public myHistoryView() 
+    {
         initComponents();
         new setIconController().setIcon(this);
         init();
+        
+        
     }
 
     /**
@@ -151,20 +157,17 @@ public class myHistoryView extends javax.swing.JFrame {
        
        MyListingsTableModel myListingsModel = new MyListingsTableModel(myListingsArray);
        PropertiesThatImInterestedTableModel propertiesImInterestedInModel = new PropertiesThatImInterestedTableModel(propertiesImInterestedIn);
-       
+      
        
        tableMyInterests.setModel(myListingsModel);
        
        tableMyListings.setModel(propertiesImInterestedInModel);
        
-       TableColumn tableColumn = tableMyInterests.getColumnModel().getColumn(7);
-      
-       
+       TableColumn tableColumn = tableMyInterests.getColumnModel().getColumn(6);
        
        tableColumn.setCellRenderer(new ButtonRenderer());
        tableColumn.setCellEditor(new JTableButtonEditor(new JCheckBox()));
-      
-       
+             
      }
      
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

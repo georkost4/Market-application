@@ -17,7 +17,7 @@ import marketsimulator.Model.Property;
  */
 public class MyListingsTableModel extends AbstractTableModel {
     JButton button;
-    ArrayList<Property> property;
+    static ArrayList<Property> property;
     InterestController controller;
     
     public MyListingsTableModel(ArrayList<Property> property) {this.property = property;  controller = new InterestController(); }
@@ -29,38 +29,36 @@ public class MyListingsTableModel extends AbstractTableModel {
         switch(column)
         {
             case 0:
-                name = "Id";
-                break;
-            case 1:
                 name = "City";
                 break;
-            case 2:
+            case 1:
                 name = "Address";
                 break;
-            case 3:
+            case 2:
                 name = "Value";
                 break;
-            case 4:
+            case 3:
                 name = "Seller";
                 break;
-            case 5:
+            case 4:
                 name = "Data Posted";
                 break;
-            case 6:
+            case 5:
                 name = "Image";
                 break;  
-            case 7:
-                name = "State";
+            case 6:
+                name = "Users";
                 break;
-            case 8:
-                name = "property_id";
-                break;  
+          
         }
         return name;
     }    
     
     
-    
+    public static  String getId(int row)
+    {
+        return property.get(row).getProperty_id();
+    }
     @Override
     public int getRowCount() 
     {
@@ -70,7 +68,7 @@ public class MyListingsTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 8;
+        return 7;
     }
 
     @Override
@@ -80,38 +78,35 @@ public class MyListingsTableModel extends AbstractTableModel {
         switch(columnIndex)
         {
             case 0:
-                tmp = property.get(rowIndex).getProperty_id();
-                break;
-            case 1:
                 tmp = property.get(rowIndex).getCity();
                 break;
-            case 2:
+            case 1:
                 tmp = property.get(rowIndex).getAddress();
                 break;
-            case 3:
+            case 2:
                 tmp = property.get(rowIndex).getValue();
                 break;
-            case 4:
+            case 3:
                 tmp = controller.getSellerName(property.get(rowIndex).getSeller_id());
                 break;
-            case 5:
+            case 4:
                 tmp = property.get(rowIndex).getDatePosted();
                 break;
-            case 6:
+            case 5:
                 tmp = property.get(rowIndex).getImage_location();
                 break;
-            case 8:
-                tmp = property.get(rowIndex).getProperty_id();
-                break;    
+          
         }
         return tmp;
     }
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        if(columnIndex == 7) return true;
+        if(columnIndex == 6) return true;
         return false;
     }
+    
+    
     
 }
     

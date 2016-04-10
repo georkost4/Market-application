@@ -48,7 +48,7 @@ public class InterestController implements InterestInterface {
 
     @Override
     public boolean declineInterest(String property_id,String user_id) {
-        Connection conn = null;
+       Connection conn = null;
        Statement stm = null;
        try
        {
@@ -61,6 +61,7 @@ public class InterestController implements InterestInterface {
            int rs = stm.executeUpdate(sql);
            
            System.out.println(String.valueOf(rs));
+           
        } 
        catch (SQLException ex) {ex.printStackTrace(); return false; } 
        catch (ClassNotFoundException ex) { ex.printStackTrace();}
@@ -239,6 +240,33 @@ public class InterestController implements InterestInterface {
         catch (ClassNotFoundException ex) {ex.printStackTrace(); return null; }
         
         return users;
+    }
+
+    public int getPropertyState(String property_id) 
+    {
+       Connection conn = null;
+       Statement stm = null;
+       int state = -2;
+       try
+       {
+           conn = database_controller.getConnection();
+           stm = conn.createStatement();
+           database_controller.setClass();
+           String sql = "SELECT approved from " + database_controller.getTABLE_BIDS() + " where user_id = " + new UserController().getLoggedUser().getId() + " and property_id = " + property_id;
+                  
+           
+           ResultSet rs =  stm.executeQuery(sql);
+           rs.next();
+           state = Integer.parseInt(rs.getString("approved"));
+           
+           System.out.println(String.valueOf(state));
+           
+       } 
+       catch (SQLException ex) {ex.printStackTrace(); return state; } 
+       catch (ClassNotFoundException ex) { ex.printStackTrace();}
+       
+       return state;
+       
     }
     
 }

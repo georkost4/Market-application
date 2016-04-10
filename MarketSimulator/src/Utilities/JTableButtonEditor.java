@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import marketsimulator.Controller.InterestController;
+import marketsimulator.Model.Property;
 import marketsimulator.Model.User;
 import marketsimulator.View.usersThatAreInterestedInMyListingsView;
 
@@ -52,7 +53,8 @@ public class JTableButtonEditor extends DefaultCellEditor
       button.setForeground(table.getForeground());
       button.setBackground(table.getBackground());
     }
-    prop_id = (String) table.getValueAt(row,0);
+    prop_id = MyListingsTableModel.getId(row);
+    System.out.println(prop_id);
     isPushed = true;
     
     return button;

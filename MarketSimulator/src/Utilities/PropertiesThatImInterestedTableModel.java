@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import marketsimulator.Controller.InterestController;
 import marketsimulator.Model.Property;
 
 /**
@@ -28,42 +29,55 @@ public class PropertiesThatImInterestedTableModel extends MyListingsTableModel {
         switch(columnIndex)
         {
             case 0:
-                tmp = property.get(rowIndex).getProperty_id();
-                break;
-            case 1:
                 tmp = property.get(rowIndex).getCity();
                 break;
-            case 2:
+            case 1:
                 tmp = property.get(rowIndex).getAddress();
                 break;
-            case 3:
+            case 2:
                 tmp = property.get(rowIndex).getValue();
                 break;
-            case 4:
+            case 3:
                 tmp = controller.getSellerName(property.get(rowIndex).getSeller_id());
                 break;
-            case 5:
+            case 4:
                 tmp = property.get(rowIndex).getDatePosted();
                 break;
-            case 6:
+            case 5:
                 tmp = property.get(rowIndex).getImage_location();
                 break;
-            case 7:
-                try {tmp =  ImageIO.read(getClass().getClassLoader().getResource("Images/not_known.png")); } 
-                catch (IOException ex) {ex.printStackTrace();  }
-                ImageIcon icon = new ImageIcon((Image) tmp);
+            case 6:
+                InterestController controller = new InterestController();
+                int state = controller.getPropertyState(property.get(rowIndex).getProperty_id());
+                ImageIcon icon = null;
+                switch(state)
+                { 
+                    case -1:
+                         try {tmp =  ImageIO.read(getClass().getClassLoader().getResource("Images/not_known.png")); } 
+                         catch (IOException ex) {ex.printStackTrace();  }
+                         icon = new ImageIcon((Image) tmp);
+                         break;
+                    case 1:
+                         try {tmp =  ImageIO.read(getClass().getClassLoader().getResource("Images/accept-icon.png")); } 
+                         catch (IOException ex) {ex.printStackTrace();  }
+                         icon = new ImageIcon((Image) tmp);
+                         break;
+                    case 2:
+                         try {tmp =  ImageIO.read(getClass().getClassLoader().getResource("Images/cancel.png")); } 
+                         catch (IOException ex) {ex.printStackTrace();  }
+                         icon = new ImageIcon((Image) tmp);
+                         break;    
+                }
+               
                 tmp = icon;
-                break;
-            case 8:
-                tmp = property.get(rowIndex).getProperty_id();
-                break;    
+                break;  
         }
         return tmp;
     }
 
     @Override
     public Class<?> getColumnClass(int columnIndex) {
-        if(columnIndex == 7)
+        if(columnIndex == 6)
         {return ImageIcon.class;}
         return Object.class;
     }
