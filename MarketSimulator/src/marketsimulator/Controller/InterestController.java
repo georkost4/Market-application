@@ -262,12 +262,43 @@ public class InterestController implements InterestInterface {
            
            System.out.println(String.valueOf(state));
            
+           conn.close();
+           stm.close();
+           
        } 
        catch (SQLException ex) {ex.printStackTrace(); return state; } 
        catch (ClassNotFoundException ex) { ex.printStackTrace();}
        
        return state;
        
+    }
+
+    @Override
+    public boolean DeclineAllOtherUsers(String property_id,String user_id) {
+       Connection conn = null;
+       Statement stm = null;
+       int val = -1;
+       try
+       {
+           conn = database_controller.getConnection();
+           stm = conn.createStatement();
+           database_controller.setClass();
+           String sql = "UPDATE " + database_controller.getTABLE_BIDS() + " set approved = 0 where property_id = " + property_id + " and user_id != " + user_id;
+                  
+           val = stm.executeUpdate(sql);
+          
+           
+           System.out.println(String.valueOf(val));
+           
+           conn.close();
+           stm.close();
+           
+       } 
+       catch (SQLException ex) {ex.printStackTrace(); return false; } 
+       catch (ClassNotFoundException ex) { ex.printStackTrace(); return false;}
+       
+       if(val == 1) return true;
+       return false;
     }
     
 }

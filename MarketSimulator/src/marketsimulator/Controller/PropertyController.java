@@ -11,8 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import marketsimulator.Model.Property;
 
 /**
@@ -87,7 +85,8 @@ public class PropertyController  implements PropertyInterface  {
             con = db_controller.getConnection();
             String sql;
             stm = con.createStatement();
-            sql = "SELECT * FROM " + db_controller.getTABLE_PROPERTY() + " where seller_id != " + new UserController().getLoggedUser().getId() + " ORDER BY date_posted DESC";
+            sql = "SELECT * FROM " + db_controller.getTABLE_PROPERTY() + " where seller_id != " + new UserController().getLoggedUser().getId() + " AND on_sale = 1 ORDER BY date_posted DESC";
+//          sql = "SELECT * FROM " + db_controller.getTABLE_PROPERTY() + " where seller_id != " + new UserController().getLoggedUser().getId() + " ORDER BY date_posted DESC";
             
             ResultSet rs =  stm.executeQuery(sql);
              
@@ -134,11 +133,42 @@ public class PropertyController  implements PropertyInterface  {
                returnVal = Integer.parseInt(rs.getString("on_sale"));           
             }
             
-        } 
+            con.close();
+            stm.close();
+            
+        }
         catch (SQLException ex) {ex.printStackTrace(); return -1;} 
         catch (ClassNotFoundException ex) {ex.printStackTrace(); return -1; }
         
         return returnVal;
+    }
+
+    @Override
+    public boolean removePropertyFromSale(String property_id) 
+    {
+        int returnVal = -1;
+        Connection con = null;
+        Statement stm = null;
+        try
+        {
+            db_controller.setClass();
+            con = db_controller.getConnection();
+            String sql;
+            stm = con.createStatement();
+            sql = "UPDATE " + db_controller.getTABLE_PROPERTY() + " set on_sale = 0 where property_id = " + property_id;
+            
+            returnVal = stm.executeUpdate(sql);
+                
+            con.close();
+            stm.close();
+            
+            
+        }
+        catch (SQLException ex) {ex.printStackTrace(); return false;} 
+        catch (ClassNotFoundException ex) {ex.printStackTrace(); return false; }
+     
+        if(returnVal == 1) return true;
+        return false;
     }
 
 }

@@ -11,6 +11,9 @@ import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 import marketsimulator.Controller.PropertyController;
 import Utilities.PropertyOnSale_JListRenderer;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import marketsimulator.Controller.UserController;
 import marketsimulator.Controller.setIconController;
 import marketsimulator.Model.Property;
@@ -26,8 +29,7 @@ public class propertyView extends javax.swing.JFrame {
      */
     public propertyView() {
         initComponents();
-        init();
-        new setIconController().setIcon(this);
+        database_polling();
     }
 
     /**
@@ -45,6 +47,7 @@ public class propertyView extends javax.swing.JFrame {
         btnHistory = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         labelUser = new javax.swing.JLabel();
+        btnPersonalInfo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Properties  on sale");
@@ -77,6 +80,13 @@ public class propertyView extends javax.swing.JFrame {
         labelUser.setForeground(new java.awt.Color(153, 153, 255));
         labelUser.setText("jLabel2");
 
+        btnPersonalInfo.setText("Add personal info");
+        btnPersonalInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPersonalInfoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -85,16 +95,18 @@ public class propertyView extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnAddNewProperty, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnHistory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(14, 14, 14))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
                             .addComponent(labelUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(36, 36, 36))))
+                        .addGap(36, 36, 36))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(btnAddNewProperty, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnHistory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnPersonalInfo))
+                        .addGap(14, 14, 14))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,7 +119,9 @@ public class propertyView extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelUser)
-                .addContainerGap(190, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnPersonalInfo)
+                .addContainerGap(140, Short.MAX_VALUE))
             .addComponent(jScrollPane1)
         );
 
@@ -132,17 +146,22 @@ public class propertyView extends javax.swing.JFrame {
         new myHistoryView().setVisible(true);
     }//GEN-LAST:event_btnHistoryActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void btnPersonalInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonalInfoActionPerformed
+       new personalInfoView().setVisible(true);
+    }//GEN-LAST:event_btnPersonalInfoActionPerformed
+
    public void init()
    {
        UserController user_controller = new UserController();
        labelUser.setText(user_controller.getLoggedUser().getFirstname() + " \n " + user_controller.getLoggedUser().getLastname());
+       
        PropertyController controller = new PropertyController();
        DefaultListModel model = new DefaultListModel();
        ArrayList<Property> properties = new ArrayList<Property>();
+       
        properties = controller.getProperties();
+       
+       
        for(Property prop : properties)
        {
            model.addElement(prop);
@@ -151,13 +170,30 @@ public class propertyView extends javax.swing.JFrame {
        propertyList.setCellRenderer(new PropertyOnSale_JListRenderer());
        propertyList.setModel(model);
    }
+   
+    private void database_polling() {
+          Runnable r = new Runnable() {
+
+           @Override
+           public void run() {
+              init();
+              System.out.println("Database Polling");
+           }
+       };
+       ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+       scheduler.scheduleAtFixedRate(r, 0, 3, TimeUnit.SECONDS);
+        new setIconController().setIcon(this);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddNewProperty;
     private javax.swing.JButton btnHistory;
+    private javax.swing.JButton btnPersonalInfo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelUser;
     private javax.swing.JList propertyList;
     // End of variables declaration//GEN-END:variables
+
+   
 }

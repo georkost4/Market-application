@@ -134,5 +134,60 @@ public class UserController  implements UserInterface
         
         return true;
     }
+
+    public boolean addUserPersonalInfo(String text) 
+    {
+       Connection conn = null;
+       Statement stmt = null;
+       try 
+       {
+           db_controller.setClass();
+           conn = db_controller.getConnection();
+           stmt = conn.createStatement();
+           String sql;
+          
+           sql = "INSERT INTO user_personal_information (user_id,information) VALUES ( " + this.getLoggedUser().getId() + " , '" + text + "')";
+                 
+           int result = stmt.executeUpdate(sql);
+           
+           stmt.close();
+           conn.close();
+           if(result == 1) return true;
+           else return false;
+       }  
+        catch (SQLException ex) { ex.printStackTrace(); return false;} 
+        catch (ClassNotFoundException ex) { ex.printStackTrace(); return false;} 
+       
+    }
+    
+    public String getUserPersonalInfo(String user_id)
+    {
+       String returnVal = null; 
+       Connection conn = null;
+       Statement stmt = null;
+       try 
+       {
+           db_controller.setClass();
+           conn = db_controller.getConnection();
+           stmt = conn.createStatement();
+           String sql;
+          
+           sql = "SELECT information from user_personal_information where user_id = '" + user_id + "'";
+                 
+           ResultSet rs = stmt.executeQuery(sql);
+           
+           rs.next();
+           
+           returnVal = rs.getString("information");
+           
+           
+           stmt.close();
+           conn.close();
+          
+       }  
+        catch (SQLException ex) { ex.printStackTrace(); return null;} 
+        catch (ClassNotFoundException ex) { ex.printStackTrace(); return null;} 
+        return returnVal;
+    }
     
 }

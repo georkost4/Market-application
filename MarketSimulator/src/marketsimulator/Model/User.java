@@ -18,7 +18,7 @@ import java.sql.Statement;
 public  class User implements Serializable
 {
     private int id;
-    private String firstname,lastname,username , password , city , number ;
+    private String firstname,lastname,username , password , city , number , personal_details ;
     
     public  User(int id,String firstname,String lastname,String username,String password,String city,String number)
     {
@@ -41,6 +41,7 @@ public  class User implements Serializable
         this.city = city;
         this.number = number;
     }
+     
     
     
     @Override

@@ -23,5 +23,6 @@ public interface InterestInterface
     public String getSellerName(String seller_id);
     public ArrayList<User> getUsersThatAreInterestedInMyListings(String property_id);
     public int getPropertyState(String property_id);
+    public boolean DeclineAllOtherUsers(String property_id,String user_id);
     
 }

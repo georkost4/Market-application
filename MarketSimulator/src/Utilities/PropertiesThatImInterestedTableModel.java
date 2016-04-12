@@ -62,7 +62,7 @@ public class PropertiesThatImInterestedTableModel extends MyListingsTableModel {
                          catch (IOException ex) {ex.printStackTrace();  }
                          icon = new ImageIcon((Image) tmp);
                          break;
-                    case 2:
+                    case 0:
                          try {tmp =  ImageIO.read(getClass().getClassLoader().getResource("Images/cancel.png")); } 
                          catch (IOException ex) {ex.printStackTrace();  }
                          icon = new ImageIcon((Image) tmp);
