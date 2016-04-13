@@ -38,8 +38,6 @@ public class myHistoryView extends javax.swing.JFrame {
         initComponents();
         new setIconController().setIcon(this);
         init();
-        
-        
     }
 
     /**
@@ -56,10 +54,10 @@ public class myHistoryView extends javax.swing.JFrame {
         jList1 = new javax.swing.JList();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tableMyInterests = new javax.swing.JTable();
+        tableMyListings = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tableMyListings = new javax.swing.JTable();
+        tableMyInterests = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Check my history");
@@ -75,21 +73,6 @@ public class myHistoryView extends javax.swing.JFrame {
 
         jLabel1.setText("My Listings");
 
-        tableMyInterests.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(tableMyInterests);
-
-        jLabel2.setText("Properties that im interested in");
-
         tableMyListings.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -101,7 +84,22 @@ public class myHistoryView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(tableMyListings);
+        jScrollPane2.setViewportView(tableMyListings);
+
+        jLabel2.setText("Properties that im interested in");
+
+        tableMyInterests.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(tableMyInterests);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -155,18 +153,23 @@ public class myHistoryView extends javax.swing.JFrame {
        propertiesImInterestedIn = controller.getMyInterests(String.valueOf(new UserController().getLoggedUser().getId()));
        myListingsArray = controller.getMyListings(String.valueOf(new UserController().getLoggedUser().getId()));
        
+       
        MyListingsTableModel myListingsModel = new MyListingsTableModel(myListingsArray);
        PropertiesThatImInterestedTableModel propertiesImInterestedInModel = new PropertiesThatImInterestedTableModel(propertiesImInterestedIn);
-      
        
-       tableMyInterests.setModel(myListingsModel);
        
-       tableMyListings.setModel(propertiesImInterestedInModel);
+       tableMyListings.setModel(myListingsModel);
        
-       TableColumn tableColumn = tableMyInterests.getColumnModel().getColumn(6);
+       tableMyInterests.setModel(propertiesImInterestedInModel);
+       
+       TableColumn tableColumn = tableMyListings.getColumnModel().getColumn(6);
+       
+       myListingsModel.setValueAt(myListingsArray.get(0).getOn_sale(), 0, 6);
+       
        
        tableColumn.setCellRenderer(new ButtonRenderer());
        tableColumn.setCellEditor(new JTableButtonEditor(new JCheckBox()));
+       
              
      }
      

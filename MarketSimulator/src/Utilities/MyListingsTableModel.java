@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 import marketsimulator.Controller.InterestController;
+import marketsimulator.Controller.PropertyController;
 import marketsimulator.Model.Property;
 
 /**
@@ -19,8 +20,9 @@ public class MyListingsTableModel extends AbstractTableModel {
     JButton button;
     static ArrayList<Property> property;
     InterestController controller;
+    PropertyController prop_controller;
     
-    public MyListingsTableModel(ArrayList<Property> property) {this.property = property;  controller = new InterestController(); }
+    public MyListingsTableModel(ArrayList<Property> property) {this.property = property;  controller = new InterestController(); prop_controller = new PropertyController(); }
 
     @Override
     public String getColumnName(int column) 
@@ -95,6 +97,9 @@ public class MyListingsTableModel extends AbstractTableModel {
             case 5:
                 tmp = property.get(rowIndex).getImage_location();
                 break;
+            case 6:
+                if(prop_controller.getOnSaleState(property.get(rowIndex).getProperty_id()) == 0 ) tmp = property.get(rowIndex).getOn_sale();
+                break;    
           
         }
         return tmp;
@@ -102,7 +107,7 @@ public class MyListingsTableModel extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        if(columnIndex == 6) return true;
+       if(columnIndex == 6 && prop_controller.getOnSaleState(property.get(rowIndex).getProperty_id()) == 1) return true;
         return false;
     }
     

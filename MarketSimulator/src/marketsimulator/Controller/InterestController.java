@@ -38,6 +38,9 @@ public class InterestController implements InterestInterface {
            
            int rs = stm.executeUpdate(sql);
            
+           conn.close();
+           stm.close();
+           
            System.out.println(String.valueOf(rs));
        } 
        catch (SQLException ex) {ex.printStackTrace(); return false; } 
@@ -59,6 +62,9 @@ public class InterestController implements InterestInterface {
                   
            
            int rs = stm.executeUpdate(sql);
+           
+           conn.close();
+           stm.close();
            
            System.out.println(String.valueOf(rs));
            
@@ -88,6 +94,9 @@ public class InterestController implements InterestInterface {
                    + " ) " ;
            
            int rs = stm.executeUpdate(sql);
+           
+           conn.close();
+           stm.close();
            
            System.out.println(String.valueOf(rs));
        } 
@@ -125,9 +134,12 @@ public class InterestController implements InterestInterface {
                 
                 list.add(new Property(id,seller_id,on_sale,value,city,address,date,image));
                 
-                System.out.println(list.get(i));
+                System.out.println("getMyInterests:"+list.get(i).toString());
                 i++;
             }
+            
+            conn.close();
+            stm.close();
         } 
         catch (SQLException ex) {ex.printStackTrace(); } 
         catch (ClassNotFoundException ex) {ex.printStackTrace();}
@@ -141,6 +153,7 @@ public class InterestController implements InterestInterface {
         ArrayList<Property> list = new ArrayList<Property>();
         Connection con = null;
         Statement stm = null;
+        int i = 0;
         try
         {
             database_controller.setClass();
@@ -164,7 +177,13 @@ public class InterestController implements InterestInterface {
                 
                 list.add(new Property(property_id,seller_id,on_sale,value,city,address,date_posted,image));
                 
+                System.out.println("getMyListings:"+list.get(i).toString());
+                i++;
+                
             }
+            
+            con.close();
+            stm.close();
             
         } 
         catch (SQLException ex) {ex.printStackTrace(); return null;} 
@@ -196,6 +215,9 @@ public class InterestController implements InterestInterface {
                 tmp = first_name + "  " + last_name;
                 
             }
+            
+            con.close();
+            stm.close();
             
         } 
         catch (SQLException ex) {ex.printStackTrace(); return null;} 
@@ -234,6 +256,8 @@ public class InterestController implements InterestInterface {
                 i++;
                 
             }
+            con.close();
+            stm.close();
             
         } 
         catch (SQLException ex) {ex.printStackTrace(); return null;} 
@@ -247,7 +271,7 @@ public class InterestController implements InterestInterface {
     {
        Connection conn = null;
        Statement stm = null;
-       int state = -2;
+       int state = -1;
        try
        {
            conn = database_controller.getConnection();
@@ -298,6 +322,41 @@ public class InterestController implements InterestInterface {
        catch (ClassNotFoundException ex) { ex.printStackTrace(); return false;}
        
        if(val == 1) return true;
+       return false;
+    }
+
+    @Override
+    public boolean checkIfAlreadyInterested(String property_id) {
+       Connection conn = null;
+       Statement stm = null;
+       int i = 0;
+       
+       try
+       {
+           conn = database_controller.getConnection();
+           stm = conn.createStatement();
+           database_controller.setClass();
+          
+           
+           String sql = "SELECT approved from " + database_controller.getTABLE_BIDS() + " where user_id = " + new UserController().getLoggedUser().getId() + " and property_id = '" + property_id + "'";
+                  
+           ResultSet rs = stm.executeQuery(sql);
+           while(rs.next())
+           {
+               i++;
+           }
+           
+           
+           System.out.println(String.valueOf(i));
+           
+           conn.close();
+           stm.close();
+          
+       } 
+       catch (SQLException ex) {ex.printStackTrace(); return false; } 
+       catch (ClassNotFoundException ex) { ex.printStackTrace(); return false;}
+       
+       if(i == 1) return true;
        return false;
     }
     

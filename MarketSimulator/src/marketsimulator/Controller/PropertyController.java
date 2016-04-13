@@ -42,6 +42,10 @@ public class PropertyController  implements PropertyInterface  {
                     + "')";
            
             int response = stm.executeUpdate(sql);
+            
+            con.close();
+            stm.close();
+            
             if(response == 1) return true;
             else return false;
             
@@ -64,7 +68,10 @@ public class PropertyController  implements PropertyInterface  {
             sql = "DELETE FROM " + db_controller.getTABLE_PROPERTY() + "WHERE property_id = " + property.getProperty_id();
             
             int response =  stm.executeUpdate(sql);
-             
+            
+            con.close();
+            stm.close();
+            
             if(response == 1) return true;
             else return false;
             
@@ -86,7 +93,6 @@ public class PropertyController  implements PropertyInterface  {
             String sql;
             stm = con.createStatement();
             sql = "SELECT * FROM " + db_controller.getTABLE_PROPERTY() + " where seller_id != " + new UserController().getLoggedUser().getId() + " AND on_sale = 1 ORDER BY date_posted DESC";
-//          sql = "SELECT * FROM " + db_controller.getTABLE_PROPERTY() + " where seller_id != " + new UserController().getLoggedUser().getId() + " ORDER BY date_posted DESC";
             
             ResultSet rs =  stm.executeQuery(sql);
              
@@ -104,6 +110,9 @@ public class PropertyController  implements PropertyInterface  {
                 list.add(new Property(property_id,seller_id,on_sale,value,city,address,date_posted,image));
                 
             }
+            
+            con.close();
+            stm.close();
             
         } 
         catch (SQLException ex) {ex.printStackTrace(); return null;} 
@@ -135,7 +144,7 @@ public class PropertyController  implements PropertyInterface  {
             
             con.close();
             stm.close();
-            
+                        
         }
         catch (SQLException ex) {ex.printStackTrace(); return -1;} 
         catch (ClassNotFoundException ex) {ex.printStackTrace(); return -1; }

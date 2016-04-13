@@ -28,7 +28,7 @@ public class UserController  implements UserInterface
     DatabaseController db_controller = new DatabaseController();
    
     @Override
-    public User getUser(String given_username,JFrame frame) 
+    public User getUser(String given_username) 
     {
         User tempUser = null;
         Connection conn = null;
@@ -59,7 +59,7 @@ public class UserController  implements UserInterface
            stmt.close();
            conn.close();
        } 
-       catch (SQLException ex) {ex.printStackTrace(); JOptionPane.showMessageDialog(frame,"Could not establish connection to the database.");  return null;} 
+       catch (SQLException ex) {ex.printStackTrace(); return null;} 
        catch (ClassNotFoundException ex) {ex.printStackTrace(); return null; }
        return tempUser;
     } 
@@ -97,7 +97,7 @@ public class UserController  implements UserInterface
     @Override
     public boolean userLogin(String username, String password) 
     {
-       User tmpUser = getUser(username,null);
+       User tmpUser = getUser(username);
        if(tmpUser == null) return false;
        if(tmpUser.getPassword().equals(password)) return true;
        return false;
@@ -134,9 +134,14 @@ public class UserController  implements UserInterface
         
         return true;
     }
-
+    
+    @Override
     public boolean addUserPersonalInfo(String text) 
     {
+        
+       User tmp = this.getLoggedUser();
+       tmp.setPersonal_details(text);
+       if(this.setLoggedUser(tmp)) System.out.print("done");
        Connection conn = null;
        Statement stmt = null;
        try 
@@ -160,6 +165,7 @@ public class UserController  implements UserInterface
        
     }
     
+    @Override
     public String getUserPersonalInfo(String user_id)
     {
        String returnVal = null; 
@@ -173,13 +179,14 @@ public class UserController  implements UserInterface
            String sql;
           
            sql = "SELECT information from user_personal_information where user_id = '" + user_id + "'";
-                 
+                      
            ResultSet rs = stmt.executeQuery(sql);
            
-           rs.next();
-           
-           returnVal = rs.getString("information");
-           
+          
+           while(rs.next())
+           {
+               returnVal = rs.getString("information");
+           }
            
            stmt.close();
            conn.close();
@@ -188,6 +195,34 @@ public class UserController  implements UserInterface
         catch (SQLException ex) { ex.printStackTrace(); return null;} 
         catch (ClassNotFoundException ex) { ex.printStackTrace(); return null;} 
         return returnVal;
+    }
+
+    @Override
+    public boolean updateUserPersonalInfo(String text) {
+       User tmp = this.getLoggedUser();
+       tmp.setPersonal_details(text);
+       if(this.setLoggedUser(tmp)) System.out.print("done");
+       Connection conn = null;
+       Statement stmt = null;
+       try 
+       {
+           db_controller.setClass();
+           conn = db_controller.getConnection();
+           stmt = conn.createStatement();
+           String sql;
+          
+           sql = "UPDATE user_personal_information set information = + '" + text + "' where user_id = " + this.getLoggedUser().getId();
+                 
+           int result = stmt.executeUpdate(sql);
+           
+           stmt.close();
+           conn.close();
+           if(result == 1) return true;
+           else return false;
+       }  
+        catch (SQLException ex) { ex.printStackTrace(); return false;} 
+        catch (ClassNotFoundException ex) { ex.printStackTrace(); return false;} 
+       
     }
     
 }

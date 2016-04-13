@@ -7,6 +7,7 @@ package marketsimulator.View;
 
 import javax.swing.JOptionPane;
 import marketsimulator.Controller.UserController;
+import marketsimulator.Controller.setIconController;
 
 /**
  *
@@ -17,8 +18,12 @@ public class personalInfoView extends javax.swing.JFrame {
     /**
      * Creates new form personalInfoView
      */
-    public personalInfoView() {
+    private boolean flag;
+    public personalInfoView(Boolean flag) {
         initComponents();
+        this.flag = flag;
+        init();
+        new setIconController().setIcon(this);
     }
 
     /**
@@ -32,24 +37,25 @@ public class personalInfoView extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtPersonalInfo = new javax.swing.JTextArea();
         label_remaining_chars = new javax.swing.JLabel();
         btnSave = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setText("Write something about yourself so that sellers can know about you . (max 290 chars)");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Ebrima", 0, 15)); // NOI18N
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jTextArea1.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtPersonalInfo.setColumns(20);
+        txtPersonalInfo.setFont(new java.awt.Font("Ebrima", 0, 15)); // NOI18N
+        txtPersonalInfo.setLineWrap(true);
+        txtPersonalInfo.setRows(5);
+        txtPersonalInfo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextArea1KeyTyped(evt);
+                txtPersonalInfoKeyTyped(evt);
             }
         });
-        jScrollPane1.setViewportView(jTextArea1);
+        jScrollPane1.setViewportView(txtPersonalInfo);
 
         label_remaining_chars.setText("290 Chars Remaining");
 
@@ -92,19 +98,47 @@ public class personalInfoView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextArea1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea1KeyTyped
-        System.out.println(jTextArea1.getText().length());
-        int size = jTextArea1.getText().length() + 1;
+    private void txtPersonalInfoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPersonalInfoKeyTyped
+        System.out.println(txtPersonalInfo.getText().length());
+        int size = txtPersonalInfo.getText().length() + 1;
         
         if(size>290) evt.consume();
         else label_remaining_chars.setText(290-size + " Chars remaining");
-    }//GEN-LAST:event_jTextArea1KeyTyped
+    }//GEN-LAST:event_txtPersonalInfoKeyTyped
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         UserController controller = new UserController();
-        if(controller.addUserPersonalInfo(jTextArea1.getText())) JOptionPane.showMessageDialog(this,"Personal info successfully saved");
-        else JOptionPane.showMessageDialog(this,"Error");
+        
+        if(flag) // if user info already added just update
+        {
+            if(controller.updateUserPersonalInfo(txtPersonalInfo.getText()))
+            {
+                JOptionPane.showMessageDialog(this,"Personal info successfully updated");
+                this.dispose();
+            }
+            else JOptionPane.showMessageDialog(this,"Error");
+        }
+        else // else insert into table
+        {
+            if(controller.addUserPersonalInfo(txtPersonalInfo.getText()))
+            {
+                JOptionPane.showMessageDialog(this,"Personal info successfully saved");
+                this.dispose();
+            }
+            else JOptionPane.showMessageDialog(this,"Error");
+        }
+        
+       
+        
     }//GEN-LAST:event_btnSaveActionPerformed
+     private void init() 
+     {
+         // if flag is true then personal info are already set
+         UserController user_controller = new UserController();
+         String personal_info = user_controller.getUserPersonalInfo(String.valueOf(user_controller.getLoggedUser().getId()));
+         if(flag) txtPersonalInfo.setText(personal_info);
+         
+    }
 
  
 
@@ -112,7 +146,8 @@ public class personalInfoView extends javax.swing.JFrame {
     private javax.swing.JButton btnSave;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel label_remaining_chars;
+    private javax.swing.JTextArea txtPersonalInfo;
     // End of variables declaration//GEN-END:variables
+
 }

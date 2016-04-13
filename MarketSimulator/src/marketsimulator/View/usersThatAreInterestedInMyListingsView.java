@@ -90,7 +90,7 @@ public class usersThatAreInterestedInMyListingsView extends javax.swing.JFrame {
     
     private void usersTharAreInterestedJListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usersTharAreInterestedJListMouseClicked
        User user = (User) usersTharAreInterestedJList.getSelectedValue();
-       new UserDetailedInformation(user,prop_id).setVisible(true);
+       new UserDetailedInformation(user,prop_id,this).setVisible(true);
     }//GEN-LAST:event_usersTharAreInterestedJListMouseClicked
 
    

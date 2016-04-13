@@ -41,6 +41,14 @@ public  class User implements Serializable
         this.city = city;
         this.number = number;
     }
+
+    public String getPersonal_details() {
+        return personal_details;
+    }
+
+    public void setPersonal_details(String personal_details) {
+        this.personal_details = personal_details;
+    }
      
     
     

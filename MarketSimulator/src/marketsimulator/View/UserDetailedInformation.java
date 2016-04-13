@@ -5,6 +5,7 @@
  */
 package marketsimulator.View;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import marketsimulator.Controller.InterestController;
 import marketsimulator.Controller.PropertyController;
@@ -24,11 +25,13 @@ public class UserDetailedInformation extends javax.swing.JFrame {
      */
     private User user;
     private String property_id;
-    public UserDetailedInformation(User user,String property_id) {
+    private JFrame frame;
+    public UserDetailedInformation(User user,String property_id,JFrame frame) {
         initComponents();
         new setIconController().setIcon(this);
         this.user = user;
         this.property_id = property_id;
+        this.frame = frame;
         init();
     }
 
@@ -190,13 +193,19 @@ public class UserDetailedInformation extends javax.swing.JFrame {
             {
                 interest_controller.DeclineAllOtherUsers(property_id, String.valueOf(user.getId()));
                 JOptionPane.showMessageDialog(this, "You successfully selled this property");
+                this.dispose();
+                frame.dispose();
             }
         }
     }//GEN-LAST:event_btnAcceptInterestActionPerformed
 
     private void btnDeclineInterestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeclineInterestActionPerformed
        InterestController controller = new InterestController();
-       if(controller.declineInterest(property_id, String.valueOf(user.getId()))) JOptionPane.showMessageDialog(this, "GG");
+       if(controller.declineInterest(property_id, String.valueOf(user.getId())))
+       {
+           JOptionPane.showMessageDialog(this, "Action done");
+           this.dispose();
+       }
     }//GEN-LAST:event_btnDeclineInterestActionPerformed
 
    private void init() 

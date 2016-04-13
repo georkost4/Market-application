@@ -1,5 +1,6 @@
 package Utilities;
 
+import static Utilities.MyListingsTableModel.property;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -13,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import marketsimulator.Controller.InterestController;
+import marketsimulator.Controller.PropertyController;
 import marketsimulator.Model.Property;
 import marketsimulator.Model.User;
 import marketsimulator.View.usersThatAreInterestedInMyListingsView;

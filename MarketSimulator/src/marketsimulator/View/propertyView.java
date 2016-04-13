@@ -29,7 +29,11 @@ public class propertyView extends javax.swing.JFrame {
      */
     public propertyView() {
         initComponents();
+        btnAddPersonalInfo.setVisible(false);
+        btnEditPersonalInfo.setVisible(false);
+        init();
         database_polling();
+        new setIconController().setIcon(this);
     }
 
     /**
@@ -47,7 +51,8 @@ public class propertyView extends javax.swing.JFrame {
         btnHistory = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         labelUser = new javax.swing.JLabel();
-        btnPersonalInfo = new javax.swing.JButton();
+        btnEditPersonalInfo = new javax.swing.JButton();
+        btnAddPersonalInfo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Properties  on sale");
@@ -80,10 +85,17 @@ public class propertyView extends javax.swing.JFrame {
         labelUser.setForeground(new java.awt.Color(153, 153, 255));
         labelUser.setText("jLabel2");
 
-        btnPersonalInfo.setText("Add personal info");
-        btnPersonalInfo.addActionListener(new java.awt.event.ActionListener() {
+        btnEditPersonalInfo.setText("Edit personal info");
+        btnEditPersonalInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPersonalInfoActionPerformed(evt);
+                btnEditPersonalInfoActionPerformed(evt);
+            }
+        });
+
+        btnAddPersonalInfo.setText("Add personal info");
+        btnAddPersonalInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddPersonalInfoActionPerformed(evt);
             }
         });
 
@@ -92,21 +104,22 @@ public class propertyView extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
-                            .addComponent(labelUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(36, 36, 36))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                                .addComponent(labelUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGap(36, 36, 36))
+                        .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(btnAddNewProperty, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnHistory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(btnPersonalInfo))
-                        .addGap(14, 14, 14))))
+                            .addGap(14, 14, 14)))
+                    .addComponent(btnEditPersonalInfo)
+                    .addComponent(btnAddPersonalInfo)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,9 +132,11 @@ public class propertyView extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelUser)
-                .addGap(18, 18, 18)
-                .addComponent(btnPersonalInfo)
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addComponent(btnAddPersonalInfo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEditPersonalInfo)
+                .addContainerGap(89, Short.MAX_VALUE))
             .addComponent(jScrollPane1)
         );
 
@@ -146,13 +161,30 @@ public class propertyView extends javax.swing.JFrame {
         new myHistoryView().setVisible(true);
     }//GEN-LAST:event_btnHistoryActionPerformed
 
-    private void btnPersonalInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonalInfoActionPerformed
-       new personalInfoView().setVisible(true);
-    }//GEN-LAST:event_btnPersonalInfoActionPerformed
+    private void btnEditPersonalInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditPersonalInfoActionPerformed
+//       
+        new personalInfoView(true).setVisible(true);
+    }//GEN-LAST:event_btnEditPersonalInfoActionPerformed
+
+    private void btnAddPersonalInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPersonalInfoActionPerformed
+        new personalInfoView(false).setVisible(true);
+    }//GEN-LAST:event_btnAddPersonalInfoActionPerformed
 
    public void init()
-   {
+   {                   
        UserController user_controller = new UserController();
+       //check if personal info has been saved in logged user
+       if(user_controller.getLoggedUser().getPersonal_details() == null )
+       {
+           btnAddPersonalInfo.setVisible(true);
+           btnEditPersonalInfo.setVisible(false);
+       }
+       else
+       {
+           btnAddPersonalInfo.setVisible(false);
+           btnEditPersonalInfo.setVisible(true);
+       }
+       
        labelUser.setText(user_controller.getLoggedUser().getFirstname() + " \n " + user_controller.getLoggedUser().getLastname());
        
        PropertyController controller = new PropertyController();
@@ -169,6 +201,8 @@ public class propertyView extends javax.swing.JFrame {
        }
        propertyList.setCellRenderer(new PropertyOnSale_JListRenderer());
        propertyList.setModel(model);
+       
+      
    }
    
     private void database_polling() {
@@ -181,14 +215,15 @@ public class propertyView extends javax.swing.JFrame {
            }
        };
        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-       scheduler.scheduleAtFixedRate(r, 0, 3, TimeUnit.SECONDS);
-        new setIconController().setIcon(this);
+       scheduler.scheduleAtFixedRate(r, 3, 3, TimeUnit.SECONDS);
+      
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddNewProperty;
+    private javax.swing.JButton btnAddPersonalInfo;
+    private javax.swing.JButton btnEditPersonalInfo;
     private javax.swing.JButton btnHistory;
-    private javax.swing.JButton btnPersonalInfo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelUser;

@@ -63,6 +63,11 @@ public class Property
 
     public void setDatePosted(String datePosted) { this.datePosted = datePosted;    }
 
+    @Override
+    public String toString() {
+        return "Property{" + "property_id=" + property_id + ", seller_id=" + seller_id + ", on_sale=" + on_sale + ", value=" + value + ", city=" + city + ", address=" + address + ", image_location=" + image_location + ", datePosted=" + datePosted + '}';
+    }
+
     
     
     

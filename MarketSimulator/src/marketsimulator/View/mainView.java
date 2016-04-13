@@ -18,6 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import marketsimulator.Controller.UserController;
 import marketsimulator.Controller.setIconController;
+import marketsimulator.Model.User;
 
 /**
  *
@@ -150,7 +151,9 @@ public class mainView extends javax.swing.JFrame {
         if(controller.userLogin(username,password))
         {
             JOptionPane.showMessageDialog(this, "Logged in");
-            controller.setLoggedUser(controller.getUser(username,this));
+            User user = controller.getUser(username);
+            if(controller.getUserPersonalInfo(String.valueOf(user.getId())) != null ) user.setPersonal_details(controller.getUserPersonalInfo(String.valueOf(user.getId())));
+            controller.setLoggedUser(user);
             new propertyView().setVisible(true);
             this.setVisible(false);
         }

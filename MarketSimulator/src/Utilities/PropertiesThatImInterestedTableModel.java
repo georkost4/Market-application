@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.table.AbstractTableModel;
 import marketsimulator.Controller.InterestController;
 import marketsimulator.Model.Property;
 
@@ -17,11 +18,47 @@ import marketsimulator.Model.Property;
  *
  * @author SoRa
  */
-public class PropertiesThatImInterestedTableModel extends MyListingsTableModel {
-
-    public PropertiesThatImInterestedTableModel(ArrayList<Property> property) {
-        super(property);
+public class PropertiesThatImInterestedTableModel extends AbstractTableModel 
+{
+    private ArrayList<Property> property;
+    private InterestController controller;
+    public PropertiesThatImInterestedTableModel(ArrayList<Property> property) 
+    {
+        this.property = property;
+        controller = new InterestController();
     }
+
+    @Override
+    public String getColumnName(int column) {
+       String name = null;
+        switch(column)
+        {
+            case 0:
+                name = "City";
+                break;
+            case 1:
+                name = "Address";
+                break;
+            case 2:
+                name = "Value";
+                break;
+            case 3:
+                name = "Seller";
+                break;
+            case 4:
+                name = "Data Posted";
+                break;
+            case 5:
+                name = "Image";
+                break;  
+            case 6:
+                name = "State";
+                break;
+        }
+        return name;
+    }
+    
+    
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
@@ -80,6 +117,16 @@ public class PropertiesThatImInterestedTableModel extends MyListingsTableModel {
         if(columnIndex == 6)
         {return ImageIcon.class;}
         return Object.class;
+    }
+
+    @Override
+    public int getRowCount() {
+        return property.size();
+    }
+
+    @Override
+    public int getColumnCount() {
+        return 7;
     }
     
     
