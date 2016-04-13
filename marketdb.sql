@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Φιλοξενητής: 127.0.0.1
--- Χρόνος δημιουργίας: 06 Απρ 2016 στις 19:02:34
+-- Χρόνος δημιουργίας: 13 Απρ 2016 στις 20:21:11
 -- Έκδοση διακομιστή: 10.1.9-MariaDB
 -- Έκδοση PHP: 5.6.15
 
@@ -21,6 +21,7 @@ SET time_zone = "+00:00";
 --
 create database marketdb;
 	use marketdb;
+
 
 -- --------------------------------------------------------
 
@@ -40,10 +41,14 @@ CREATE TABLE `bids` (
 --
 
 INSERT INTO `bids` (`bid_id`, `property_id`, `user_id`, `approved`) VALUES
-(1, 11, 5, -1),
-(5, 12, 5, -1),
-(7, 18, 4, -1),
-(8, 12, 6, -1);
+(26, 12, 6, -1),
+(27, 10, 6, -1),
+(28, 11, 5, -1),
+(29, 20, 5, -1),
+(30, 12, 4, -1),
+(31, 17, 4, -1),
+(32, 18, 4, -1),
+(33, 11, 6, -1);
 
 -- --------------------------------------------------------
 
@@ -54,7 +59,7 @@ INSERT INTO `bids` (`bid_id`, `property_id`, `user_id`, `approved`) VALUES
 CREATE TABLE `onsale` (
   `property_id` int(11) NOT NULL,
   `seller_id` int(4) NOT NULL,
-  `name` varchar(30) NOT NULL,
+  `on_sale` varchar(1) NOT NULL,
   `value` varchar(10) NOT NULL,
   `city` varchar(30) NOT NULL,
   `address` varchar(15) NOT NULL,
@@ -66,12 +71,13 @@ CREATE TABLE `onsale` (
 -- Άδειασμα δεδομένων του πίνακα `onsale`
 --
 
-INSERT INTO `onsale` (`property_id`, `seller_id`, `name`, `value`, `city`, `address`, `date_posted`, `image`) VALUES
-(10, 4, ' House 1', '23500', 'Philadelphia', 'MarketSt', 'Wed Mar 30 20:04:53 EEST 2016', 'C:\\Users\\SoRa\\Documents\\house1.png'),
-(11, 4, ' House 2', '233500', 'New York', '52nd Street ', 'Wed Mar 30 20:05:06 EEST 2016', 'C:\\Users\\SoRa\\Documents\\house2.png'),
-(12, 4, ' House 3', '9999', 'Chicago', '53nd Street', 'Wed Mar 30 20:05:15 EEST 2016', 'C:\\Users\\SoRa\\Documents\\house3.png'),
-(17, 4, ' HouseFour', '239', 'Baltimore', 'BPD 23', 'Tue Apr 05 20:29:06 EEST 2016', 'C:/Users/SoRa/Desktop/house-north-fifth.png'),
-(18, 5, 'House 4', '295', 'Athens', 'Ypokrath 32', 'Tue Apr 05 21:52:33 EEST 2016', 'C:/Users/SoRa/Documents/house3.png');
+INSERT INTO `onsale` (`property_id`, `seller_id`, `on_sale`, `value`, `city`, `address`, `date_posted`, `image`) VALUES
+(10, 4, '1', '23500', 'Philadelphia', 'MarketSt', 'Wed Mar 30 20:04:53 EEST 2016', 'C:\\Users\\LABS\\Documents\\house1.png'),
+(11, 4, '1', '233500', 'New York', '52nd Street ', 'Wed Mar 30 20:05:06 EEST 2016', 'C:\\Users\\LABS\\Documents\\house2.png'),
+(12, 5, '1', '9999', 'Chicago', '53nd Street', 'Wed Mar 30 20:05:15 EEST 2016', 'C:\\Users\\LABS\\Documents\\house3.png'),
+(17, 5, '1', '239', 'Baltimore145', 'BPD', 'Tue Apr 05 20:29:06 EEST 2016', 'C:\\Users\\LABS/Documents/house5.png'),
+(18, 6, '1', '295', 'Athens', 'Ypokrath 32', 'Tue Apr 05 21:52:33 EEST 2016', 'C:\\Users\\LABS/Documents/house4.png'),
+(20, 6, '1', '19430', 'Oklahoma', 'Corner 5nt&10nt', 'Wed Apr 13 20:59:39 EEST 2016', 'C:\\Users\\LABS/Documents/house6.jpg');
 
 -- --------------------------------------------------------
 
@@ -97,6 +103,27 @@ INSERT INTO `users` (`user_id`, `firstname`, `lastname`, `username`, `password`,
 (4, 'Antone', 'Prosthetus', 'admin', 'admin', 'Berline', '0123456789'),
 (5, 'Searchius', 'Affecton', 'root', 'root', 'Copenhagh', '1234567810'),
 (6, 'George', 'Kostogloudis', 'user', 'user', 'Seres', '2345678112');
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `user_personal_information`
+--
+
+CREATE TABLE `user_personal_information` (
+  `information_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `information` varchar(300) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Άδειασμα δεδομένων του πίνακα `user_personal_information`
+--
+
+INSERT INTO `user_personal_information` (`information_id`, `user_id`, `information`) VALUES
+(15, 5, 'I am currently a student at Ohio university and i am enrolled into electrical engineering department . I am a peacefull person and very friendly .'),
+(16, 6, 'I am searching for a place for me at my family to settle in cause our house caught on fire recently , i have two kids and one dog .'),
+(17, 4, 'I am 3D model artist and i would like to see as many of these houses available from a closer scope so i can have a better point of view .');
 
 --
 -- Ευρετήρια για άχρηστους πίνακες
@@ -125,6 +152,14 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `username` (`username`);
 
 --
+-- Ευρετήρια για πίνακα `user_personal_information`
+--
+ALTER TABLE `user_personal_information`
+  ADD PRIMARY KEY (`information_id`),
+  ADD UNIQUE KEY `user_id_2` (`user_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- AUTO_INCREMENT για άχρηστους πίνακες
 --
 
@@ -132,17 +167,22 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT για πίνακα `bids`
 --
 ALTER TABLE `bids`
-  MODIFY `bid_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `bid_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT για πίνακα `onsale`
 --
 ALTER TABLE `onsale`
-  MODIFY `property_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `property_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT για πίνακα `users`
 --
 ALTER TABLE `users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT για πίνακα `user_personal_information`
+--
+ALTER TABLE `user_personal_information`
+  MODIFY `information_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

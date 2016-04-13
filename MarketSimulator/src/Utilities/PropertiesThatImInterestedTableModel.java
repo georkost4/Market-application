@@ -72,7 +72,7 @@ public class PropertiesThatImInterestedTableModel extends AbstractTableModel
                 tmp = property.get(rowIndex).getAddress();
                 break;
             case 2:
-                tmp = property.get(rowIndex).getValue();
+                tmp = property.get(rowIndex).getValue()+"$";
                 break;
             case 3:
                 tmp = controller.getSellerName(property.get(rowIndex).getSeller_id());

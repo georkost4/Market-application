@@ -32,8 +32,8 @@ public class PropertyController  implements PropertyInterface  {
             String sql;
             stm = con.createStatement();
             sql = "INSERT INTO " + db_controller.getTABLE_PROPERTY()+ "(property_id,seller_id,on_sale,value,city,address,date_posted,image) VALUES "
-                    + "(0," +property.getSeller_id() +  ",' " 
-                    + property.getOn_sale() + "'," 
+                    + "(0," +property.getSeller_id() +  "," 
+                    + "'1',"   
                     + "'"+property.getValue() + "',"
                     + "'"+property.getCity() + "'," 
                     + "'"+property.getAddress() + "',"
