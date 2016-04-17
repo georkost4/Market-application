@@ -59,6 +59,7 @@ public class propertyView extends javax.swing.JFrame {
         setResizable(false);
 
         propertyList.setFont(new java.awt.Font("Georgia", 0, 16)); // NOI18N
+        propertyList.setToolTipText("Properties on sale");
         propertyList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 propertyListMouseClicked(evt);

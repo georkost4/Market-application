@@ -12,12 +12,16 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.paint.Color;
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import marketsimulator.Model.Property;
 
 /**
@@ -36,7 +40,6 @@ public class PropertyOnSale_JListRenderer extends DefaultListCellRenderer implem
         
         setIcon(icon);
         
-        
         if(isSelected)
         {
             setBackground(list.getSelectionBackground());
@@ -46,6 +49,8 @@ public class PropertyOnSale_JListRenderer extends DefaultListCellRenderer implem
         {
             setBackground(list.getBackground());
             setForeground(list.getForeground());
+            Border noFocus = BorderFactory.createRaisedBevelBorder();
+            this.setBorder(noFocus);
         }
         
         setEnabled(true);

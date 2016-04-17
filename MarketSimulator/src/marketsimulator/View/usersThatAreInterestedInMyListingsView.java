@@ -20,8 +20,8 @@ import marketsimulator.Model.User;
 public class usersThatAreInterestedInMyListingsView extends javax.swing.JFrame {
 
     
-    ArrayList<User> users;
-    String prop_id;
+    private ArrayList<User> users;
+    private String prop_id;
     public usersThatAreInterestedInMyListingsView(String prop_id) {
         initComponents();
         this.prop_id = prop_id;
@@ -81,6 +81,8 @@ public class usersThatAreInterestedInMyListingsView extends javax.swing.JFrame {
     private void init() {
         users = new ArrayList<User>();
         users = (new InterestController().getUsersThatAreInterestedInMyListings(prop_id));
+        
+        
         System.out.println(users);
         
         DefaultListModel model = new DefaultListModel();
@@ -100,7 +102,11 @@ public class usersThatAreInterestedInMyListingsView extends javax.swing.JFrame {
     }//GEN-LAST:event_usersTharAreInterestedJListMouseClicked
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        System.out.println("gg2");
+        if(users.isEmpty())
+        {
+            JOptionPane.showMessageDialog(this,"No users are interested in this property");
+            this.dispose();
+        }
         init();
     }//GEN-LAST:event_formWindowActivated
 
