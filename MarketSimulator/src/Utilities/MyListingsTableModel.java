@@ -96,20 +96,16 @@ public class MyListingsTableModel extends AbstractTableModel {
                 break;
             case 5:
                 tmp = property.get(rowIndex).getImage_location();
-                break;
-            case 6:
-                if(prop_controller.getOnSaleState(property.get(rowIndex).getProperty_id()) == 0 ) tmp = property.get(rowIndex).getOn_sale();
-                break;    
-          
+                break;          
         }
         return tmp;
     }
 
-    @Override
-    public boolean isCellEditable(int rowIndex, int columnIndex) {
-       if(columnIndex == 6 && prop_controller.getOnSaleState(property.get(rowIndex).getProperty_id()) == 1) return true;
-        return false;
-    }
+   @Override
+   public boolean isCellEditable(int rowIndex, int columnIndex) {
+     if(columnIndex == 6 && prop_controller.getOnSaleState(property.get(rowIndex).getProperty_id()) == 1) return true;
+       return false;
+  }
     
     
     

@@ -5,11 +5,13 @@
  */
 package Utilities;
 
+import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.table.TableCellRenderer;
+import marketsimulator.Controller.PropertyController;
 
 /**
  *
@@ -33,7 +35,14 @@ public class ButtonRenderer extends JButton implements TableCellRenderer {
           setForeground(table.getForeground());
           setBackground(UIManager.getColor("Button.background"));
         }
-        setText("See users");
+        PropertyController controller = new PropertyController();
+        if(controller.getOnSaleState(MyListingsTableModel.getId(row)) == 1){  setText("See users");  } 
+        else
+        {
+            this.setForeground(Color.red);
+            this.setBackground(Color.green);
+            setText("Sold");
+        }
         return this;
   }
   

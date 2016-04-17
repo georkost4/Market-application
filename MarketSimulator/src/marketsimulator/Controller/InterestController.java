@@ -237,7 +237,7 @@ public class InterestController implements InterestInterface {
             con = database_controller.getConnection();
             String sql;
             stm = con.createStatement();
-            sql = "select * from users where user_id in ( SELECT user_id from bids where property_id = " + property_id + " and user_id != " + new UserController().getLoggedUser().getId() + " )";
+            sql = "select * from users where user_id in ( SELECT user_id from bids where property_id = " + property_id + " and approved = -1 and user_id != " + new UserController().getLoggedUser().getId() + " )";
             
             ResultSet rs =  stm.executeQuery(sql);
             

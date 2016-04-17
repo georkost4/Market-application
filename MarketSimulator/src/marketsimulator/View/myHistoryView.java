@@ -22,6 +22,7 @@ import Utilities.PropertiesThatImInterestedTableModel;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import marketsimulator.Controller.PropertyController;
 import marketsimulator.Controller.setIconController;
 
 /**
@@ -146,7 +147,7 @@ public class myHistoryView extends javax.swing.JFrame {
      private void init() 
      {
        InterestController controller = new InterestController();
-       
+       PropertyController prop_controller = new PropertyController();
        ArrayList<Property> propertiesImInterestedIn = new ArrayList<Property>();
        ArrayList<Property> myListingsArray =  new ArrayList<Property>();
        
@@ -160,13 +161,15 @@ public class myHistoryView extends javax.swing.JFrame {
        
        tableMyListings.setModel(myListingsModel);
        
+       
+       
        tableMyInterests.setModel(propertiesImInterestedInModel);
        
        TableColumn tableColumn = tableMyListings.getColumnModel().getColumn(6);
        
        myListingsModel.setValueAt(myListingsArray.get(0).getOn_sale(), 0, 6);
        
-       
+//       if(prop_controller.getOnSaleState(property.get(rowIndex).getProperty_id()) == 1)
        tableColumn.setCellRenderer(new ButtonRenderer());
        tableColumn.setCellEditor(new JTableButtonEditor(new JCheckBox()));
        
