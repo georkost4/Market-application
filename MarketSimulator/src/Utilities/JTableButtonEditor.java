@@ -67,9 +67,7 @@ public class JTableButtonEditor extends DefaultCellEditor
   {
     if (isPushed) 
     {
-      ArrayList<User> users = new ArrayList<User>();
-      users = (new InterestController().getUsersThatAreInterestedInMyListings(prop_id));
-      new usersThatAreInterestedInMyListingsView(users,prop_id).setVisible(true);
+      new usersThatAreInterestedInMyListingsView(prop_id).setVisible(true);
     }
     isPushed = false;
     return null;

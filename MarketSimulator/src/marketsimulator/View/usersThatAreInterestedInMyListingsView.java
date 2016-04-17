@@ -22,9 +22,8 @@ public class usersThatAreInterestedInMyListingsView extends javax.swing.JFrame {
     
     ArrayList<User> users;
     String prop_id;
-    public usersThatAreInterestedInMyListingsView(ArrayList<User> users,String prop_id) {
+    public usersThatAreInterestedInMyListingsView(String prop_id) {
         initComponents();
-        this.users = users;
         this.prop_id = prop_id;
         init();
         new setIconController().setIcon(this);
@@ -45,6 +44,11 @@ public class usersThatAreInterestedInMyListingsView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Interested users");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         usersTharAreInterestedJList.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         usersTharAreInterestedJList.setModel(new javax.swing.AbstractListModel() {
@@ -75,6 +79,8 @@ public class usersThatAreInterestedInMyListingsView extends javax.swing.JFrame {
 
     
     private void init() {
+        users = new ArrayList<User>();
+        users = (new InterestController().getUsersThatAreInterestedInMyListings(prop_id));
         System.out.println(users);
         
         DefaultListModel model = new DefaultListModel();
@@ -92,6 +98,11 @@ public class usersThatAreInterestedInMyListingsView extends javax.swing.JFrame {
        User user = (User) usersTharAreInterestedJList.getSelectedValue();
        new UserDetailedInformation(user,prop_id,this).setVisible(true);
     }//GEN-LAST:event_usersTharAreInterestedJListMouseClicked
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        System.out.println("gg2");
+        init();
+    }//GEN-LAST:event_formWindowActivated
 
    
 
