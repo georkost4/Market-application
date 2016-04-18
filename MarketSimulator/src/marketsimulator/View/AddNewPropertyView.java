@@ -105,8 +105,7 @@ public class AddNewPropertyView extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(22, 22, 22)
-                                .addComponent(txtValue, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(2, 2, 2))
+                                .addComponent(txtValue, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel8)
@@ -180,11 +179,19 @@ public class AddNewPropertyView extends javax.swing.JFrame {
            
                 File file = fc.getSelectedFile();
                 txtImageSelected.setText(file.getAbsolutePath());
+                
+                String photo_name = file.getName();
+                
                 try 
                 {
+                    File marketDir = new File("C:\\xampp\\htdocs\\MarketApp");
+                    marketDir.mkdir();
+                    File ImageFile =  new File("C:\\xampp\\htdocs\\MarketApp\\"+photo_name);
+                    
                     BufferedImage img = new BufferedImage(176, 146, BufferedImage.TYPE_INT_RGB);
                     img.createGraphics().drawImage(ImageIO.read(new File(txtImageSelected.getText())).getScaledInstance(176, 146, Image.SCALE_SMOOTH),0,0,null);
-                    ImageIO.write(img, "jpg", new File(txtImageSelected.getText()));
+                    ImageIO.write(img, "jpg",ImageFile);
+                    txtImageSelected.setText(ImageFile.getAbsolutePath());
                 }
                 catch (IOException ex) {ex.printStackTrace();  }
             
@@ -209,7 +216,12 @@ public class AddNewPropertyView extends javax.swing.JFrame {
         
         if(vd_controller.validateAddNewPropertyInput(this,temp.getValue(),temp.getCity(),temp.getAddress()))
         {
-            if(controller.addProperty(temp)) JOptionPane.showMessageDialog(this, "New Property successfully added");
+            if(controller.addProperty(temp))
+            {
+                JOptionPane.showMessageDialog(this, "New Property successfully added");
+                this.dispose();
+                new propertyView().setVisible(true);
+            }
         }
     }//GEN-LAST:event_btnDoneActionPerformed
 
