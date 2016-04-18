@@ -39,8 +39,6 @@ public class MarketSimulator
        catch (IllegalAccessException e) {
           // handle exception
        }
-       
-     
        if(new UserController().checkIfLoggedIn()) new propertyView().setVisible(true);
        else new mainView().setVisible(true);
     }

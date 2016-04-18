@@ -251,4 +251,12 @@ public class UserController  implements UserInterface
          return true;
     }
     
+    public boolean checkIfRememberFileExists()
+    {
+        
+        File file = new File(System.getProperty("user.home")+"\\remember.ser");
+        if (file.exists()) return true;
+        return false;   
+    }
+    
 }

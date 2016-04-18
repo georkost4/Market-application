@@ -188,15 +188,36 @@ public class propertyView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddPersonalInfoActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-        File file = new File(System.getProperty("user.home")+"\\remember.ser");
-        File file2 = new File(System.getProperty("user.home")+"\\user.ser");
-        if(file.delete() && file2.delete())
+        UserController controller = new UserController();
+        
+        if(controller.checkIfRememberFileExists())
         {
-            JOptionPane.showMessageDialog(this,"Logged out");
-            new mainView().setVisible(true);
-            this.dispose();
+             File file = new File(System.getProperty("user.home")+"\\remember.ser");
+             File file2 = new File(System.getProperty("user.home")+"\\user.ser");
+             
+             if(file.delete() && file2.delete())
+            {
+                JOptionPane.showMessageDialog(this,"Logged out");
+                new mainView().setVisible(true);
+                this.dispose();
+            }
+            else JOptionPane.showMessageDialog(this, "Error");
         }
-        else JOptionPane.showMessageDialog(this, "Error");
+        else
+        {
+            File file2 = new File(System.getProperty("user.home")+"\\user.ser");
+             
+            if(file2.delete())
+            {
+               JOptionPane.showMessageDialog(this,"Logged out");
+               new mainView().setVisible(true);
+               this.dispose();
+            }
+            else JOptionPane.showMessageDialog(this, "Error2");   
+        }
+        
+       
+        
     }//GEN-LAST:event_btnLogoutActionPerformed
 
    public void init()

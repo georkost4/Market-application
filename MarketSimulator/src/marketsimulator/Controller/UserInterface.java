@@ -24,4 +24,5 @@ public interface UserInterface
     public boolean updateUserPersonalInfo(String text);
     public boolean checkIfLoggedIn(); 
     public boolean setRememberMe();
+    public boolean checkIfRememberFileExists();
 }
