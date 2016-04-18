@@ -22,4 +22,6 @@ public interface UserInterface
     public String getUserPersonalInfo(String user_id);
     public boolean addUserPersonalInfo(String text);
     public boolean updateUserPersonalInfo(String text);
+    public boolean checkIfLoggedIn(); 
+    public boolean setRememberMe();
 }

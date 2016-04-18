@@ -8,7 +8,9 @@ package marketsimulator.View;
 import com.sun.glass.events.KeyEvent;
 import java.awt.Image;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,6 +18,7 @@ import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import marketsimulator.Controller.UserController;
 import marketsimulator.Controller.setIconController;
 import marketsimulator.Model.User;
@@ -31,9 +34,7 @@ public class mainView extends javax.swing.JFrame {
      */
     public mainView() {
         initComponents();
-//        setIcon();
         new setIconController().setIcon(this);
-        
     }
 
     /**
@@ -52,6 +53,7 @@ public class mainView extends javax.swing.JFrame {
         btnLogin = new javax.swing.JButton();
         btnRegister = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        checkBoxRememberMe = new java.awt.Checkbox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login Form");
@@ -84,36 +86,38 @@ public class mainView extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Welcome to marketSim");
 
+        checkBoxRememberMe.setLabel("Remember me");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 306, Short.MAX_VALUE)
-                .addComponent(btnRegister)
-                .addGap(44, 44, 44))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
-                        .addComponent(btnLogin))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(113, 113, 113)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(120, 120, 120))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(83, 83, 83)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(113, 113, 113))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(checkBoxRememberMe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnLogin))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(btnRegister)
+                .addGap(44, 44, 44))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,7 +133,9 @@ public class mainView extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnLogin)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(checkBoxRememberMe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(15, 15, 15)
                 .addComponent(btnRegister)
                 .addGap(56, 56, 56))
@@ -148,15 +154,35 @@ public class mainView extends javax.swing.JFrame {
 	String password = txtPassword.getText();
         
         UserController controller = new UserController();
-        if(controller.userLogin(username,password))
+        
+        if(checkBoxRememberMe.getState())
         {
-            JOptionPane.showMessageDialog(this, "Logged in");
-            User user = controller.getUser(username);
-            if(controller.getUserPersonalInfo(String.valueOf(user.getId())) != null ) user.setPersonal_details(controller.getUserPersonalInfo(String.valueOf(user.getId())));
-            controller.setLoggedUser(user);
-            new propertyView().setVisible(true);
-            this.setVisible(false);
+            controller.setRememberMe();
+            
+            if(controller.userLogin(username,password))
+            {
+                JOptionPane.showMessageDialog(this, "Logged in");
+                User user = controller.getUser(username);
+                if(controller.getUserPersonalInfo(String.valueOf(user.getId())) != null ) user.setPersonal_details(controller.getUserPersonalInfo(String.valueOf(user.getId())));
+                controller.setLoggedUser(user);
+                new propertyView().setVisible(true);
+                this.setVisible(false);
+            }
         }
+        else
+        {
+            if(controller.userLogin(username,password))
+            {
+                JOptionPane.showMessageDialog(this, "Logged in");
+                User user = controller.getUser(username);
+                if(controller.getUserPersonalInfo(String.valueOf(user.getId())) != null ) user.setPersonal_details(controller.getUserPersonalInfo(String.valueOf(user.getId())));
+                controller.setLoggedUser(user);
+                new propertyView().setVisible(true);
+                this.setVisible(false);
+            }
+        }
+        
+       
        
     }//GEN-LAST:event_btnLoginActionPerformed
 
@@ -167,11 +193,11 @@ public class mainView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtPasswordKeyPressed
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnRegister;
+    private java.awt.Checkbox checkBoxRememberMe;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -179,13 +205,9 @@ public class mainView extends javax.swing.JFrame {
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 
-    private void setIcon() 
-    {
-        Image icon = null;
-        try {icon = ImageIO.read(getClass().getClassLoader().getResource("Images/logo.jpg"));} 
-        catch (IOException ex) {ex.printStackTrace();  }
-        this.setIconImage( icon);
-    }     
+   
+
+   
 
         
 

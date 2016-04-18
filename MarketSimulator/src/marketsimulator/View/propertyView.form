@@ -27,26 +27,34 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="jScrollPane1" pref="474" max="32767" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="jLabel1" pref="84" max="32767" attributes="0"/>
-                              <Component id="labelUser" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="jLabel1" pref="84" max="32767" attributes="0"/>
+                                      <Component id="labelUser" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="btnAddNewProperty" max="32767" attributes="0"/>
+                                      <Component id="btnHistory" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="btnAddNewProperty" max="32767" attributes="0"/>
-                              <Component id="btnHistory" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                          <Component id="btnEditPersonalInfo" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnAddPersonalInfo" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="btnEditPersonalInfo" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnAddPersonalInfo" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                      <Component id="btnLogout" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
           </Group>
       </Group>
@@ -66,7 +74,9 @@
               <Component id="btnAddPersonalInfo" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnEditPersonalInfo" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="89" max="32767" attributes="0"/>
+              <EmptySpace pref="38" max="32767" attributes="0"/>
+              <Component id="btnLogout" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
           </Group>
           <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
       </Group>
@@ -139,6 +149,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddPersonalInfoActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnLogout">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Logout"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLogoutActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

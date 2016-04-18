@@ -6,6 +6,7 @@ import marketsimulator.Model.User;
 import java.util.ArrayList;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import marketsimulator.Controller.UserController;
 import marketsimulator.View.AddNewPropertyView;
 import marketsimulator.View.propertyView;
 
@@ -38,6 +39,13 @@ public class MarketSimulator
        catch (IllegalAccessException e) {
           // handle exception
        }
-       new mainView().setVisible(true);
+       
+     
+       if(new UserController().checkIfLoggedIn()) new propertyView().setVisible(true);
+       else new mainView().setVisible(true);
     }
+
+
+
+   
 }

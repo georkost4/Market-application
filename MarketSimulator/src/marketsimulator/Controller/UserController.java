@@ -9,6 +9,7 @@ import marketsimulator.Model.DatabaseController;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.sql.Connection;
@@ -108,7 +109,7 @@ public class UserController  implements UserInterface
         User tmp = null;
         try
         {
-		FileInputStream fin = new FileInputStream(System.getProperty("user.home")+"\\Documents\\user.ser");
+		FileInputStream fin = new FileInputStream(System.getProperty("user.home")+"\\user.ser");
 		ObjectInputStream oos = new ObjectInputStream(fin);   
 		tmp = (User) oos.readObject();
 		oos.close();	   
@@ -123,12 +124,15 @@ public class UserController  implements UserInterface
     {
         try
         {
-		File file = new File(System.getProperty("user.home")+"\\Documents\\user.ser");
-                file.deleteOnExit();
-		FileOutputStream fout = new FileOutputStream(System.getProperty("user.home")+"\\Documents\\user.ser");
-		ObjectOutputStream oos = new ObjectOutputStream(fout);   
-		oos.writeObject(user);
-		oos.close();
+            File file = new File(System.getProperty("user.home")+"\\user.ser");
+           
+            File file_remember_me = new File(System.getProperty("user.home")+"\\remember.ser");
+            if(!file_remember_me.exists()) file.deleteOnExit();
+            
+            FileOutputStream fout = new FileOutputStream(file);
+            ObjectOutputStream oos = new ObjectOutputStream(fout);   
+            oos.writeObject(user);
+            oos.close();
 	}
         catch(Exception ex){  ex.printStackTrace();return false;}
         
@@ -223,6 +227,28 @@ public class UserController  implements UserInterface
         catch (SQLException ex) { ex.printStackTrace(); return false;} 
         catch (ClassNotFoundException ex) { ex.printStackTrace(); return false;} 
        
+    }
+    
+    public boolean checkIfLoggedIn() 
+     {
+        if(this.getLoggedUser() != null)
+        {
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean setRememberMe()
+    {
+         try 
+            {
+                File file = new File(System.getProperty("user.home")+"\\remember.ser");
+                FileOutputStream fout = new FileOutputStream(file);
+                fout.write(1);
+                fout.close();
+            } 
+            catch (IOException ex) {ex.printStackTrace();  return false; }
+         return true;
     }
     
 }

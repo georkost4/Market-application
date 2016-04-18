@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 import marketsimulator.Controller.PropertyController;
 import Utilities.PropertyOnSale_JListRenderer;
+import java.io.File;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -53,6 +54,7 @@ public class propertyView extends javax.swing.JFrame {
         labelUser = new javax.swing.JLabel();
         btnEditPersonalInfo = new javax.swing.JButton();
         btnAddPersonalInfo = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Properties  on sale");
@@ -100,27 +102,39 @@ public class propertyView extends javax.swing.JFrame {
             }
         });
 
+        btnLogout.setText("Logout");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
-                                .addComponent(labelUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGap(36, 36, 36))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(btnAddNewProperty, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnHistory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGap(14, 14, 14)))
-                    .addComponent(btnEditPersonalInfo)
-                    .addComponent(btnAddPersonalInfo)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                                        .addComponent(labelUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGap(36, 36, 36))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(btnAddNewProperty, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnHistory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGap(14, 14, 14)))
+                            .addComponent(btnEditPersonalInfo)
+                            .addComponent(btnAddPersonalInfo)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(btnLogout))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,7 +151,9 @@ public class propertyView extends javax.swing.JFrame {
                 .addComponent(btnAddPersonalInfo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEditPersonalInfo)
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addComponent(btnLogout)
+                .addGap(19, 19, 19))
             .addComponent(jScrollPane1)
         );
 
@@ -170,6 +186,18 @@ public class propertyView extends javax.swing.JFrame {
     private void btnAddPersonalInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPersonalInfoActionPerformed
         new personalInfoView(false).setVisible(true);
     }//GEN-LAST:event_btnAddPersonalInfoActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        File file = new File(System.getProperty("user.home")+"\\remember.ser");
+        File file2 = new File(System.getProperty("user.home")+"\\user.ser");
+        if(file.delete() && file2.delete())
+        {
+            JOptionPane.showMessageDialog(this,"Logged out");
+            new mainView().setVisible(true);
+            this.dispose();
+        }
+        else JOptionPane.showMessageDialog(this, "Error");
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
    public void init()
    {                   
@@ -225,6 +253,7 @@ public class propertyView extends javax.swing.JFrame {
     private javax.swing.JButton btnAddPersonalInfo;
     private javax.swing.JButton btnEditPersonalInfo;
     private javax.swing.JButton btnHistory;
+    private javax.swing.JButton btnLogout;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelUser;
