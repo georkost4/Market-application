@@ -10,7 +10,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 import marketsimulator.Controller.PropertyController;
-import Utilities.PropertyOnSale_JListRenderer;
+import Utilities.propertyOnSale_JListCellRenderer;
 import java.io.File;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -228,7 +228,7 @@ public class propertyView extends javax.swing.JFrame {
            model.addElement(prop);
    
        }
-       propertyList.setCellRenderer(new PropertyOnSale_JListRenderer());
+       propertyList.setCellRenderer(new propertyOnSale_JListCellRenderer());
        propertyList.setModel(model);
        
       

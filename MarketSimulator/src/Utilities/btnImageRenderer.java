@@ -17,9 +17,9 @@ import marketsimulator.Controller.PropertyController;
  *
  * @author SoRa
  */
-public class ButtonRenderer extends JButton implements TableCellRenderer {
-
-  public ButtonRenderer() {
+public class btnImageRenderer extends JButton implements TableCellRenderer
+{
+    public btnImageRenderer() {
     setOpaque(true);
   }
 
@@ -35,14 +35,7 @@ public class ButtonRenderer extends JButton implements TableCellRenderer {
           setForeground(table.getForeground());
           setBackground(UIManager.getColor("Button.background"));
         }
-        PropertyController controller = new PropertyController();
-        if(controller.getOnSaleState(MyListingsTableModel.getId(row)) == 1){  setText("See users");  } 
-        else
-        {
-            this.setForeground(Color.red);
-            this.setBackground(Color.green);
-            setText("Sold");
-        }
+        setText("See Image");
         return this;
   }
   

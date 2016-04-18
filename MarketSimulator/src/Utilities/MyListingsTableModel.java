@@ -104,6 +104,7 @@ public class MyListingsTableModel extends AbstractTableModel {
    @Override
    public boolean isCellEditable(int rowIndex, int columnIndex) {
      if(columnIndex == 6 && prop_controller.getOnSaleState(property.get(rowIndex).getProperty_id()) == 1) return true;
+     if(columnIndex == 5) return true;
        return false;
   }
     

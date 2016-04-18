@@ -5,7 +5,7 @@
  */
 package marketsimulator.View;
 
-import Utilities.usersThatAreInterestedInMyListingsJLIST_RENDERER;
+import Utilities.usersInterested_JlistCellRenderer;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -92,7 +92,7 @@ public class usersThatAreInterestedInMyListingsView extends javax.swing.JFrame {
             model.addElement(user);
         }
         usersTharAreInterestedJList.setModel(model);
-        usersTharAreInterestedJList.setCellRenderer(new usersThatAreInterestedInMyListingsJLIST_RENDERER());
+        usersTharAreInterestedJList.setCellRenderer(new usersInterested_JlistCellRenderer());
     }
     
     

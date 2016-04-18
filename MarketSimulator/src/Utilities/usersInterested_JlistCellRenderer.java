@@ -18,7 +18,7 @@ import marketsimulator.Model.User;
  *
  * @author SoRa
  */
-public class usersThatAreInterestedInMyListingsJLIST_RENDERER extends DefaultListCellRenderer implements ListCellRenderer<Object>
+public class usersInterested_JlistCellRenderer extends DefaultListCellRenderer implements ListCellRenderer<Object>
 {
     @Override
     public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {

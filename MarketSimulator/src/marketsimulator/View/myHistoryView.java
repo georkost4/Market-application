@@ -16,9 +16,11 @@ import marketsimulator.Controller.InterestController;
 import marketsimulator.Controller.UserController;
 import Utilities.MyListingsTableModel;
 import marketsimulator.Model.Property;
-import Utilities.JTableButtonEditor;
-import Utilities.ButtonRenderer;
+import Utilities.btnSeeUsersEditor;
+import Utilities.btnSeeUsersRenderer;
 import Utilities.PropertiesThatImInterestedTableModel;
+import Utilities.btnImageEditor;
+import Utilities.btnImageRenderer;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -165,13 +167,19 @@ public class myHistoryView extends javax.swing.JFrame {
        
        tableMyInterests.setModel(propertiesImInterestedInModel);
        
-       TableColumn tableColumn = tableMyListings.getColumnModel().getColumn(6);
+       TableColumn tableSeeUsers = tableMyListings.getColumnModel().getColumn(6);
+       TableColumn tableImage1 = tableMyListings.getColumnModel().getColumn(5);
+       TableColumn tableImage2 = tableMyInterests.getColumnModel().getColumn(5);
        
-       myListingsModel.setValueAt(myListingsArray.get(0).getOn_sale(), 0, 6);
        
-//       if(prop_controller.getOnSaleState(property.get(rowIndex).getProperty_id()) == 1)
-       tableColumn.setCellRenderer(new ButtonRenderer());
-       tableColumn.setCellEditor(new JTableButtonEditor(new JCheckBox()));
+       
+       tableSeeUsers.setCellRenderer(new btnSeeUsersRenderer());
+       tableSeeUsers.setCellEditor(new btnSeeUsersEditor(new JCheckBox()));
+       
+       tableImage1.setCellRenderer(new btnImageRenderer());
+       tableImage1.setCellEditor(new btnImageEditor(new JCheckBox()));
+       tableImage2.setCellRenderer(new btnImageRenderer());
+       tableImage2.setCellEditor(new btnImageEditor(new JCheckBox()));
        
              
      }

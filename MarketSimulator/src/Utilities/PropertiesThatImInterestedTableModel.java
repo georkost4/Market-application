@@ -128,6 +128,15 @@ public class PropertiesThatImInterestedTableModel extends AbstractTableModel
     public int getColumnCount() {
         return 7;
     }
+
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) 
+    {
+        if (columnIndex == 5) return true;
+        return false;
+    }
+    
+    
     
     
     

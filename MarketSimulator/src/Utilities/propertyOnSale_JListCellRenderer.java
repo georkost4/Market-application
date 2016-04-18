@@ -28,7 +28,7 @@ import marketsimulator.Model.Property;
  *
  * @author SoRa
  */
-public class PropertyOnSale_JListRenderer extends DefaultListCellRenderer implements ListCellRenderer<Object>
+public class propertyOnSale_JListCellRenderer extends DefaultListCellRenderer implements ListCellRenderer<Object>
 {
 
     @Override

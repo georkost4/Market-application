@@ -1,45 +1,39 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Utilities;
 
-import static Utilities.MyListingsTableModel.property;
-import java.awt.Color;
 import java.awt.Component;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTable;
-import marketsimulator.Controller.InterestController;
-import marketsimulator.Controller.PropertyController;
-import marketsimulator.Model.Property;
-import marketsimulator.Model.User;
+import marketsimulator.View.propertyImageView;
 import marketsimulator.View.usersThatAreInterestedInMyListingsView;
 
-public class JTableButtonEditor extends DefaultCellEditor
+/**
+ *
+ * @author SoRa
+ */
+public class btnImageEditor extends DefaultCellEditor
 {
-    
   protected JButton button;
 
 
   private boolean isPushed;
-  private String prop_id;
+  private String image_loc = null;
 
-  public JTableButtonEditor(JCheckBox checkBox) 
+  public btnImageEditor(JCheckBox checkBox) 
   {
     super(checkBox);
     button = new JButton();
     button.setOpaque(true);
     button.addActionListener(new ActionListener() 
-    {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        fireEditingStopped();
-      }
-    });
+    {@Override  public void actionPerformed(ActionEvent e) { fireEditingStopped();}});
   }
 
   @Override
@@ -55,8 +49,8 @@ public class JTableButtonEditor extends DefaultCellEditor
       button.setForeground(table.getForeground());
       button.setBackground(table.getBackground());
     }
-    prop_id = MyListingsTableModel.getId(row);
-    System.out.println(prop_id);
+    image_loc = (String) table.getValueAt(row, 5);
+    System.out.println(image_loc);
     isPushed = true;
     
     return button;
@@ -67,7 +61,7 @@ public class JTableButtonEditor extends DefaultCellEditor
   {
     if (isPushed) 
     {
-      new usersThatAreInterestedInMyListingsView(prop_id).setVisible(true);
+      new propertyImageView(image_loc).setVisible(true);
     }
     isPushed = false;
     return null;
@@ -83,4 +77,5 @@ public class JTableButtonEditor extends DefaultCellEditor
   protected void fireEditingStopped() {
     super.fireEditingStopped();
   }
+    
 }
