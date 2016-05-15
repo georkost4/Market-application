@@ -17,13 +17,19 @@ import marketsimulator.Model.Property;
 import marketsimulator.Model.User;
 
 /**
- *
+ * Controller for declaring,declining,accept interests in properties 
+ * and also providing general informations.
  * @author SoRa
  */
 public class InterestController implements InterestInterface {
     DatabaseController database_controller = new DatabaseController();
    
-
+    /**
+     * Method for completing the sell operation of the house.
+     * @param property_id The property_id of the house you sold.
+     * @param user_id The user_id of the user you sell the house to.
+     * @return <b>true</b> if all went good.
+     */
     @Override
     public boolean acceptInterest(String property_id,String user_id) {
        Connection conn = null;
@@ -49,6 +55,12 @@ public class InterestController implements InterestInterface {
        return true;
     }
 
+    /**
+     * Method for turning down a users interest in your property.
+     * @param property_id property_id of your property.
+     * @param user_id user_id of the user to turn down.
+     * @return <b>true</b> if all went right.
+     */
     @Override
     public boolean declineInterest(String property_id,String user_id) {
        Connection conn = null;
@@ -75,6 +87,12 @@ public class InterestController implements InterestInterface {
        return true;
     }
 
+    /**
+     * Method to declare interest on a specific property.
+     * @param property_id The property that you want to declare interest to.
+     * @param user_id Logged user id.
+     * @return <b>true</b> for success.
+     */
     @Override
     public boolean makeInterest(String property_id, String user_id) {
        //Implement database calls to make Interest on a property
@@ -106,6 +124,11 @@ public class InterestController implements InterestInterface {
        return true;
     }
 
+    /**
+     * Method for getting a list of the properties that I'm interested in .
+     * @param user_id Desired user's properties interests.
+     * @return  ArrayList of the  properties I'm interested in.
+     */
     @Override
     public ArrayList<Property> getMyInterests(String user_id) {
         Connection conn = null;
@@ -147,6 +170,11 @@ public class InterestController implements InterestInterface {
         return list;
     }
 
+    /**
+     * Method for getting the properties that the user want to sell.
+     * @param user_id The user_id of the user to get his listings.
+     * @return  ArrayList of the properties.
+     */
     @Override
     public ArrayList<Property> getMyListings(String user_id) 
     {
@@ -188,10 +216,14 @@ public class InterestController implements InterestInterface {
         } 
         catch (SQLException ex) {ex.printStackTrace(); return null;} 
         catch (ClassNotFoundException ex) {ex.printStackTrace(); return null; }
-        
         return list;
     }
 
+    /**
+     * Method for getting a user's name by his id.
+     * @param seller_id The desired user_id.
+     * @return String of his name.
+     */
     @Override
     public String getSellerName(String seller_id) {
         String tmp = null;
@@ -226,6 +258,11 @@ public class InterestController implements InterestInterface {
         return tmp;
     }
 
+    /**
+     * Method for getting all users that are interested in some property.
+     * @param property_id The property that you want.
+     * @return ArrayList of users .
+     */
     @Override
     public ArrayList<User> getUsersThatAreInterestedInMyListings(String property_id) {
         ArrayList<User> users = new ArrayList<User>();
@@ -266,6 +303,13 @@ public class InterestController implements InterestInterface {
         return users;
     }
     
+    /**
+     * Method for getting the state of some user interest on a property.
+     * @param property_id The property to get the state.
+     * @return <b>-1</b> if the seller hasn't seen the interest yet
+     * <b>0</b> if the seller declined the user.
+     * <b>1</b> if the seller sold the property to the user.
+     */
     @Override
     public int getPropertyState(String property_id) 
     {
@@ -297,6 +341,12 @@ public class InterestController implements InterestInterface {
        
     }
 
+    /**
+     * Method for automatically declining all users except the one you sold the property.
+     * @param property_id The property sold.
+     * @param user_id The user sold the property to.
+     * @return <b>true</b> if successful.
+     */
     @Override
     public boolean DeclineAllOtherUsers(String property_id,String user_id) {
        Connection conn = null;
@@ -325,6 +375,11 @@ public class InterestController implements InterestInterface {
        return false;
     }
 
+    /**
+     * Method for checking if the user declared interest in a specific property.
+     * @param property_id The property id that you want to check.
+     * @return <b> True</b> if you are already interested.
+     */
     @Override
     public boolean checkIfAlreadyInterested(String property_id) {
        Connection conn = null;

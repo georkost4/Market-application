@@ -19,26 +19,24 @@ import marketsimulator.View.propertyView;
 
 public class MarketSimulator 
 {
-   public static void main(String[] args) 
+ 
+    /**
+     * Main method that starts the Market application.
+     * @param args
+     */
+    public static void main(String[] args) 
    {
        try 
        {
-            // Set cross-platform Java L&F (also called "Metal")
-        UIManager.setLookAndFeel(
+            UIManager.setLookAndFeel(
             UIManager.getSystemLookAndFeelClassName());
        } 
-       catch (UnsupportedLookAndFeelException e) {
-          // handle exception
-       }
-       catch (ClassNotFoundException e) {
-          // handle exception
-       }
-       catch (InstantiationException e) {
-          // handle exception
-       }
-       catch (IllegalAccessException e) {
-          // handle exception
-       }
+       catch (UnsupportedLookAndFeelException e) {}
+       catch (ClassNotFoundException e) {}
+       catch (InstantiationException e) {}
+       catch (IllegalAccessException e) {}
+       
+       // If the user credentials not found start over , else show the main view,
        if(new UserController().checkIfLoggedIn()) new propertyView().setVisible(true);
        else new mainView().setVisible(true);
     }
