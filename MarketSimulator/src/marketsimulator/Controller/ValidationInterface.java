@@ -9,7 +9,8 @@ import javax.swing.JFrame;
 import marketsimulator.Model.Property;
 
 /**
- *
+ * Interface for declaring the methods that
+ * ValidationController implements .
  * @author SoRa
  */
 public interface ValidationInterface 

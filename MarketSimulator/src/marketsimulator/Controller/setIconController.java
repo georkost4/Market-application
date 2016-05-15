@@ -11,12 +11,17 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 /**
- *
+ * Controller for setting application icon
  * @author SoRa
  */
 public class setIconController 
 {
-     public void setIcon(JFrame frame) 
+ 
+    /**
+     * Method for setting jframe's icon .
+     * @param frame The frame to set up the application icon.
+     */
+    public void setIcon(JFrame frame) 
     {
         Image icon = null;
         try {icon = ImageIO.read(getClass().getClassLoader().getResource("Images/logo.jpg"));} 

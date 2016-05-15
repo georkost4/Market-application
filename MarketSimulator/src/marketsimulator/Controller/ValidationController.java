@@ -9,13 +9,20 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Controller that manages input-validation related code .
+ * For example when adding new property the value field must
+ * be validated for a number input or the city field must be
+ * validated for a string input .
  * @author SoRa
  */
 public class ValidationController implements ValidationInterface
 {
     
-
+    /**
+     * Method that check if the input phone is only 10 numerical chars .
+     * @param phone Phone input to be validated.
+     * @return <true> for validation otherwise <b>false</b> .
+     */
     @Override
     public boolean validatePhoneNumber(String phone) 
     {
@@ -26,6 +33,12 @@ public class ValidationController implements ValidationInterface
         return false;
     }
 
+    /**
+     * Method for validating password input. Must be at least 4 chars long , maximum 10
+     * and must contain only alphanumerical values .
+     * @param password Input to validate .
+     * @return <b>true</b> if validation succeeds.
+     */
     @Override
     public boolean validatePassword(String password) {
         String regex = "[0-9a-zA-Z]{4,10}" ;
@@ -35,6 +48,14 @@ public class ValidationController implements ValidationInterface
         return false;
     }
 
+    /**
+     * Method for validating first name and last name fields .
+     * Name fields must be at least 2 char long and contain only
+     * a-z,A-Z characters.
+     * @param name1 First name input .
+     * @param name2 Last name input . 
+     * @return <b>true</b> if validation succeeds .
+     */
     @Override
     public boolean validateName(String name1, String name2) {
         String regex = "[a-zA-Z]{2,}";
@@ -43,6 +64,13 @@ public class ValidationController implements ValidationInterface
         return false;
     }
 
+    /**
+     * Method for validating username field.
+     * Must start with a-z or A-Z and can contain one or more
+     * alphanumerical value .
+     * @param username Username input .
+     * @return <b>true</b> if validation succeeds .
+     */
     @Override
     public boolean validateUsername(String username) {
         // Start with character and contain zero or more numbers and characters
@@ -52,14 +80,25 @@ public class ValidationController implements ValidationInterface
         return false;
     }
     
-     @Override
+    /**
+     * Method for validating City field . The same
+     * rules as Name fields apply here as well.
+     * @param city City input.
+     * @return <b>true</b> if validation succeeds .
+     */
+    @Override
     public boolean validateCity(String city) {
         // Same rules as Name validation
         return this.validateName(city, city);
     }
 
-   
-
+    /**
+     * Method for validating Price field .
+     * Must be at least one char long and can 
+     * contain only numerical values .
+     * @param value Price input .
+     * @return <b>true</b> if validation succeeds .
+     */
     @Override
     public boolean validateValue(String value) {
         // Only numerical 
@@ -69,6 +108,13 @@ public class ValidationController implements ValidationInterface
         return false;
     }
 
+    /**
+     * Method for validating address field .
+     * Must start with a-zA-Z only and must end with
+     * a space and a number. e.g "Andreou 23" .
+     * @param address Address input .
+     * @return <b>true</b> if validation succeeds .
+     */
     @Override
     public boolean validateAddress(String address) {
        // Characters followed by a number
@@ -78,6 +124,18 @@ public class ValidationController implements ValidationInterface
         return false;
     }
 
+    /**
+     * Method that validates user Registration and outputs the corresponding error
+     * message.
+     * @param frame The frame to output the error message.
+     * @param name First name input.
+     * @param name2 Last name input.
+     * @param phone Phone number input.
+     * @param password Password input.
+     * @param username Username input.
+     * @param city City input.
+     * @return <b>true</b> if each validation test succeeds .
+     */
     @Override
     public boolean validateRegisterInput(JFrame frame,String name, String name2, String phone, String password, String username,String city) {
         if(!this.validateName(name, name2))
@@ -107,6 +165,15 @@ public class ValidationController implements ValidationInterface
         return true;
     }
 
+    /**
+     * Method that call each validation method and outputs corresponding 
+     * error messages.
+     * @param frame The frame to output the messages.
+     * @param value Value input.
+     * @param city City input.
+     * @param address Address input.
+     * @return <b>true</b> if each validation method succeeds .
+     */
     @Override
     public boolean validateAddNewPropertyInput(JFrame frame, String value, String city, String address) 
     {
