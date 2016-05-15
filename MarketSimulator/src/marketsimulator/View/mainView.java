@@ -5,8 +5,8 @@
  */
 package marketsimulator.View;
 
-import com.sun.glass.events.KeyEvent;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;

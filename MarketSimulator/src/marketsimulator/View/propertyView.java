@@ -15,6 +15,8 @@ import java.io.File;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import javax.swing.ButtonGroup;
+import marketsimulator.Controller.SearchController;
 import marketsimulator.Controller.UserController;
 import marketsimulator.Controller.setIconController;
 import marketsimulator.Model.Property;
@@ -24,10 +26,13 @@ import marketsimulator.Model.Property;
  * @author SoRa
  */
 public class propertyView extends javax.swing.JFrame {
-
+        
     /**
      * Creates new form propertyView
      */
+    
+    public boolean flag;
+    
     public propertyView() {
         initComponents();
         btnAddPersonalInfo.setVisible(false);
@@ -35,6 +40,8 @@ public class propertyView extends javax.swing.JFrame {
         init();
         database_polling();
         new setIconController().setIcon(this);
+        groupButton();
+        flag = true;
     }
 
     /**
@@ -55,6 +62,13 @@ public class propertyView extends javax.swing.JFrame {
         btnEditPersonalInfo = new javax.swing.JButton();
         btnAddPersonalInfo = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
+        txtSearch = new javax.swing.JTextField();
+        search_Button = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        value = new javax.swing.JRadioButton();
+        clear_Button = new javax.swing.JButton();
+        city = new javax.swing.JRadioButton();
+        btnMyProfile = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Properties  on sale");
@@ -109,27 +123,68 @@ public class propertyView extends javax.swing.JFrame {
             }
         });
 
+        search_Button.setText("Search");
+        search_Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                search_ButtonMouseClicked(evt);
+            }
+        });
+
+        jLabel2.setText("Search by:");
+
+        value.setText("max price");
+
+        clear_Button.setText("Clear");
+        clear_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clear_ButtonActionPerformed(evt);
+            }
+        });
+
+        city.setText("city");
+
+        btnMyProfile.setText("MyProfile");
+        btnMyProfile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMyProfileActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
-                                        .addComponent(labelUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGap(36, 36, 36))
                                 .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(btnAddNewProperty, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnHistory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGap(14, 14, 14)))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(btnAddNewProperty, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(btnHistory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(search_Button))
+                                            .addComponent(value)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(clear_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(city))
+                                    .addContainerGap())
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(btnMyProfile)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                                            .addComponent(labelUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addGap(36, 36, 36)))
                             .addComponent(btnEditPersonalInfo)
                             .addComponent(btnAddPersonalInfo)))
                     .addGroup(layout.createSequentialGroup()
@@ -139,19 +194,36 @@ public class propertyView extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(75, 75, 75)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(search_Button))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(clear_Button)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(city)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(value)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAddNewProperty)
-                .addGap(57, 57, 57)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnHistory)
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelUser)
-                .addGap(31, 31, 31)
+                .addGap(2, 2, 2)
+                .addComponent(btnMyProfile)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAddPersonalInfo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEditPersonalInfo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addComponent(btnLogout)
                 .addGap(19, 19, 19))
             .addComponent(jScrollPane1)
@@ -214,11 +286,68 @@ public class propertyView extends javax.swing.JFrame {
                this.dispose();
             }
             else JOptionPane.showMessageDialog(this, "Error2");   
-        }
-        
-       
+        }   
         
     }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void search_ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_search_ButtonMouseClicked
+        
+        flag = false;
+        String searchText = txtSearch.getText().trim();
+        String selectedRadioBtn = "";
+        if(city.isSelected())
+            selectedRadioBtn = "city";
+        else
+            selectedRadioBtn = "value";
+
+        
+        SearchController sc = new SearchController();
+        ArrayList<Property> foundProperties = new ArrayList<Property>();
+        foundProperties = sc.findProperties(searchText,selectedRadioBtn);
+        
+        DefaultListModel model = new DefaultListModel();
+        
+        model.clear();
+        
+        for(Property prop : foundProperties)
+        {
+           model.addElement(prop);
+   
+        }
+        propertyList.setCellRenderer(new propertyOnSale_JListCellRenderer());
+        propertyList.setModel(model);
+        
+    }//GEN-LAST:event_search_ButtonMouseClicked
+
+    private void clear_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clear_ButtonActionPerformed
+        
+        flag = true;
+        PropertyController controller = new PropertyController();
+        DefaultListModel model = new DefaultListModel();
+        model.clear();    
+        
+        ArrayList<Property> properties = new ArrayList<Property>();
+        properties = controller.getProperties();
+        for(Property prop : properties)
+        {
+           model.addElement(prop);
+   
+        }
+        
+        propertyList.setCellRenderer(new propertyOnSale_JListCellRenderer());
+        propertyList.setModel(model);
+        
+        
+        txtSearch.setText(" ");
+        
+    }//GEN-LAST:event_clear_ButtonActionPerformed
+
+    private void btnMyProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMyProfileActionPerformed
+
+        this.setVisible(false); 
+        new UserProfileView().setVisible(true);
+
+    }//GEN-LAST:event_btnMyProfileActionPerformed
 
    public void init()
    {                   
@@ -256,18 +385,31 @@ public class propertyView extends javax.swing.JFrame {
    }
    
     private void database_polling() {
-          Runnable r = new Runnable() {
+         
+       
+         Runnable r = new Runnable() {
 
            @Override
            public void run() {
-              init();
-              System.out.println("Database Polling");
+              if(flag)
+              {
+                  init();
+                  System.out.println("Database Polling");
+              }
            }
-       };
+         };
        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
        scheduler.scheduleAtFixedRate(r, 3, 3, TimeUnit.SECONDS);
-      
+       
     }
+    private void groupButton( ) {
+
+        ButtonGroup bg1 = new ButtonGroup( );
+
+        bg1.add(city);
+        bg1.add(value);
+
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddNewProperty;
@@ -275,10 +417,17 @@ public class propertyView extends javax.swing.JFrame {
     private javax.swing.JButton btnEditPersonalInfo;
     private javax.swing.JButton btnHistory;
     private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnMyProfile;
+    private javax.swing.JRadioButton city;
+    private javax.swing.JButton clear_Button;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelUser;
     private javax.swing.JList propertyList;
+    private javax.swing.JButton search_Button;
+    private javax.swing.JTextField txtSearch;
+    private javax.swing.JRadioButton value;
     // End of variables declaration//GEN-END:variables
 
    

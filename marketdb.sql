@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Φιλοξενητής: 127.0.0.1
--- Χρόνος δημιουργίας: 13 Απρ 2016 στις 20:21:11
+-- Χρόνος δημιουργίας: 20 Απρ 2016 στις 22:20:50
 -- Έκδοση διακομιστή: 10.1.9-MariaDB
 -- Έκδοση PHP: 5.6.15
 
@@ -21,8 +21,6 @@ SET time_zone = "+00:00";
 --
 create database marketdb;
 	use marketdb;
-
-
 -- --------------------------------------------------------
 
 --
@@ -41,14 +39,15 @@ CREATE TABLE `bids` (
 --
 
 INSERT INTO `bids` (`bid_id`, `property_id`, `user_id`, `approved`) VALUES
-(26, 12, 6, -1),
-(27, 10, 6, -1),
-(28, 11, 5, -1),
-(29, 20, 5, -1),
-(30, 12, 4, -1),
-(31, 17, 4, -1),
-(32, 18, 4, -1),
-(33, 11, 6, -1);
+(35, 10, 5, -1),
+(36, 18, 5, 1),
+(37, 10, 6, 0),
+(38, 11, 6, 1),
+(39, 20, 4, -1),
+(40, 18, 4, 0),
+(41, 17, 4, 0),
+(42, 12, 4, -1),
+(43, 17, 6, -1);
 
 -- --------------------------------------------------------
 
@@ -60,7 +59,7 @@ CREATE TABLE `onsale` (
   `property_id` int(11) NOT NULL,
   `seller_id` int(4) NOT NULL,
   `on_sale` varchar(1) NOT NULL,
-  `value` varchar(10) NOT NULL,
+  `value` int(10) NOT NULL,
   `city` varchar(30) NOT NULL,
   `address` varchar(15) NOT NULL,
   `date_posted` varchar(100) NOT NULL,
@@ -72,12 +71,12 @@ CREATE TABLE `onsale` (
 --
 
 INSERT INTO `onsale` (`property_id`, `seller_id`, `on_sale`, `value`, `city`, `address`, `date_posted`, `image`) VALUES
-(10, 4, '1', '23500', 'Philadelphia', 'MarketSt', 'Wed Mar 30 20:04:53 EEST 2016', 'C:\\Users\\LABS\\Documents\\house1.png'),
-(11, 4, '1', '233500', 'New York', '52nd Street ', 'Wed Mar 30 20:05:06 EEST 2016', 'C:\\Users\\LABS\\Documents\\house2.png'),
-(12, 5, '1', '9999', 'Chicago', '53nd Street', 'Wed Mar 30 20:05:15 EEST 2016', 'C:\\Users\\LABS\\Documents\\house3.png'),
-(17, 5, '1', '239', 'Baltimore145', 'BPD', 'Tue Apr 05 20:29:06 EEST 2016', 'C:\\Users\\LABS/Documents/house5.png'),
-(18, 6, '1', '295', 'Athens', 'Ypokrath 32', 'Tue Apr 05 21:52:33 EEST 2016', 'C:\\Users\\LABS/Documents/house4.png'),
-(20, 6, '1', '19430', 'Oklahoma', 'Corner 5nt&10nt', 'Wed Apr 13 20:59:39 EEST 2016', 'C:\\Users\\LABS/Documents/house6.jpg');
+(10, 4, '1', 23500, 'Philadelphia', 'MarketSt', 'Wed Mar 30 20:04:53 EEST 2016', 'C:\\xampp\\htdocs\\MarketApp/house1.png'),
+(11, 4, '0', 233500, 'New York', '52nd Street ', 'Wed Mar 30 20:05:06 EEST 2016', 'C:\\xampp\\htdocs\\MarketApp\\house2.png'),
+(12, 5, '1', 9999, 'Chicago', '53nd Street', 'Wed Mar 30 20:05:15 EEST 2016', 'C:\\xampp\\htdocs\\MarketApp\\house3.png'),
+(17, 5, '1', 239, 'Baltimore145', 'BPD', 'Tue Apr 05 20:29:06 EEST 2016', 'C:\\xampp\\htdocs\\MarketApp\\house5.png'),
+(18, 6, '0', 295, 'Athens', 'Ypokrath 32', 'Tue Apr 05 21:52:33 EEST 2016', 'C:\\xampp\\htdocs\\MarketApp\\house4.png'),
+(20, 6, '1', 19430, 'Oklahoma', 'Corner 5nt&10nt', 'Wed Apr 13 20:59:39 EEST 2016', 'C:\\xampp\\htdocs\\MarketApp\\house6.jpg');
 
 -- --------------------------------------------------------
 
@@ -167,12 +166,12 @@ ALTER TABLE `user_personal_information`
 -- AUTO_INCREMENT για πίνακα `bids`
 --
 ALTER TABLE `bids`
-  MODIFY `bid_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `bid_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 --
 -- AUTO_INCREMENT για πίνακα `onsale`
 --
 ALTER TABLE `onsale`
-  MODIFY `property_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `property_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT για πίνακα `users`
 --
