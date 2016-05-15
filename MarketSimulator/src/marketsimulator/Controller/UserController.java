@@ -21,13 +21,19 @@ import javax.swing.JOptionPane;
 import marketsimulator.Model.User;
 
 /**
- *
+ * Controller for managing user-related operations such as
+ * login,register,getUser and more.
  * @author SoRa
  */
 public class UserController  implements UserInterface
 {
     DatabaseController db_controller = new DatabaseController();
    
+    /**
+     * Method for getting a user object given a username .
+     * @param given_username The user's username.
+     * @return <b>User</b> object . 
+     */
     @Override
     public User getUser(String given_username) 
     {
@@ -65,6 +71,11 @@ public class UserController  implements UserInterface
        return tempUser;
     } 
 
+    /**
+     * Method for registering a new user to the application.
+     * @param user The User object to register.
+     * @return <b>true</b> for success.
+     */
     @Override
     public boolean userRegister(User user) 
     {  
@@ -95,6 +106,12 @@ public class UserController  implements UserInterface
         catch (ClassNotFoundException ex) { ex.printStackTrace(); return false;} 
     }
 
+    /**
+     * Method for a logging in a user.
+     * @param username The users username.
+     * @param password The users password.
+     * @return <b>true</b> if the credentials are correct otherwise returns <b>false</b> .
+     */
     @Override
     public boolean userLogin(String username, String password) 
     {
@@ -104,6 +121,10 @@ public class UserController  implements UserInterface
        return false;
     }
 
+    /**
+     * Method for getting the logged in user .
+     * @return <b>User</b> object .
+     */
     @Override
     public User getLoggedUser() {
         User tmp = null;
@@ -119,6 +140,11 @@ public class UserController  implements UserInterface
         return tmp;
     }
 
+    /**
+     * Method for saving logged User object in hard drive.
+     * @param user User object to save.
+     * @return <b>true</b> if saving was successful.
+     */
     @Override
     public boolean setLoggedUser(User user) 
     {
@@ -139,6 +165,11 @@ public class UserController  implements UserInterface
         return true;
     }
     
+    /**
+     * Method for setting logged user personal info .
+     * @param text Personal info text .
+     * @return <b>true</b> if saving was successful.
+     */
     @Override
     public boolean addUserPersonalInfo(String text) 
     {
@@ -169,6 +200,11 @@ public class UserController  implements UserInterface
        
     }
     
+    /**
+     * Method for retrieving logged user personal info .
+     * @param user_id Logged user id .
+     * @return <b>String</b> containing users personal info .
+     */
     @Override
     public String getUserPersonalInfo(String user_id)
     {
@@ -201,6 +237,11 @@ public class UserController  implements UserInterface
         return returnVal;
     }
 
+    /**
+     * Method for updating the personal info of the logged user.
+     * @param text Updated personal info text.
+     * @return <b>true</b> for success.
+     */
     @Override
     public boolean updateUserPersonalInfo(String text) {
        User tmp = this.getLoggedUser();
@@ -229,6 +270,10 @@ public class UserController  implements UserInterface
        
     }
     
+    /**
+     * Method for checking if any user is logged to the application.
+     * @return <b>true</b> if  someone is logged in otherwise <b>false</b> .
+     */
     public boolean checkIfLoggedIn() 
      {
         if(this.getLoggedUser() != null)
@@ -238,6 +283,10 @@ public class UserController  implements UserInterface
         return false;
     }
     
+    /**
+     * Method for creating remember me(keep me logged in) file in hard drive.
+     * @return <b>true</b> if operation is successful.
+     */
     public boolean setRememberMe()
     {
          try 
@@ -246,14 +295,17 @@ public class UserController  implements UserInterface
                 FileOutputStream fout = new FileOutputStream(file);
                 fout.write(1);
                 fout.close();
-            } 
+            }
             catch (IOException ex) {ex.printStackTrace();  return false; }
          return true;
     }
     
+    /**
+     * Method for checking if remember me(keep me logged in) file exists .
+     * @return <b>true<b> if exists.
+     */
     public boolean checkIfRememberFileExists()
     {
-        
         File file = new File(System.getProperty("user.home")+"\\remember.ser");
         if (file.exists()) return true;
         return false;   

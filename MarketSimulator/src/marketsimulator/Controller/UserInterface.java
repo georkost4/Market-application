@@ -9,7 +9,8 @@ import javax.swing.JFrame;
 import marketsimulator.Model.User;
 
 /**
- *
+ * Interface for declaring the methods that
+ * UserController implements.
  * @author SoRa
  */
 public interface UserInterface 
