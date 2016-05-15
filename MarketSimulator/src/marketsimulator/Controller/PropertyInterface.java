@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import marketsimulator.Model.Property;
 
 /**
- *
+ * Interface for declaring PropertyController methods.
  * @author SoRa
  */
 public interface PropertyInterface 

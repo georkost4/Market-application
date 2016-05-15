@@ -10,11 +10,14 @@ import marketsimulator.Model.Property;
 import marketsimulator.Model.User;
 
 /**
- *
+ * Interface for defining the methods of
+ * the InterestController
  * @author SoRa
  */
 public interface InterestInterface 
 {
+
+   
     public boolean makeInterest(String property_id,String user_id);
     public boolean acceptInterest(String property_id,String user_id);
     public boolean declineInterest(String property_id,String user_id);

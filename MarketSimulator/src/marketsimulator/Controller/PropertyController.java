@@ -14,12 +14,18 @@ import java.util.ArrayList;
 import marketsimulator.Model.Property;
 
 /**
- *
+ * Controller for managing with property related code
+ * like adding,removing,getState  of some property
  * @author SoRa
  */
 public class PropertyController  implements PropertyInterface  {
     DatabaseController db_controller = new DatabaseController();
     
+    /**
+     * Method for adding new property on sale.
+     * @param property The property object to put on sale.
+     * @return <b>true</b> for success.
+     */
     @Override
     public boolean addProperty(Property property) 
     {
@@ -54,6 +60,11 @@ public class PropertyController  implements PropertyInterface  {
         catch (ClassNotFoundException ex) {ex.printStackTrace(); return false; }
     }
 
+    /**
+     * Method for removing a property you put from the application.
+     * @param property The property object to remove.
+     * @return <b>true</b> for success.
+     */
     @Override
     public boolean removeProperty(Property property) 
     {
@@ -80,6 +91,10 @@ public class PropertyController  implements PropertyInterface  {
         catch (ClassNotFoundException ex) {ex.printStackTrace(); return false; }
     }
 
+    /**
+     * Method for getting the list of properties on sale to display on main view.
+     * @return ArrayList with property objects .
+     */
     @Override
     public ArrayList<Property> getProperties()
     {
@@ -121,6 +136,13 @@ public class PropertyController  implements PropertyInterface  {
         return list;
     }
     
+    /**
+     * Method for getting the state(on sale or not on sale) of a specific property.
+     * @param property_id The property you want to get the state.
+     * @return <b>1</b> if the property is on sale.
+     * <b>0</b> if the property is sold.
+     * <b>-1</b> if error occurs .
+     */
     @Override
     public int getOnSaleState(String property_id)
     {
@@ -152,6 +174,11 @@ public class PropertyController  implements PropertyInterface  {
         return returnVal;
     }
 
+    /**
+     * Method for changing a specific property state.
+     * @param property_id The property you want to change its state;
+     * @return <b>true</b> for success.
+     */
     @Override
     public boolean removePropertyFromSale(String property_id) 
     {
