@@ -22,6 +22,11 @@ public class PropertiesThatImInterestedTableModel extends AbstractTableModel
 {
     private ArrayList<Property> property;
     private InterestController controller;
+
+    /**
+     * Constructor for custom table model.
+     * @param property ArrayList of the properties to show on table model.
+     */
     public PropertiesThatImInterestedTableModel(ArrayList<Property> property) 
     {
         this.property = property;

@@ -22,6 +22,10 @@ public class MyListingsTableModel extends AbstractTableModel {
     InterestController controller;
     PropertyController prop_controller;
     
+    /**
+     * Constructor for a custom table model.
+     * @param property ArrayList of the properties to show on the table model.
+     */
     public MyListingsTableModel(ArrayList<Property> property) {this.property = property;  controller = new InterestController(); prop_controller = new PropertyController(); }
 
     @Override
@@ -56,7 +60,11 @@ public class MyListingsTableModel extends AbstractTableModel {
         return name;
     }    
     
-    
+    /**
+     *
+     * @param row Some row at the table.
+     * @return Returns the property_id of a single row on the table.
+     */
     public static  String getId(int row)
     {
         return property.get(row).getProperty_id();

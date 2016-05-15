@@ -19,6 +19,10 @@ import marketsimulator.Controller.PropertyController;
  */
 public class btnImageRenderer extends JButton implements TableCellRenderer
 {
+
+    /**
+     * Custom button image renderer constructor.
+     */
     public btnImageRenderer() {
     setOpaque(true);
   }

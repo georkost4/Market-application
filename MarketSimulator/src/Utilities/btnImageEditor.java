@@ -21,13 +21,21 @@ import marketsimulator.View.usersThatAreInterestedInMyListingsView;
  */
 public class btnImageEditor extends DefaultCellEditor
 {
-  protected JButton button;
+
+    /**
+     *
+     */
+    protected JButton button;
 
 
   private boolean isPushed;
   private String image_loc = null;
 
-  public btnImageEditor(JCheckBox checkBox) 
+    /**
+     * Custom button image editor constructor.
+     * @param checkBox
+     */
+    public btnImageEditor(JCheckBox checkBox) 
   {
     super(checkBox);
     button = new JButton();

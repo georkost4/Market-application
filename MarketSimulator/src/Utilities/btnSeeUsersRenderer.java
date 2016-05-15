@@ -19,7 +19,10 @@ import marketsimulator.Controller.PropertyController;
  */
 public class btnSeeUsersRenderer extends JButton implements TableCellRenderer {
 
-  public btnSeeUsersRenderer() {
+    /**
+     *
+     */
+    public btnSeeUsersRenderer() {
     setOpaque(true);
   }
 

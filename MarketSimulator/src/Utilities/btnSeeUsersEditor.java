@@ -19,16 +19,27 @@ import marketsimulator.Model.Property;
 import marketsimulator.Model.User;
 import marketsimulator.View.usersThatAreInterestedInMyListingsView;
 
+/**
+ *
+ * @author SoRa-NDKTP
+ */
 public class btnSeeUsersEditor extends DefaultCellEditor
 {
     
-  protected JButton button;
+    /**
+     *
+     */
+    protected JButton button;
 
 
   private boolean isPushed;
   private String prop_id;
 
-  public btnSeeUsersEditor(JCheckBox checkBox) 
+    /**
+     *
+     * @param checkBox
+     */
+    public btnSeeUsersEditor(JCheckBox checkBox) 
   {
     super(checkBox);
     button = new JButton();
