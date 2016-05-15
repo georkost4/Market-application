@@ -302,7 +302,7 @@ public class UserController  implements UserInterface
     
     /**
      * Method for checking if remember me(keep me logged in) file exists .
-     * @return <b>true<b> if exists.
+     * @return <b>true</b> if exists.
      */
     public boolean checkIfRememberFileExists()
     {

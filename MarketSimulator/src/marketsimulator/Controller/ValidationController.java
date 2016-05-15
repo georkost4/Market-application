@@ -21,7 +21,7 @@ public class ValidationController implements ValidationInterface
     /**
      * Method that check if the input phone is only 10 numerical chars .
      * @param phone Phone input to be validated.
-     * @return <true> for validation otherwise <b>false</b> .
+     * @return <b>true</b> for validation otherwise <b>false</b> .
      */
     @Override
     public boolean validatePhoneNumber(String phone) 
