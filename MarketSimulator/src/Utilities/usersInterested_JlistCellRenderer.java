@@ -7,11 +7,8 @@ package Utilities;
 
 import java.awt.Component;
 import javax.swing.DefaultListCellRenderer;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
-import marketsimulator.Model.Property;
 import marketsimulator.Model.User;
 
 /**
