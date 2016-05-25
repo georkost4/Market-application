@@ -10,7 +10,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- *
+ * Controller for getting a connection
+ * to the database and also the table names
  * @author SoRa
  */
 public class DatabaseController implements DAO
@@ -24,22 +25,43 @@ public class DatabaseController implements DAO
    private static String TABLE_PROPERTY = "onsale";
    private static String TABLE_BIDS = "bids";
    
-   @Override
+    /**
+     * Use this method to get a connection link to database.
+     * @return Connection object
+     * @throws SQLException
+     */
+    @Override
    public Connection getConnection() throws SQLException 
    {
        return DriverManager.getConnection(DB_URL,USER,PASS);
    }
    
-   @Override
+    /**
+     * Sets the class which JDBC driver is in .
+     * @throws ClassNotFoundException
+     */
+    @Override
    public void setClass() throws ClassNotFoundException 
    {
        Class.forName(JDBC_DRIVER);
    }
 
+    /**
+     * Gets the name of table USERS .
+     * @return <b>String</b> of the table name .
+     */
     public  String getTABLE_USERS() { return TABLE_USERS;}
 
+    /**
+     * Gets the name of table PROPERTY .
+     * @return <b>String</b> of the table name .
+     */
     public  String getTABLE_PROPERTY() {return TABLE_PROPERTY;}
 
+    /**
+     * Gets the name of table BIDS .
+     * @return <b>String</b> of the table name .
+     */ 
     public  String getTABLE_BIDS() {return TABLE_BIDS; }
    
    
