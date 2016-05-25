@@ -6,6 +6,7 @@
 package marketsimulator.Controller;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,31 +18,33 @@ import marketsimulator.Model.DatabaseController;
  */
 public class EditController {
     
-    DatabaseController db_controller = new DatabaseController();
+    DatabaseController dbcontroller = new DatabaseController();
  
-    public void EditedData(String firstname,String lastname,String city,String number){
-    
-        Connection con = null;
+    public void EditedData(String firstname,String lastname,String city,String number) throws SQLException{
+         
+
+        Connection conn = null;
         Statement stm = null;
         
-                try
-        {
+
+         try
+         {
   
-            db_controller.setClass();
-            con = db_controller.getConnection();
+            conn = dbcontroller.getConnection();
             String sql = null;
-            stm = con.createStatement();
+            stm = conn.createStatement();
             UserController uc = new UserController();           
             
-            sql = "UPDATE users SET firstname='"+ firstname +"',lastname='"+ lastname +"',city='"+ city +"',number='"+ number +"'  WHERE  username= '" + uc.getLoggedUser().getUsername()+ "' ";
+            PreparedStatement ps = conn.prepareStatement("UPDATE users SET firstname='"+ firstname +"',lastname='"+ lastname +"',city='"+ city +"',number='"+ number +"'  WHERE  username= '" + uc.getLoggedUser().getUsername()+ "' ");
             
-            ResultSet rs =  stm.executeQuery(sql);
+             ps.executeUpdate();
+             ps.close();
+          }
+        catch (SQLException se)
+         {
+
+           throw se;
+         }
+    
         }
-        catch (SQLException ex) {ex.printStackTrace(); } 
-        catch (ClassNotFoundException ex) {ex.printStackTrace(); 
-        
-        }   
-    
     }
-    
-}

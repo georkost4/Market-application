@@ -36,7 +36,7 @@
                   <Component id="jLabel1" min="-2" pref="71" max="-2" attributes="0"/>
                   <Component id="labelUsername" min="-2" pref="82" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="94" max="32767" attributes="0"/>
+              <EmptySpace pref="82" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="EditButton" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">

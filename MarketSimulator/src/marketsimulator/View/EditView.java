@@ -9,9 +9,13 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import marketsimulator.Controller.EditController;
 import marketsimulator.Controller.UserController;
 import marketsimulator.Model.DatabaseController;
+import marketsimulator.Model.User;
 
 /**
  *
@@ -81,6 +85,11 @@ public class EditView extends javax.swing.JFrame {
         });
 
         jButton3.setText("Edit Password");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -155,10 +164,27 @@ public class EditView extends javax.swing.JFrame {
         String city      = txtCity.getText();
         String number    = txtPhone.getText();
         
-        EditController edit=new EditController();
-        edit.EditedData(firstName, lastName, city, number);
+        UserController controller = new UserController();
         
+        EditController edit=new EditController();
+        try {
+            edit.EditedData(firstName, lastName, city, number);
+        } catch (SQLException ex) {
+            Logger.getLogger(EditView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        JOptionPane.showMessageDialog(this, "Edit Done");
+                User user = controller.getUser(firstName);
+                if(controller.getUserPersonalInfo(String.valueOf(user.getId())) != null ) user.setPersonal_details(controller.getUserPersonalInfo(String.valueOf(user.getId())));
+                controller.setLoggedUser(user);
+                new propertyView().setVisible(true);
+                this.setVisible(false);
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+         this.setVisible(false); 
+        new EditPassView().setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
   public void init()
    {   
        
