@@ -10,9 +10,13 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
+ 
 /**
- *
+ * Class for describing a user
+ * in the application . Contains methods
+ * for setting and getting a user's details
+ * such as name , username, city , number and
+ * others .
  * @author SoRa
  */
 public  class User implements Serializable
@@ -21,14 +25,14 @@ public  class User implements Serializable
     private String firstname,lastname,username , password , city , number , personal_details ;
     
     /**
-     *
-     * @param id
-     * @param firstname
-     * @param lastname
-     * @param username
-     * @param password
-     * @param city
-     * @param number
+     * Constructor for creating a User object.
+     * @param id Id of the user.
+     * @param firstname First name of the user.
+     * @param lastname Last name of the user.
+     * @param username Username of the user.
+     * @param password Password of the user.
+     * @param city City of the user.
+     * @param number Phone number of the user.
      */
     public  User(int id,String firstname,String lastname,String username,String password,String city,String number)
     {
@@ -42,13 +46,14 @@ public  class User implements Serializable
     }
     
     /**
-     *
-     * @param firstname
-     * @param lastname
-     * @param username
-     * @param password
-     * @param city
-     * @param number
+     * Constructor for creating a user
+     * object without the user_id attribute.
+     * @param firstname First name of the user.
+     * @param lastname Last name of the user.
+     * @param username Username of the user.
+     * @param password Password of the user.
+     * @param city City of the user.
+     * @param number Phone number of the user.
      */
     public  User(String firstname,String lastname,String username,String password,String city,String number)
     {
@@ -62,15 +67,16 @@ public  class User implements Serializable
     }
 
     /**
-     *
-     * @return
+     * Getter  user's personal 
+     * statement.
+     * @return <b>String</b> containing user's details.
      */
     public String getPersonal_details() {
         return personal_details;
     }
 
     /**
-     *
+     * Setter for user personal statement.
      * @param personal_details
      */
     public void setPersonal_details(String personal_details) {
@@ -86,56 +92,56 @@ public  class User implements Serializable
     }
 
     /**
-     *
-     * @return
+     * Getter for user's id.
+     * @return <b>int</b> containing the id of the user.
      */
     public int getId() {
         return id;
     }
 
     /**
-     *
-     * @return
+     * Getter of user's First name.
+     * @return <b>String</b> containing user's First name.
      */
     public String getFirstname() {
         return firstname;
     }
 
     /**
-     *
-     * @return
+     * Getter of user's Last name.
+     * @return <b>String</b> containing user's Last name.
      */
     public String getLastname() {
         return lastname;
     }
 
     /**
-     *
-     * @return
+     * Getter of user's Username.
+     * @return <b>String</b> containing user's Username.
      */
     public String getUsername() {
         return username;
     }
 
     /**
-     *
-     * @return
+     * Getter of user's password.
+     * @return <b>String</b> containing user's password.
      */
     public String getPassword() {
         return password;
     }
 
     /**
-     *
-     * @return
+     * Getter of user's City.
+     * @return <b>String</b> containing user's City.
      */
     public String getCity() {
         return city;
     }
 
     /**
-     *
-     * @return
+     * Getter of user's phone number.
+     * @return <b>String</b> containing user's phone number.
      */
     public String getNumber() {
         return number;

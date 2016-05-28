@@ -6,7 +6,10 @@
 package marketsimulator.Model;
 
 /**
- *
+ * Class describing a property(house) in the
+ * application . Contains methods for creating a
+ * Property object also for getting and setting 
+ * values to its objects.
  * @author SoRa
  */
 public class Property 
