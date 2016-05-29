@@ -15,7 +15,9 @@ import marketsimulator.Model.Property;
 import marketsimulator.Model.User;
 
 /**
- *
+ * View for deciding whether the seller 
+ * wants to sell his property to this user
+ * or not.
  * @author SoRa
  */
 public class UserDetailedInformation extends javax.swing.JFrame {
@@ -26,9 +28,17 @@ public class UserDetailedInformation extends javax.swing.JFrame {
     private User user;
     private String property_id;
     private JFrame frame;
-    public UserDetailedInformation(User user,String property_id,JFrame frame) {
+    
+    
+    public UserDetailedInformation(User user,String property_id,JFrame frame) 
+    {
         initComponents();
         new setIconController().setIcon(this);
+        
+        // Getting the seller's information
+        // along with the property to decide
+        // whether to sell it or decline
+        // the user.
         this.user = user;
         this.property_id = property_id;
         this.frame = frame;
@@ -187,8 +197,11 @@ public class UserDetailedInformation extends javax.swing.JFrame {
         InterestController interest_controller = new InterestController();
         PropertyController property_controller = new PropertyController();
         
+        // Remove the property from the on sale catalog.
+        // and make the appropriate changes to the database.
         if(property_controller.removePropertyFromSale(property_id))
         {
+            
             if(interest_controller.acceptInterest(property_id,String.valueOf(user.getId())))
             {
                 interest_controller.DeclineAllOtherUsers(property_id, String.valueOf(user.getId()));
@@ -201,13 +214,22 @@ public class UserDetailedInformation extends javax.swing.JFrame {
 
     private void btnDeclineInterestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeclineInterestActionPerformed
        InterestController controller = new InterestController();
+       
+       // Decline the user , make the appropriate changes to the 
+       // database.
        if(controller.declineInterest(property_id, String.valueOf(user.getId())))
        {
            JOptionPane.showMessageDialog(this, "Action done");
            this.dispose();
        }
     }//GEN-LAST:event_btnDeclineInterestActionPerformed
-
+    
+    
+   /** 
+    * Set up the text boxes of
+    * the view with informations
+    * about the property.
+    */
    private void init() 
    {
        labelFirstName.setText(user.getFirstname());

@@ -6,11 +6,7 @@
 package marketsimulator.View;
 
 import java.util.ArrayList;
-import java.util.Vector;
-import javax.swing.DefaultCellEditor;
-import javax.swing.DefaultListModel;
 import javax.swing.JCheckBox;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import marketsimulator.Controller.InterestController;
 import marketsimulator.Controller.UserController;
@@ -21,14 +17,12 @@ import Utilities.btnSeeUsersRenderer;
 import Utilities.PropertiesThatImInterestedTableModel;
 import Utilities.btnImageEditor;
 import Utilities.btnImageRenderer;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import marketsimulator.Controller.PropertyController;
 import marketsimulator.Controller.setIconController;
 
 /**
- *
+ * View for controlling your properties on sale and also
+ * the properties you are interested into.
  * @author SoRa
  */
 public class myHistoryView extends javax.swing.JFrame {
@@ -150,32 +144,32 @@ public class myHistoryView extends javax.swing.JFrame {
      {
        InterestController controller = new InterestController();
        PropertyController prop_controller = new PropertyController();
+       
+       // Lists containing my properties and my interested properties.
        ArrayList<Property> propertiesImInterestedIn = new ArrayList<Property>();
        ArrayList<Property> myListingsArray =  new ArrayList<Property>();
-       
        propertiesImInterestedIn = controller.getMyInterests(String.valueOf(new UserController().getLoggedUser().getId()));
        myListingsArray = controller.getMyListings(String.valueOf(new UserController().getLoggedUser().getId()));
        
-       
+       // Custom table models.
        MyListingsTableModel myListingsModel = new MyListingsTableModel(myListingsArray);
        PropertiesThatImInterestedTableModel propertiesImInterestedInModel = new PropertiesThatImInterestedTableModel(propertiesImInterestedIn);
        
-       
-       tableMyListings.setModel(myListingsModel);
-       
-       
-       
+       //Setting the custom table models.
+       tableMyListings.setModel(myListingsModel); 
        tableMyInterests.setModel(propertiesImInterestedInModel);
        
+       // Getting the table column of specific columns.
        TableColumn tableSeeUsers = tableMyListings.getColumnModel().getColumn(6);
        TableColumn tableImage1 = tableMyListings.getColumnModel().getColumn(5);
        TableColumn tableImage2 = tableMyInterests.getColumnModel().getColumn(5);
        
        
-       
+       // Setting custom cell renderer for "See Users" button.
        tableSeeUsers.setCellRenderer(new btnSeeUsersRenderer());
        tableSeeUsers.setCellEditor(new btnSeeUsersEditor(new JCheckBox()));
        
+       // Setting custom cell renderer for "See Image" button.
        tableImage1.setCellRenderer(new btnImageRenderer());
        tableImage1.setCellEditor(new btnImageEditor(new JCheckBox()));
        tableImage2.setCellRenderer(new btnImageRenderer());

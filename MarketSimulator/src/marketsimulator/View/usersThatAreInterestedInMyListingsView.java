@@ -14,7 +14,8 @@ import marketsimulator.Controller.setIconController;
 import marketsimulator.Model.User;
 
 /**
- *
+ * View for checking the user's that
+ * are interested in your property.
  * @author SoRa
  */
 public class usersThatAreInterestedInMyListingsView extends javax.swing.JFrame {
@@ -22,6 +23,8 @@ public class usersThatAreInterestedInMyListingsView extends javax.swing.JFrame {
     
     private ArrayList<User> users;
     private String prop_id;
+    
+    
     public usersThatAreInterestedInMyListingsView(String prop_id) {
         initComponents();
         this.prop_id = prop_id;
@@ -80,11 +83,13 @@ public class usersThatAreInterestedInMyListingsView extends javax.swing.JFrame {
     
     private void init() {
         users = new ArrayList<User>();
+        //Get the users.
         users = (new InterestController().getUsersThatAreInterestedInMyListings(prop_id));
         
-        
+        // Debug info here.
         System.out.println(users);
         
+        //Default list model representing the users.
         DefaultListModel model = new DefaultListModel();
         
         for(User user : users)
@@ -98,10 +103,13 @@ public class usersThatAreInterestedInMyListingsView extends javax.swing.JFrame {
     
     private void usersTharAreInterestedJListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usersTharAreInterestedJListMouseClicked
        User user = (User) usersTharAreInterestedJList.getSelectedValue();
+       // Open new window for deciding whether to sell or not the property to this user.
        new UserDetailedInformation(user,prop_id,this).setVisible(true);
     }//GEN-LAST:event_usersTharAreInterestedJListMouseClicked
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // If no user is interested in this property show
+        // appropriate message.
         if(users.isEmpty())
         {
             JOptionPane.showMessageDialog(this,"No users are interested in this property");

@@ -12,7 +12,7 @@ import marketsimulator.Controller.setIconController;
 import marketsimulator.Model.User;
 
 /**
- *
+ * View for registering a new user.
  * @author SoRa
  */
 public class registerView extends javax.swing.JFrame {
@@ -160,6 +160,8 @@ public class registerView extends javax.swing.JFrame {
         // TODO add your handling code here:
         UserController controller = new UserController();
         ValidationController vd_controller = new ValidationController();
+        
+        //Get data from text boxes.
         String firstName = txtFirstName.getText();
         String lastName  = txtLastName.getText();
         String username  = txtUsername.getText();
@@ -171,6 +173,7 @@ public class registerView extends javax.swing.JFrame {
         // Validate Data
         if(vd_controller.validateRegisterInput(this,user.getFirstname(),user.getLastname(),user.getNumber(),user.getPassword(),user.getUsername(),user.getCity()))
         {
+            //Register the user calling userRegister method.
             if(controller.userRegister(user))
             {
                 JOptionPane.showMessageDialog(this, "You successfully Registered");

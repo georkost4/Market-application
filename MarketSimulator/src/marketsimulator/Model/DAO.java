@@ -18,7 +18,7 @@ public interface DAO
 
     /**
      * Gets a link to database .
-     * @return <b>Connection<b> link to the database. 
+     * @return <b>Connection</b> link to the database. 
      * @throws SQLException
      */
     public Connection getConnection() throws SQLException;

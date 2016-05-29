@@ -10,7 +10,8 @@ import javax.swing.ImageIcon;
 import marketsimulator.Controller.setIconController;
 
 /**
- *
+ * View for watching a property image 
+ * in a different window.
  * @author SoRa
  */
 public class propertyImageView extends javax.swing.JFrame {

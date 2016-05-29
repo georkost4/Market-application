@@ -25,7 +25,8 @@ import marketsimulator.Model.Property;
 import marketsimulator.Model.User;
 
 /**
- *
+ * View for adding a new
+ * property on sale.
  * @author SoRa
  */
 public class AddNewPropertyView extends javax.swing.JFrame {
@@ -165,6 +166,8 @@ public class AddNewPropertyView extends javax.swing.JFrame {
     private void btnSelectImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectImageActionPerformed
         // TODO add your handling code here:
         
+        // Open window dialog for choosing
+        // the image of the property.
         final JFileChooser fc = new JFileChooser();
         FileFilter imageFilter = new FileNameExtensionFilter(
         "Image files", ImageIO.getReaderFileSuffixes());
@@ -174,7 +177,7 @@ public class AddNewPropertyView extends javax.swing.JFrame {
    
         int returnVal = fc.showDialog(this,"Select");
         System.out.println(String.valueOf(returnVal));
-        if(returnVal == 0)
+        if(returnVal == CHOSE_OK)
         {
            
                 File file = fc.getSelectedFile();
@@ -184,12 +187,13 @@ public class AddNewPropertyView extends javax.swing.JFrame {
                 
                 try 
                 {
+                    // Save the image to the local server directory.
                     File marketDir = new File("C:\\xampp\\htdocs\\MarketApp");
                     marketDir.mkdir();
                     File ImageFile =  new File("C:\\xampp\\htdocs\\MarketApp\\"+photo_name);
                     
                     BufferedImage img = new BufferedImage(176, 146, BufferedImage.TYPE_INT_RGB);
-                    img.createGraphics().drawImage(ImageIO.read(new File(txtImageSelected.getText())).getScaledInstance(176, 146, Image.SCALE_SMOOTH),0,0,null);
+                    img.createGraphics().drawImage(ImageIO.read(new File(txtImageSelected.getText())).getScaledInstance(176, 146, Image.SCALE_SMOOTH), CHOSE_OK, CHOSE_OK,null);
                     ImageIO.write(img, "jpg",ImageFile);
                     txtImageSelected.setText(ImageFile.getAbsolutePath());
                 }
@@ -197,13 +201,16 @@ public class AddNewPropertyView extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_btnSelectImageActionPerformed
+    
 
     private void btnDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoneActionPerformed
 
         PropertyController controller = new PropertyController();
         UserController user_controller = new UserController();
         ValidationController vd_controller = new ValidationController();
-       
+        
+        
+        // Get the values from the text boxes
         String seller_id = String.valueOf( user_controller.getLoggedUser().getId() );
         String value = txtValue.getText();
         String image = txtImageSelected.getText().replace("\\", "/");
@@ -211,9 +218,10 @@ public class AddNewPropertyView extends javax.swing.JFrame {
         String address = txtAddress.getText();
         
         Date date = new Date();
-       
+        
         Property temp = new Property("0",seller_id,"1",value,city,address,date.toString(),image);
         
+        // Insert the new proeprty to the database.
         if(vd_controller.validateAddNewPropertyInput(this,temp.getValue(),temp.getCity(),temp.getAddress()))
         {
             if(controller.addProperty(temp))
@@ -231,7 +239,7 @@ public class AddNewPropertyView extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
 
-   
+    private static final int CHOSE_OK = 0;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDone;

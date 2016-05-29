@@ -14,7 +14,8 @@ import marketsimulator.Controller.setIconController;
 import marketsimulator.Model.Property;
 
 /**
- *
+ * View containing information
+ * about a specific property(house) on sale.
  * @author SoRa
  */
 public class propertyDetailsView extends javax.swing.JFrame {
@@ -163,6 +164,9 @@ public class propertyDetailsView extends javax.swing.JFrame {
         PropertyController property_controller = new PropertyController();
         if(property_controller.getOnSaleState(property.getProperty_id()) == 1) // if the property is still on sale proceed
         {
+            // Make the appropriate changes in the database
+            // declare interest about this property from the 
+            // logged in user.
             if(controller.makeInterest(property.getProperty_id(),String.valueOf(user_controller.getLoggedUser().getId())))
             {
                 JOptionPane.showMessageDialog(this, "You just declared your interest");
@@ -178,6 +182,8 @@ public class propertyDetailsView extends javax.swing.JFrame {
 
    private void init() 
     {
+        // Setting up the text boxes and the image
+        // of the property.
         icon.setIcon( new ImageIcon(property.getImage_location()));
         city.setText( property.getCity());
         address.setText( property.getAddress());

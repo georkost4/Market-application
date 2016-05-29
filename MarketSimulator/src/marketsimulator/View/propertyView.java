@@ -22,7 +22,10 @@ import marketsimulator.Controller.setIconController;
 import marketsimulator.Model.Property;
 
 /**
- *
+ * View containing the catalog
+ * of the properties that are on sale .
+ * Also contains options for editing user profile and
+ * checking the history of transactions/interests you made.
  * @author SoRa
  */
 public class propertyView extends javax.swing.JFrame {
@@ -141,6 +144,7 @@ public class propertyView extends javax.swing.JFrame {
             }
         });
 
+        city.setSelected(true);
         city.setText("city");
 
         btnMyProfile.setText("MyProfile");
@@ -239,7 +243,7 @@ public class propertyView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddNewPropertyActionPerformed
 
     private void propertyListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_propertyListMouseClicked
-        // TODO add your handling code here:
+        // Open new window with this property details.
          Property prop = (Property) propertyList.getSelectedValue() ;
          new propertyDetailsView(prop).setVisible(true);
          this.setVisible(false);
@@ -251,7 +255,7 @@ public class propertyView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHistoryActionPerformed
 
     private void btnEditPersonalInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditPersonalInfoActionPerformed
-//       
+
         new personalInfoView(true).setVisible(true);
     }//GEN-LAST:event_btnEditPersonalInfoActionPerformed
 
@@ -262,6 +266,10 @@ public class propertyView extends javax.swing.JFrame {
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         UserController controller = new UserController();
         
+        // If the user logged in with "Remember me" option
+        // delete also the remember.ser file alongside
+        // with the user.ser file.
+        // Else just log out and return to login form.
         if(controller.checkIfRememberFileExists())
         {
              File file = new File(System.getProperty("user.home")+"\\remember.ser");
@@ -291,7 +299,8 @@ public class propertyView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void search_ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_search_ButtonMouseClicked
-        
+        // Search for a property
+        // matching these criteria.
         flag = false;
         String searchText = txtSearch.getText().trim();
         String selectedRadioBtn = "";
@@ -320,7 +329,7 @@ public class propertyView extends javax.swing.JFrame {
     }//GEN-LAST:event_search_ButtonMouseClicked
 
     private void clear_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clear_ButtonActionPerformed
-        
+        // Clear the search criteria
         flag = true;
         PropertyController controller = new PropertyController();
         DefaultListModel model = new DefaultListModel();
@@ -353,6 +362,7 @@ public class propertyView extends javax.swing.JFrame {
    {                   
        UserController user_controller = new UserController();
        //check if personal info has been saved in logged user
+       // and decide which button to show "Add personal info" or "Edit personal info" .
        if(user_controller.getLoggedUser().getPersonal_details() == null )
        {
            btnAddPersonalInfo.setVisible(true);
@@ -366,6 +376,10 @@ public class propertyView extends javax.swing.JFrame {
        
        labelUser.setText(user_controller.getLoggedUser().getFirstname() + " \n " + user_controller.getLoggedUser().getLastname());
        
+       
+       // Get a list with the properties on sale
+       // from the database
+       // and load it to the model.
        PropertyController controller = new PropertyController();
        DefaultListModel model = new DefaultListModel();
        ArrayList<Property> properties = new ArrayList<Property>();
@@ -385,19 +399,22 @@ public class propertyView extends javax.swing.JFrame {
    }
    
     private void database_polling() {
-         
+       // Create a runnable
+       // to check for updates
+       // every 3 seconds in the databse
+       // and the update the model(catalog)
+       // of the properties on sale.
        
-         Runnable r = new Runnable() {
-
-           @Override
-           public void run() {
-              if(flag)
-              {
-                  init();
-                  System.out.println("Database Polling");
-              }
-           }
-         };
+       Runnable r = new Runnable() {
+          @Override
+         public void run() {
+            if(flag)
+            {
+                init();
+                System.out.println("Database Polling");
+            }
+         }
+       };
        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
        scheduler.scheduleAtFixedRate(r, 3, 3, TimeUnit.SECONDS);
        

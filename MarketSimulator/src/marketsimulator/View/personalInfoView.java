@@ -10,7 +10,8 @@ import marketsimulator.Controller.UserController;
 import marketsimulator.Controller.setIconController;
 
 /**
- *
+ * View for setting the user's
+ * personal statement(informations about himself).
  * @author SoRa
  */
 public class personalInfoView extends javax.swing.JFrame {

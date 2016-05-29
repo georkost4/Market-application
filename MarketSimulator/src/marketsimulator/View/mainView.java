@@ -5,26 +5,15 @@
  */
 package marketsimulator.View;
 
-import java.awt.Image;
 import java.awt.event.KeyEvent;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 import marketsimulator.Controller.UserController;
 import marketsimulator.Controller.setIconController;
 import marketsimulator.Model.User;
 
 /**
- *
+ * The login form for entering
+ * in the application.
  * @author SoRa
  */
 public class mainView extends javax.swing.JFrame {
@@ -157,14 +146,21 @@ public class mainView extends javax.swing.JFrame {
         
         if(checkBoxRememberMe.getState())
         {
+            // Set remember me state.
             controller.setRememberMe();
             
+            // Check if the credentials are correct.
             if(controller.userLogin(username,password))
             {
+                // Save this user to a file locally
+                // grab any personal detail if he has
+                // any
                 JOptionPane.showMessageDialog(this, "Logged in");
                 User user = controller.getUser(username);
                 if(controller.getUserPersonalInfo(String.valueOf(user.getId())) != null ) user.setPersonal_details(controller.getUserPersonalInfo(String.valueOf(user.getId())));
                 controller.setLoggedUser(user);
+                
+                //Show property catalog.
                 new propertyView().setVisible(true);
                 this.setVisible(false);
             }
@@ -173,10 +169,15 @@ public class mainView extends javax.swing.JFrame {
         {
             if(controller.userLogin(username,password))
             {
+                // Save this user to a file locally
+                // grab any personal detail if he has
+                // any
                 JOptionPane.showMessageDialog(this, "Logged in");
                 User user = controller.getUser(username);
                 if(controller.getUserPersonalInfo(String.valueOf(user.getId())) != null ) user.setPersonal_details(controller.getUserPersonalInfo(String.valueOf(user.getId())));
                 controller.setLoggedUser(user);
+                
+                // Show property catalog
                 new propertyView().setVisible(true);
                 this.setVisible(false);
             }
