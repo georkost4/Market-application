@@ -5,6 +5,7 @@
  */
 package marketsimulator.Controller;
 
+import static junit.framework.Assert.assertEquals;
 import org.junit.Test;
 
 /**

@@ -2,17 +2,16 @@
 package marketsimulator;
 
 import marketsimulator.View.mainView;
-import marketsimulator.Model.User;
-import java.util.ArrayList;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import marketsimulator.Controller.UserController;
-import marketsimulator.View.AddNewPropertyView;
+import marketsimulator.Model.DatabaseController;
 import marketsimulator.View.propertyView;
 
 
 /**
- *
+ * Main class used for starting
+ * the application
  * @author SoRa
  */
 
@@ -36,9 +35,26 @@ public class MarketSimulator
        catch (InstantiationException e) {}
        catch (IllegalAccessException e) {}
        
-       // If the user credentials not found start over , else show the main view,
-       if(new UserController().checkIfLoggedIn()) new propertyView().setVisible(true);
-       else new mainView().setVisible(true);
+       
+       DatabaseController controller = new DatabaseController();
+       if(controller.checkIfDatabaseExists())
+       {
+           // If the user credentials not found start over , else show the main view,
+           if(new UserController().checkIfLoggedIn()) new propertyView().setVisible(true);
+           else new mainView().setVisible(true);
+       }
+       else
+       {
+           System.out.print("Database and tables created.");
+           
+           //Create the db and the tables.
+           controller.createDatabase();
+           controller.createTables();
+           // Show the login form.
+           new mainView().setVisible(true);
+       }
+       
+       
     }
 
 
