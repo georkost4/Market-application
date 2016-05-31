@@ -229,11 +229,13 @@ public class PropertyController  implements PropertyInterface  {
 
         try {
            
-            
+            // Get the bytes from the file
+            // and encode it to base64 string.
             byte [] arr = Files.readAllBytes(file.toPath());
-            
             String base64 = Base64.getEncoder().encodeToString(arr);
-         
+            
+            // Open a connection to the server
+            // and send it the data
             URL url = new URL(DatabaseController.SERVER_URL);
             URLConnection connection = url.openConnection();
             connection.setDoOutput(true);
@@ -246,6 +248,8 @@ public class PropertyController  implements PropertyInterface  {
             out.write(toSend);
             out.close();
             
+            // Receive the response from the server
+            // and print it to the console
             BufferedReader in = new BufferedReader( new InputStreamReader( connection.getInputStream()));
             String response;
             while ((response = in.readLine()) != null) 

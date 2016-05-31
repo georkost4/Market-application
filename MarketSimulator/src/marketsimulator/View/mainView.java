@@ -164,6 +164,7 @@ public class mainView extends javax.swing.JFrame {
                 new propertyView().setVisible(true);
                 this.setVisible(false);
             }
+            else JOptionPane.showMessageDialog(this,"Wrong username and/or password","Error",JOptionPane.ERROR_MESSAGE);
         }
         else
         {
@@ -181,6 +182,7 @@ public class mainView extends javax.swing.JFrame {
                 new propertyView().setVisible(true);
                 this.setVisible(false);
             }
+             else JOptionPane.showMessageDialog(this,"Wrong username and/or password","Error",JOptionPane.ERROR_MESSAGE);
         }
         
        

@@ -50,21 +50,24 @@ public class UserController  implements UserInterface
            sql = "SELECT * FROM users where username = '" + given_username + "'";
            ResultSet rs = stmt.executeQuery(sql);
            
-           rs.next();
-            
-           int id  = rs.getInt("user_id");
-           String firstname  = rs.getString("firstname");
-           String lastname   = rs.getString("lastname");
-           String username   = rs.getString("username");
-           String password   = rs.getString("password");
-           String city       = rs.getString("city");
-           String number     = rs.getString("number");
+           while(rs.next())
+           {
+                int id  = rs.getInt("user_id");
+                String firstname  = rs.getString("firstname");
+                String lastname   = rs.getString("lastname");
+                String username   = rs.getString("username");
+                String password   = rs.getString("password");
+                String city       = rs.getString("city");
+                String number     = rs.getString("number");
 
-           tempUser = new User(id,firstname,lastname,username,password,city,number);
-           
+                tempUser = new User(id,firstname,lastname,username,password,city,number);
+                System.out.println("Here-1");
+           }
            rs.close();
            stmt.close();
            conn.close();
+           System.out.println("Here");
+           if(tempUser == null) System.out.println("true");
        } 
        catch (SQLException ex) {ex.printStackTrace(); return null;} 
        catch (ClassNotFoundException ex) {ex.printStackTrace(); return null; }
@@ -115,7 +118,8 @@ public class UserController  implements UserInterface
     @Override
     public boolean userLogin(String username, String password) 
     {
-       User tmpUser = getUser(username);
+       User tmpUser = null;
+       tmpUser = getUser(username);
        if(tmpUser == null) return false;
        if(tmpUser.getPassword().equals(password)) return true;
        return false;

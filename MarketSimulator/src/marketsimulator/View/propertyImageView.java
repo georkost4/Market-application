@@ -5,6 +5,12 @@
  */
 package marketsimulator.View;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import marketsimulator.Controller.setIconController;
@@ -57,7 +63,10 @@ public class propertyImageView extends javax.swing.JFrame {
 
     private void init()
     {
-       Icon icon = new ImageIcon(imageLoc);
+       BufferedImage img = null ;
+       try {  img = ImageIO.read(new URL(imageLoc)); } 
+       catch (IOException ex) { ex.printStackTrace(); }
+       Icon icon = new ImageIcon(img);
        jLabel1.setIcon(icon);
     }
 
