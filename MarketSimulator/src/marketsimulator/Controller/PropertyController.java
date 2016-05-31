@@ -5,14 +5,11 @@
  */
 package marketsimulator.Controller;
 
-import com.sun.org.apache.xml.internal.security.utils.Base64;
-import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -24,9 +21,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
+import java.util.Base64;
 import marketsimulator.Model.Property;
 
 /**
@@ -237,7 +232,7 @@ public class PropertyController  implements PropertyInterface  {
             
             byte [] arr = Files.readAllBytes(file.toPath());
             
-            String base64 = Base64.encode(arr);
+            String base64 = Base64.getEncoder().encodeToString(arr);
          
             URL url = new URL(DatabaseController.SERVER_URL);
             URLConnection connection = url.openConnection();
