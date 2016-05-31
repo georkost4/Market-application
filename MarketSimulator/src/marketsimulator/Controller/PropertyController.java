@@ -5,12 +5,28 @@
  */
 package marketsimulator.Controller;
 
+import com.sun.org.apache.xml.internal.security.utils.Base64;
+import java.awt.Image;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+import java.nio.file.Files;
 import marketsimulator.Model.DatabaseController;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import marketsimulator.Model.Property;
 
 /**
@@ -205,6 +221,45 @@ public class PropertyController  implements PropertyInterface  {
      
         if(returnVal == 1) return true;
         return false;
+    }
+    
+    
+     /**
+     * Method for uploading the image to the server.
+     * @param File The file containing the image of the property.
+     * @return <b>true</b> for success.
+     */
+    public void uploadImageToServer(File file) 
+    {
+
+        try {
+           
+            
+            byte [] arr = Files.readAllBytes(file.toPath());
+            
+            String base64 = Base64.encode(arr);
+         
+            URL url = new URL(DatabaseController.SERVER_URL);
+            URLConnection connection = url.openConnection();
+            connection.setDoOutput(true);
+            
+            OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
+            String toSend = URLEncoder.encode("image","UTF-8") + "=" + URLEncoder.encode(base64,"UTF-8");
+            toSend += "&" +URLEncoder.encode("name","UTF-8") + "=" + URLEncoder.encode(file.getName(),"UTF-8");
+            toSend += "&" + URLEncoder.encode("id","UTF-8") + "=" + URLEncoder.encode(String.valueOf((new UserController().getLoggedUser().getId())),"UTF-8");
+            
+            out.write(toSend);
+            out.close();
+            
+            BufferedReader in = new BufferedReader( new InputStreamReader( connection.getInputStream()));
+            String response;
+            while ((response = in.readLine()) != null) 
+            {
+                System.out.println(response);
+            }
+            in.close();
+        } 
+        catch (MalformedURLException ex) {ex.printStackTrace();} catch (IOException ex) { ex.printStackTrace();}
     }
 
 }

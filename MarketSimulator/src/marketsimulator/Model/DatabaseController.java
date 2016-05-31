@@ -20,8 +20,10 @@ import java.util.logging.Logger;
 public class DatabaseController implements DAO
 {
    private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-   private static final String DB_URL = "jdbc:mysql://localhost:3306/MarketDB";
-   private static final String USER = "root";
+   private static final String DB_URL = "jdbc:mysql://192.168.1.2/MarketDB";
+   public static final String SERVER_URL = "http://192.168.1.2/image_handler.php";
+   public static final String SERVER_IMAGE_LOCATION = "http://192.168.1.2/";
+   private static final String USER = "guest";
    private static final String PASS = "";
    
    private static String TABLE_USERS = "users" ;

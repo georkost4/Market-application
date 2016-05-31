@@ -6,6 +6,13 @@
 package Utilities;
 
 import java.awt.Component;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.Icon;
@@ -27,7 +34,17 @@ public class propertyOnSale_JListCellRenderer extends DefaultListCellRenderer im
         Property prop = (Property) value;
         setText(prop.getCity() + " " + prop.getAddress() + "  " + prop.getValue()+"$");
         
-        Icon icon = new ImageIcon(prop.getImage_location());
+        URL url;
+        BufferedImage img = null ;
+        try 
+        { 
+            url = new URL(prop.getImage_location()) ;
+            img = ImageIO.read(url);
+        } 
+        catch (MalformedURLException ex) {ex.printStackTrace();   } 
+        catch (IOException ex) {ex.printStackTrace();  }
+        
+        ImageIcon icon = new ImageIcon(img);
         
         setIcon(icon);
         

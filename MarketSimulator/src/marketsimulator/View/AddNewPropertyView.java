@@ -21,6 +21,7 @@ import marketsimulator.Controller.PropertyController;
 import marketsimulator.Controller.UserController;
 import marketsimulator.Controller.ValidationController;
 import marketsimulator.Controller.setIconController;
+import marketsimulator.Model.DatabaseController;
 import marketsimulator.Model.Property;
 import marketsimulator.Model.User;
 
@@ -184,17 +185,18 @@ public class AddNewPropertyView extends javax.swing.JFrame {
                 txtImageSelected.setText(file.getAbsolutePath());
                 
                 String photo_name = file.getName();
-                
+                PropertyController controller = new PropertyController();
                 try 
                 {
                     // Save the image to the local server directory.
-                    File marketDir = new File("C:\\xampp\\htdocs\\MarketApp");
+                    File marketDir = new File("C:\\MarketApp");
                     marketDir.mkdir();
-                    File ImageFile =  new File("C:\\xampp\\htdocs\\MarketApp\\"+photo_name);
-                    
+                    File ImageFile =  new File("C:\\MarketApp\\"+photo_name);
+
                     BufferedImage img = new BufferedImage(176, 146, BufferedImage.TYPE_INT_RGB);
                     img.createGraphics().drawImage(ImageIO.read(new File(txtImageSelected.getText())).getScaledInstance(176, 146, Image.SCALE_SMOOTH), CHOSE_OK, CHOSE_OK,null);
                     ImageIO.write(img, "jpg",ImageFile);
+                    controller.uploadImageToServer(ImageFile);
                     txtImageSelected.setText(ImageFile.getAbsolutePath());
                 }
                 catch (IOException ex) {ex.printStackTrace();  }
@@ -213,13 +215,15 @@ public class AddNewPropertyView extends javax.swing.JFrame {
         // Get the values from the text boxes
         String seller_id = String.valueOf( user_controller.getLoggedUser().getId() );
         String value = txtValue.getText();
-        String image = txtImageSelected.getText().replace("\\", "/");
+        String[] image = txtImageSelected.getText().split("\\\\");
+        String name = image[image.length-1];
         String city  = txtCity.getText();
         String address = txtAddress.getText();
         
         Date date = new Date();
         
-        Property temp = new Property("0",seller_id,"1",value,city,address,date.toString(),image);
+        Property temp = new Property("0",seller_id,"1",value,city,address,date.toString()
+                ,DatabaseController.SERVER_IMAGE_LOCATION + String.valueOf(user_controller.getLoggedUser().getId()) + name);
         
         // Insert the new proeprty to the database.
         if(vd_controller.validateAddNewPropertyInput(this,temp.getValue(),temp.getCity(),temp.getAddress()))
