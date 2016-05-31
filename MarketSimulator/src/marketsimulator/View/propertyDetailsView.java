@@ -5,6 +5,13 @@
  */
 package marketsimulator.View;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import marketsimulator.Controller.InterestController;
@@ -182,22 +189,28 @@ public class propertyDetailsView extends javax.swing.JFrame {
 
    private void init() 
     {
-        // Setting up the text boxes and the image
-        // of the property.
-        icon.setIcon( new ImageIcon(property.getImage_location()));
-        city.setText( property.getCity());
-        address.setText( property.getAddress());
-        value.setText(property.getValue()+"$");
-        
-        // Check if already interested before giving other option . 
-        InterestController interest_controller = new InterestController();
-        boolean flag = interest_controller.checkIfAlreadyInterested(property.getProperty_id());
-        if(flag)
-        {
-            btnInterest.setVisible(false);
-            errorLabel.setEnabled(true);
-            errorLabel.setText("Already interested in this property.");
-        }
+        try {
+            // Setting up the text boxes and the image
+            // of the property.
+            URL url = new URL(property.getImage_location());
+            BufferedImage img = ImageIO.read(url);
+            icon.setIcon( new ImageIcon(img));
+            city.setText( property.getCity());
+            address.setText( property.getAddress());
+            value.setText(property.getValue()+"$");
+            
+            // Check if already interested before giving other option .
+            InterestController interest_controller = new InterestController();
+            boolean flag = interest_controller.checkIfAlreadyInterested(property.getProperty_id());
+            if(flag)
+            {
+                btnInterest.setVisible(false);
+                errorLabel.setEnabled(true);
+                errorLabel.setText("Already interested in this property.");
+            }
+        } 
+        catch (MalformedURLException ex) {ex.printStackTrace();} 
+        catch (IOException ex){ex.printStackTrace();  }
         
     }
   

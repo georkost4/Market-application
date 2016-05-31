@@ -33,13 +33,13 @@ public class propertyOnSale_JListCellRenderer extends DefaultListCellRenderer im
     public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
         Property prop = (Property) value;
         setText(prop.getCity() + " " + prop.getAddress() + "  " + prop.getValue()+"$");
-        
+   
         URL url;
         BufferedImage img = null ;
         try 
         { 
             url = new URL(prop.getImage_location()) ;
-            img = ImageIO.read(url);
+            img = ImageIO.read(url.openStream());
         } 
         catch (MalformedURLException ex) {ex.printStackTrace();   } 
         catch (IOException ex) {ex.printStackTrace();  }
