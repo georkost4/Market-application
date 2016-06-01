@@ -46,6 +46,7 @@ public class mainView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login Form");
+        setResizable(false);
 
         jLabel1.setText("Username:");
 
@@ -72,10 +73,9 @@ public class mainView extends javax.swing.JFrame {
         });
 
         jLabel3.setFont(new java.awt.Font("Showcard Gothic", 2, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Welcome to marketSim");
 
-        checkBoxRememberMe.setLabel("Remember me");
+        checkBoxRememberMe.setLabel("Keep logged in");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -104,7 +104,7 @@ public class mainView extends javax.swing.JFrame {
                                     .addComponent(jLabel2)
                                     .addGap(18, 18, 18)
                                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(btnRegister)
                 .addGap(44, 44, 44))
         );

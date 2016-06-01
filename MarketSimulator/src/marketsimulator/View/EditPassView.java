@@ -9,15 +9,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import marketsimulator.Controller.UserController;
-import marketsimulator.Model.DatabaseController;
+import marketsimulator.Controller.DatabaseController;
+import marketsimulator.Controller.setIconController;
 
 /**
- *
- * @author Student
+ * View for editing user's password.
+ * @author Nikos
  */
 public class EditPassView extends javax.swing.JFrame {
 
@@ -26,6 +25,7 @@ public class EditPassView extends javax.swing.JFrame {
      */
     public EditPassView() {
         initComponents();
+        new setIconController().setIcon(this);
     }
 
     /**
@@ -45,6 +45,7 @@ public class EditPassView extends javax.swing.JFrame {
         btnEdit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setText("Enter Current Password:");
 
@@ -103,9 +104,16 @@ public class EditPassView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Compares typed oldPassword  with current
+     * password.If it's not the same,it shows a message.
+     * If it's the same,it changes the password with the
+     * typed newPassword and shows message that edit is done.
+     */
+    
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         
-         String oldPassword = oldPass.getText();
+        String oldPassword = oldPass.getText();
         String newPassword  = newPass.getText();
         
         DatabaseController dbcontroller = new DatabaseController();
@@ -142,40 +150,6 @@ public class EditPassView extends javax.swing.JFrame {
         new EditView().setVisible(true);
     }//GEN-LAST:event_btnBackActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EditPassView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EditPassView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EditPassView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EditPassView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new EditPassView().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;

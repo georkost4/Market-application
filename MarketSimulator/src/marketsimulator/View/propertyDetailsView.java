@@ -60,6 +60,7 @@ public class propertyDetailsView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Details of the property");
+        setResizable(false);
 
         city.setText("jLabel1");
 

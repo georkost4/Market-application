@@ -21,7 +21,7 @@ import marketsimulator.Controller.PropertyController;
 import marketsimulator.Controller.UserController;
 import marketsimulator.Controller.ValidationController;
 import marketsimulator.Controller.setIconController;
-import marketsimulator.Model.DatabaseController;
+import marketsimulator.Controller.DatabaseController;
 import marketsimulator.Model.Property;
 import marketsimulator.Model.User;
 
@@ -63,6 +63,7 @@ public class AddNewPropertyView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Add new property for sale");
+        setResizable(false);
 
         jLabel4.setText("Value");
 

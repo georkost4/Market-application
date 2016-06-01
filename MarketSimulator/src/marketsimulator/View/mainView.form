@@ -4,6 +4,7 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="title" type="java.lang.String" value="Login Form"/>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -55,7 +56,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="34" max="32767" attributes="0"/>
+              <EmptySpace pref="35" max="32767" attributes="0"/>
               <Component id="btnRegister" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
           </Group>
@@ -132,7 +133,7 @@
     </Component>
     <Component class="java.awt.Checkbox" name="checkBoxRememberMe">
       <Properties>
-        <Property name="label" type="java.lang.String" value="Remember me"/>
+        <Property name="label" type="java.lang.String" value="Keep logged in"/>
       </Properties>
     </Component>
   </SubComponents>

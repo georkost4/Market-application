@@ -5,20 +5,19 @@
  */
 package marketsimulator.View;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import marketsimulator.Controller.EditController;
 import marketsimulator.Controller.UserController;
-import marketsimulator.Model.DatabaseController;
+import marketsimulator.Controller.setIconController;
 import marketsimulator.Model.User;
 
 /**
- *
+ * View for editing user's personal info.
+ * Also contains option for editing user's
+ * password.
  * @author Nikos
  */
 public class EditView extends javax.swing.JFrame {
@@ -28,6 +27,7 @@ public class EditView extends javax.swing.JFrame {
      */
     public EditView() {
         initComponents();
+         new setIconController().setIcon(this);
         init();
     }
 
@@ -53,6 +53,7 @@ public class EditView extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setText("Firstname");
 
@@ -157,6 +158,12 @@ public class EditView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnBackActionPerformed
 
+    /**
+     * Takes the new typed data and saves them 
+     * with help from EditController.Then it shows
+     * a message that the edit was done.
+     */
+    
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
        
         String firstName = txtFirstName.getText();
@@ -182,55 +189,27 @@ public class EditView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-         this.setVisible(false); 
+        this.setVisible(false); 
         new EditPassView().setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
-  public void init()
-   {   
-       
-   UserController user_controller = new UserController();
-   
-   
-   txtFirstName.setText(user_controller.getLoggedUser().getFirstname());
-   txtLastName.setText(user_controller.getLoggedUser().getLastname());
-   txtCity.setText(user_controller.getLoggedUser().getCity());
-   txtPhone.setText(user_controller.getLoggedUser().getNumber());
-   
-   }
+    
     /**
-     * @param args the command line arguments
+     * Sets user's info in the textboxs to show
+     * current entries.
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EditView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EditView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EditView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EditView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new EditView().setVisible(true);
-            }
-        });
+    
+    public void init()
+    {   
+       
+    UserController user_controller = new UserController();
+   
+    txtFirstName.setText(user_controller.getLoggedUser().getFirstname());
+    txtLastName.setText(user_controller.getLoggedUser().getLastname());
+    txtCity.setText(user_controller.getLoggedUser().getCity());
+    txtPhone.setText(user_controller.getLoggedUser().getNumber());
+   
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;

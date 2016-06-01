@@ -15,7 +15,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.nio.file.Files;
-import marketsimulator.Model.DatabaseController;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

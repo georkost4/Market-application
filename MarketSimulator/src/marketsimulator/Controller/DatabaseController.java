@@ -3,14 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package marketsimulator.Model;
+package marketsimulator.Controller;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import marketsimulator.Model.DAO;
 
 /**
  * Controller for getting a connection
@@ -21,8 +20,15 @@ public class DatabaseController implements DAO
 {
    private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
    private static final String DB_URL = "jdbc:mysql://localhost/marketdb";
-   public static final String SERVER_URL = "http://192.168.1.2/image_handler.php";
-   public static final String SERVER_IMAGE_LOCATION = "http://192.168.1.2/";
+   
+   // use these constants and replace ip address to whatever the address is on the server.
+//   public static final String SERVER_URL = "http://192.168.1.2/image_handler.php"; 
+//   public static final String SERVER_IMAGE_LOCATION = "http://192.168.1.2/";
+   
+   // use these constants for localhost usage .
+   public static final String SERVER_URL = "http://localhost/image_handler.php"; 
+   public static final String SERVER_IMAGE_LOCATION = "http://localhost/";
+   
    private static final String USER = "root";
    private static final String PASS = "";
    
@@ -147,14 +153,14 @@ public class DatabaseController implements DAO
        try 
        {
            // Get a connection.
-           Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","");
+           Connection con = DriverManager.getConnection("jdbc:mysql://localhost/","root","");
            Class.forName("com.mysql.jdbc.Driver");
            
            Statement stm = con.createStatement();
            
            stm.executeUpdate(CREATE_DATABASE);
            
-           System.out.println("GG");
+           System.out.println("Database Created");
            
            
            
@@ -178,6 +184,7 @@ public class DatabaseController implements DAO
            Connection con = this.getConnection();
            this.setClass();
            
+           // Execute the queries.
            Statement stm = con.createStatement();
            
            stm.executeUpdate(CREATE_TABLE_BIDS);
@@ -196,7 +203,7 @@ public class DatabaseController implements DAO
            stm.executeUpdate(ALTER_TABLE_PERSONAL_INFO_2);
            
            
-           System.out.println("GG");
+           System.out.println("Queries executed without error.");
            
            
            
@@ -216,6 +223,7 @@ public class DatabaseController implements DAO
     public boolean checkIfDatabaseExists() {
        try 
        {
+           // Try to get a connection to the database.
            this.getConnection();
        } 
        catch (SQLException ex) 

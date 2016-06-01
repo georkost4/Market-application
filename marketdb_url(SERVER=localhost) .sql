@@ -14,12 +14,13 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Βάση δεδομένων: `marketdb`
 --
-
+create database marketdb;
+use marketdb;
 -- --------------------------------------------------------
 
 --
@@ -70,12 +71,12 @@ CREATE TABLE `onsale` (
 --
 
 INSERT INTO `onsale` (`property_id`, `seller_id`, `on_sale`, `value`, `city`, `address`, `date_posted`, `image`) VALUES
-(10, 4, '1', 23500, 'Philadelphia', 'MarketSt', 'Wed Mar 30 20:04:53 EEST 2016', 'http://192.168.1.2/house1.png'),
-(11, 4, '0', 233500, 'New York', '52nd Street ', 'Wed Mar 30 20:05:06 EEST 2016', 'http://192.168.1.2/house2.png'),
-(12, 5, '1', 9999, 'Chicago', '53nd Street', 'Wed Mar 30 20:05:15 EEST 2016', 'http://192.168.1.2/house3.png'),
-(17, 5, '1', 239, 'Baltimore145', 'BPD', 'Tue Apr 05 20:29:06 EEST 2016', 'http://192.168.1.2/house5.png'),
-(18, 6, '0', 295, 'Athens', 'Ypokrath 32', 'Tue Apr 05 21:52:33 EEST 2016', 'http://192.168.1.2/house4.png'),
-(20, 6, '1', 19430, 'Oklahoma', 'Corner 5nt&10nt', 'Wed Apr 13 20:59:39 EEST 2016', 'http://192.168.1.2/house6.jpg');
+(10, 4, '1', 23500, 'Philadelphia', 'MarketSt', 'Wed Mar 30 20:04:53 EEST 2016', 'http://localhost/house1.png'),
+(11, 4, '0', 233500, 'New York', '52nd Street ', 'Wed Mar 30 20:05:06 EEST 2016', 'http://localhost/house2.png'),
+(12, 5, '1', 9999, 'Chicago', '53nd Street', 'Wed Mar 30 20:05:15 EEST 2016', 'http://localhost/house3.png'),
+(17, 5, '1', 239, 'Baltimore145', 'BPD', 'Tue Apr 05 20:29:06 EEST 2016', 'http://localhost/house5.png'),
+(18, 6, '0', 295, 'Athens', 'Ypokrath 32', 'Tue Apr 05 21:52:33 EEST 2016', 'http://localhost/house4.png'),
+(20, 6, '1', 19430, 'Oklahoma', 'Corner 5nt&10nt', 'Wed Apr 13 20:59:39 EEST 2016', 'http://localhost/house6.jpg');
 
 -- --------------------------------------------------------
 

@@ -11,7 +11,6 @@ import marketsimulator.Controller.InterestController;
 import marketsimulator.Controller.PropertyController;
 import marketsimulator.Controller.UserController;
 import marketsimulator.Controller.setIconController;
-import marketsimulator.Model.Property;
 import marketsimulator.Model.User;
 
 /**
@@ -205,7 +204,7 @@ public class UserDetailedInformation extends javax.swing.JFrame {
             if(interest_controller.acceptInterest(property_id,String.valueOf(user.getId())))
             {
                 interest_controller.DeclineAllOtherUsers(property_id, String.valueOf(user.getId()));
-                JOptionPane.showMessageDialog(this, "You successfully selled this property");
+                JOptionPane.showMessageDialog(this, "You successfully sold this property");
                 this.dispose();
                 frame.dispose();
             }

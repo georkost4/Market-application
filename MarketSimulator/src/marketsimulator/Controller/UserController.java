@@ -5,7 +5,6 @@
  */
 package marketsimulator.Controller;
 
-import marketsimulator.Model.DatabaseController;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

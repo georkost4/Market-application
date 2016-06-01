@@ -184,12 +184,12 @@ public class ValidationController implements ValidationInterface
         } 
         if(!this.validateAddress(address))
         {
-            JOptionPane.showMessageDialog(frame, "a-z and 0-9", "Address input Error", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(frame, "a-z followed by 0-9 (eg Orlean 32) ", "Address input Error", JOptionPane.INFORMATION_MESSAGE);
             return false;
         } 
         if(!this.validateCity(city))
         {
-            JOptionPane.showMessageDialog(frame, "a-z only", "City input Error", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(frame, "a-z chars only", "City input Error", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
         return true;

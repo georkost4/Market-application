@@ -5,10 +5,20 @@
  */
 package marketsimulator.View;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import marketsimulator.Controller.UserController;
+import marketsimulator.Controller.DatabaseController;
+import marketsimulator.Controller.setIconController;
 
 /**
- *
+ * View containing the user's personal info.
+ * Also contains options for editing user info and
+ * adding some more information about the user.
  * @author Nikos
  */
 public class UserProfileView extends javax.swing.JFrame {
@@ -18,6 +28,7 @@ public class UserProfileView extends javax.swing.JFrame {
      */
     public UserProfileView() {
         initComponents();
+        new setIconController().setIcon(this);
         init();
     }
 
@@ -38,15 +49,14 @@ public class UserProfileView extends javax.swing.JFrame {
         BackButton = new javax.swing.JButton();
         MoreButton = new javax.swing.JButton();
         EditButton = new javax.swing.JButton();
-        labelFirstname = new javax.swing.JLabel();
-        labelLastname = new javax.swing.JLabel();
-        labelCity = new javax.swing.JLabel();
-        labelPhone = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        userDataList = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
-        labelUsername.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        labelUsername.setFont(new java.awt.Font("Tahoma", 3, 35)); // NOI18N
         labelUsername.setText("jLabel1");
 
         jLabel2.setText("Firstname:");
@@ -78,15 +88,10 @@ public class UserProfileView extends javax.swing.JFrame {
             }
         });
 
-        labelFirstname.setText("jLabel6");
-
-        labelLastname.setText("jLabel7");
-
-        labelCity.setText("jLabel8");
-
-        labelPhone.setText("jLabel9");
-
         jLabel1.setText("Username");
+
+        userDataList.setBackground(new java.awt.Color(240, 240, 240));
+        jScrollPane1.setViewportView(userDataList);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,7 +108,7 @@ public class UserProfileView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(EditButton)
                     .addGroup(layout.createSequentialGroup()
@@ -112,48 +117,40 @@ public class UserProfileView extends javax.swing.JFrame {
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(54, 54, 54)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelLastname)
-                            .addComponent(labelFirstname)
-                            .addComponent(labelCity)
-                            .addComponent(labelPhone))))
-                .addGap(58, 58, 58))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(labelFirstname))
+                .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(labelLastname))
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5)
+                .addGap(49, 49, 49)
+                .addComponent(EditButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
+                        .addGap(37, 37, 37)
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(labelUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(161, 161, 161)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(BackButton)
-                            .addComponent(MoreButton))
-                        .addGap(74, 74, 74))
+                        .addComponent(labelUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+                        .addGap(161, 161, 161))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labelCity)
-                            .addComponent(jLabel4))
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(labelPhone))
-                        .addGap(38, 38, 38)
-                        .addComponent(EditButton)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(23, 23, 23)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BackButton)
+                    .addComponent(MoreButton))
+                .addGap(74, 74, 74))
         );
 
         pack();
@@ -178,55 +175,65 @@ public class UserProfileView extends javax.swing.JFrame {
         new EditView().setVisible(true);
         
     }//GEN-LAST:event_EditButtonActionPerformed
-  public void init()
+
+    /**
+     * Shows username on a label and
+     * creates an ArrayList with user's personal 
+     * info to view.
+     */
+    public void init()
    {   
        
-   UserController user_controller = new UserController();
+       DatabaseController db_controller = new DatabaseController();
+       
+       UserController user_controller = new UserController();
    
-   labelUsername.setText(user_controller.getLoggedUser().getUsername());
+       labelUsername.setText(user_controller.getLoggedUser().getUsername());
    
-   labelFirstname.setText(user_controller.getLoggedUser().getFirstname());
-   labelLastname.setText(user_controller.getLoggedUser().getLastname());
-   labelCity.setText(user_controller.getLoggedUser().getCity());
-   labelPhone.setText(user_controller.getLoggedUser().getNumber());
-   
-   }
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UserProfileView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UserProfileView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UserProfileView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UserProfileView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
+        ArrayList<String> list = new ArrayList<String>();
+        Connection con = null;
+        Statement stm = null;
+        try
+        {
+            db_controller.setClass();
+            con = db_controller.getConnection();
+            String sql;
+            stm = con.createStatement();
+            sql = "SELECT firstname,lastname,city,number FROM " + db_controller.getTABLE_USERS()+ " where user_id = " + new UserController().getLoggedUser().getId() + " ";
+            
+            ResultSet rs =  stm.executeQuery(sql);
+             
+            while(rs.next())
+            {
+                String firstName = rs.getString("firstname");
+                String lastName   = rs.getString("lastname");
+                String city        = rs.getString("city");
+                String phone     = rs.getString("number");
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new UserProfileView().setVisible(true);
+                
+                list.add(new String(firstName));
+                list.add(new String(lastName));
+                list.add(new String(city));
+                list.add(new String(phone));
             }
-        });
+            
+            con.close();
+            stm.close();
+            
+        } 
+        catch (SQLException ex) {ex.printStackTrace(); } 
+        catch (ClassNotFoundException ex) {ex.printStackTrace(); }
         
-    }
+        DefaultListModel model = new DefaultListModel();
+        
+        for(String prop : list)
+       {
+           model.addElement(prop);
+   
+       }
+       userDataList.setFixedCellHeight(33);
+       userDataList.setModel(model);
+   }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BackButton;
@@ -237,10 +244,8 @@ public class UserProfileView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel labelCity;
-    private javax.swing.JLabel labelFirstname;
-    private javax.swing.JLabel labelLastname;
-    private javax.swing.JLabel labelPhone;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelUsername;
+    private javax.swing.JList<String> userDataList;
     // End of variables declaration//GEN-END:variables
 }

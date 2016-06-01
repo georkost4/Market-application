@@ -5,7 +5,7 @@ import marketsimulator.View.mainView;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import marketsimulator.Controller.UserController;
-import marketsimulator.Model.DatabaseController;
+import marketsimulator.Controller.DatabaseController;
 import marketsimulator.View.propertyView;
 
 
