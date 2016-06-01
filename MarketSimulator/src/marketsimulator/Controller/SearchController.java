@@ -10,16 +10,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import marketsimulator.Controller.DatabaseController;
 import marketsimulator.Model.Property;
 
 /**
- *
+ * Controler for handling search of the properties.
  * @author Nikos
  */
 public class SearchController {
     
     DatabaseController db_controller = new DatabaseController();
     
+    /**
+     * Method that creates a sql query,to search 
+     * properties with the choice of either by city or by 
+     * max price and returns the result with a ArrayList.
+     */
 
     public ArrayList<Property> findProperties(String textToSearch,String choice)
     {

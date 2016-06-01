@@ -220,8 +220,7 @@ public class PropertyController  implements PropertyInterface  {
     
      /**
      * Method for uploading the image to the server.
-     * @param File The file containing the image of the property.
-     * @return <b>true</b> for success.
+     * @param file The file containing the image of the property.
      */
     public void uploadImageToServer(File file) 
     {

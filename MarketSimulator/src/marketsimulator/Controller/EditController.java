@@ -7,18 +7,23 @@ package marketsimulator.Controller;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import marketsimulator.Controller.DatabaseController;
 
 /**
- *
+ * Controler for editing user's personal info.
  * @author Nikos
  */
 public class EditController {
     
     DatabaseController dbcontroller = new DatabaseController();
  
+    /**
+    * Method that gets the typed new data from EditView
+    * and updates the database.
+    */
+    
     public void EditedData(String firstname,String lastname,String city,String number) throws SQLException{
          
 
@@ -38,6 +43,7 @@ public class EditController {
             
              ps.executeUpdate();
              ps.close();
+             
           }
         catch (SQLException se)
          {
