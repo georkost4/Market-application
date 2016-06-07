@@ -176,7 +176,7 @@ public class AddNewPropertyView extends javax.swing.JFrame {
         fc.addChoosableFileFilter(imageFilter);
         fc.setAcceptAllFileFilterUsed(false);
         
-   
+        // If the user chose image execute the followin code
         int returnVal = fc.showDialog(this,"Select");
         System.out.println(String.valueOf(returnVal));
         if(returnVal == CHOSE_OK)
@@ -193,7 +193,8 @@ public class AddNewPropertyView extends javax.swing.JFrame {
                     File marketDir = new File("C:\\MarketApp");
                     marketDir.mkdir();
                     File ImageFile =  new File("C:\\MarketApp\\"+photo_name);
-
+                     
+                    // Write the new scaled down to 176x146 image locally amd then upload it to the web server.
                     BufferedImage img = new BufferedImage(176, 146, BufferedImage.TYPE_INT_RGB);
                     img.createGraphics().drawImage(ImageIO.read(new File(txtImageSelected.getText())).getScaledInstance(176, 146, Image.SCALE_SMOOTH), CHOSE_OK, CHOSE_OK,null);
                     ImageIO.write(img, "jpg",ImageFile);

@@ -115,6 +115,7 @@ public class usersThatAreInterestedInMyListingsView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this,"No users are interested in this property");
             this.dispose();
         }
+        // Re draw the listview
         init();
     }//GEN-LAST:event_formWindowActivated
 
