@@ -26,8 +26,15 @@ public class MyListingsTableModel extends AbstractTableModel {
      * Constructor for a custom table model.
      * @param property ArrayList of the properties to show on the table model.
      */
-    public MyListingsTableModel(ArrayList<Property> property) {this.property = property;  controller = new InterestController(); prop_controller = new PropertyController(); }
-
+    public MyListingsTableModel(ArrayList<Property> property) 
+    {
+        this.property = property;  
+        controller = new InterestController(); 
+        prop_controller = new PropertyController();
+    }
+    
+    
+    // Table column names
     @Override
     public String getColumnName(int column) 
     {
@@ -108,7 +115,10 @@ public class MyListingsTableModel extends AbstractTableModel {
         }
         return tmp;
     }
-
+    
+    
+    // If you want the cell to be editable e.g add a button
+    // you want to return  true.
    @Override
    public boolean isCellEditable(int rowIndex, int columnIndex) {
      if(columnIndex == 6 && prop_controller.getOnSaleState(property.get(rowIndex).getProperty_id()) == 1) return true;

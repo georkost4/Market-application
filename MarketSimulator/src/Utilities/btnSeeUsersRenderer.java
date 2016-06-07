@@ -14,7 +14,7 @@ import javax.swing.table.TableCellRenderer;
 import marketsimulator.Controller.PropertyController;
 
 /**
- *
+ * Draws a button to the table model
  * @author SoRa
  */
 public class btnSeeUsersRenderer extends JButton implements TableCellRenderer {
@@ -28,6 +28,7 @@ public class btnSeeUsersRenderer extends JButton implements TableCellRenderer {
 
   public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) 
   {
+        // Visual effects for the table.
         if (isSelected) 
         {
           setForeground(table.getSelectionForeground());
@@ -39,6 +40,8 @@ public class btnSeeUsersRenderer extends JButton implements TableCellRenderer {
           setBackground(UIManager.getColor("Button.background"));
         }
         PropertyController controller = new PropertyController();
+        // If the property is sold add sold sign
+        // else set text to See users that are interested
         if(controller.getOnSaleState(MyListingsTableModel.getId(row)) == 1){  setText("See users");  } 
         else
         {

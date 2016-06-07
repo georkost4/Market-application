@@ -23,7 +23,8 @@ import javax.swing.border.Border;
 import marketsimulator.Model.Property;
 
 /**
- *
+ * Custom JList renderer for displaying
+ * properties tha are on sale.
  * @author SoRa
  */
 public class propertyOnSale_JListCellRenderer extends DefaultListCellRenderer implements ListCellRenderer<Object>
@@ -32,8 +33,12 @@ public class propertyOnSale_JListCellRenderer extends DefaultListCellRenderer im
     @Override
     public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
         Property prop = (Property) value;
+        // set the text of the jTextView to the property city , address , value.
         setText(prop.getCity() + " " + prop.getAddress() + "  " + prop.getValue()+"$");
-   
+        
+        
+        // Get the url of the image from the prop object and 
+        // save the image.
         URL url;
         BufferedImage img = null ;
         try 
@@ -45,9 +50,11 @@ public class propertyOnSale_JListCellRenderer extends DefaultListCellRenderer im
         catch (IOException ex) {ex.printStackTrace();  }
         
         ImageIcon icon = new ImageIcon(img);
-        
+        // Set the image taken from the url to the imageView of
+        // the ListView
         setIcon(icon);
         
+        // Custom Borders for each entry of the ListView
         if(isSelected)
         {
             setBackground(list.getSelectionBackground());

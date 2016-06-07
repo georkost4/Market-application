@@ -13,10 +13,10 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JTable;
 import marketsimulator.View.propertyImageView;
-import marketsimulator.View.usersThatAreInterestedInMyListingsView;
 
 /**
- *
+ * Custom Editor for the Button Image , 
+ * uses jcombobox super constructor.
  * @author SoRa
  */
 public class btnImageEditor extends DefaultCellEditor
@@ -36,49 +36,65 @@ public class btnImageEditor extends DefaultCellEditor
      * @param checkBox
      */
     public btnImageEditor(JCheckBox checkBox) 
-  {
-    super(checkBox);
-    button = new JButton();
-    button.setOpaque(true);
-    button.addActionListener(new ActionListener() 
-    {@Override  public void actionPerformed(ActionEvent e) { fireEditingStopped();}});
+    {
+        // Use default cell editor for a checkbox
+        // but instead create a button
+        super(checkBox);
+        button = new JButton();
+        button.setOpaque(true);
+        button.addActionListener(new ActionListener() 
+        {
+            @Override  
+            public void actionPerformed(ActionEvent e)
+            { 
+                fireEditingStopped();
+            }
+        });
   }
 
   @Override
   public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) 
   {
-    if (isSelected) 
-    {
-      button.setForeground(table.getSelectionForeground());
-      button.setBackground(table.getSelectionBackground());
-    } 
-    else 
-    {
-      button.setForeground(table.getForeground());
-      button.setBackground(table.getBackground());
-    }
-    image_loc = (String) table.getValueAt(row, 5);
-    System.out.println(image_loc);
-    isPushed = true;
-    
-    return button;
+      // Visual effect if the button is selected or not
+      if (isSelected) 
+      {
+        button.setForeground(table.getSelectionForeground());
+        button.setBackground(table.getSelectionBackground());
+      } 
+      else 
+      {
+        button.setForeground(table.getForeground());
+        button.setBackground(table.getBackground());
+      }
+      // Get the image URL
+      image_loc = (String) table.getValueAt(row, 5);
+      System.out.println(image_loc);
+      // Set the pushed variable to true so tha the event will be fired.
+      isPushed = true;
+
+      return button;
   }
 
   @Override
   public Object getCellEditorValue() 
   {
-    if (isPushed) 
-    {
-      new propertyImageView(image_loc).setVisible(true);
-    }
-    isPushed = false;
-    return null;
+     // Button Image clicked event 
+     if (isPushed) 
+     {
+         //Show the image
+         new propertyImageView(image_loc).setVisible(true);
+     }
+     // Set the clicked variable to false
+     isPushed = false;
+     return null;
   }
 
   @Override
-  public boolean stopCellEditing() {
-    isPushed = false;
-    return super.stopCellEditing();
+  public boolean stopCellEditing() 
+  {
+            
+      isPushed = false;
+      return super.stopCellEditing();
   }
 
   @Override

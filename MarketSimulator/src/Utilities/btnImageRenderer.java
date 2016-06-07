@@ -12,7 +12,7 @@ import javax.swing.UIManager;
 import javax.swing.table.TableCellRenderer;
 
 /**
- *
+ * Draws the button image on the table.
  * @author SoRa
  */
 public class btnImageRenderer extends JButton implements TableCellRenderer

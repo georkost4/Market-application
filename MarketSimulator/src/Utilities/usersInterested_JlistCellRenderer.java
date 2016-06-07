@@ -12,7 +12,9 @@ import javax.swing.ListCellRenderer;
 import marketsimulator.Model.User;
 
 /**
- *
+ * Custom JList model for seeing the users
+ * that are interested in a specific property
+ * that is on sale.
  * @author SoRa
  */
 public class usersInterested_JlistCellRenderer extends DefaultListCellRenderer implements ListCellRenderer<Object>
@@ -20,8 +22,10 @@ public class usersInterested_JlistCellRenderer extends DefaultListCellRenderer i
     @Override
     public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
         User user = (User) value;
+        // set the text view of the list with the user
         setText(user.getFirstname()+ " " + user.getLastname());
         
+        // Visual effects for the list
         if(isSelected)
         {
             setBackground(list.getSelectionBackground());

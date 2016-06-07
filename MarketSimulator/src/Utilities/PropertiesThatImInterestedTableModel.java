@@ -22,6 +22,10 @@ public class PropertiesThatImInterestedTableModel extends AbstractTableModel
 {
     private ArrayList<Property> property;
     private InterestController controller;
+    private static final int DECLINED = 0;
+    private static final int PROPERTY_SOLD = 1;
+    private static final int SELLER_HASNT_DECIDED = -1;
+
 
     /**
      * Constructor for custom table model.
@@ -92,19 +96,21 @@ public class PropertiesThatImInterestedTableModel extends AbstractTableModel
                 InterestController controller = new InterestController();
                 int state = controller.getPropertyState(property.get(rowIndex).getProperty_id());
                 ImageIcon icon = null;
+                
+                // use the appropriate icon 
                 switch(state)
                 { 
-                    case -1:
+                    case SELLER_HASNT_DECIDED:
                          try {tmp =  ImageIO.read(getClass().getClassLoader().getResource("Images/not_known.png")); } 
                          catch (IOException ex) {ex.printStackTrace();  }
                          icon = new ImageIcon((Image) tmp);
                          break;
-                    case 1:
+                    case PROPERTY_SOLD:
                          try {tmp =  ImageIO.read(getClass().getClassLoader().getResource("Images/accept-icon.png")); } 
                          catch (IOException ex) {ex.printStackTrace();  }
                          icon = new ImageIcon((Image) tmp);
                          break;
-                    case 0:
+                    case DECLINED:
                          try {tmp =  ImageIO.read(getClass().getClassLoader().getResource("Images/cancel.png")); } 
                          catch (IOException ex) {ex.printStackTrace();  }
                          icon = new ImageIcon((Image) tmp);
@@ -116,7 +122,7 @@ public class PropertiesThatImInterestedTableModel extends AbstractTableModel
         }
         return tmp;
     }
-
+    
     @Override
     public Class<?> getColumnClass(int columnIndex) {
         if(columnIndex == 6)
